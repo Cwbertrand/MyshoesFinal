@@ -1,0 +1,710 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+li{
+    text-decoration: none;
+    font-style: none;
+    list-style: none;
+    color: #000;
+}
+
+a{
+    font-style: none;
+    color: #000;
+    text-decoration: none;
+
+}
+
+.text-justify{
+    text-align: justify;
+    text-indent: 50px;
+}
+.general_btn{
+    border: none;
+    background: transparent;
+    text-decoration: none;
+    font-style: none;
+    list-style: none;
+    text-align: center;
+    
+}
+
+
+/**===== NAV BAR ======**/
+.nav_bar{
+    background: #c6c6c7a2;
+    width: 100%;
+}
+.nav_bar .general_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+}
+
+.general_container .logo{
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.general_container .nav_links,
+.general_container .nav_ul,
+.general_container .icons{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.nav_ul .nav_items{
+    margin: 0px 1rem;
+}
+
+.general_container .icons{
+    width: 10%;
+}
+
+/**===== creating burger ======**/
+.burger,
+.icon_close {
+    display: none;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #000000;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* At Media Query for size maximum 768 */
+@media screen and (max-width:768px) {
+    .nav_links{
+        position: fixed;
+        top: 0;
+        height: 100%;
+        right: 0px;
+        background: #c6c6c7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        width: 50% !important;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    
+    .burger{
+        display: block;
+        cursor: pointer;
+    }
+
+    .fa-bars{
+        font-size: 1.5rem;
+    }
+
+    .icon_close{
+        display: block;
+        position: absolute;
+        top: .8rem;
+        right: 3.1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .nav_ul{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 3rem 0px;
+    }
+
+    .nav_ul .nav_items{
+        margin-top: 2rem;
+    }
+
+    .nav_ul .nav_items:hover{
+        background-color: rgba(130, 126, 126, 0.564);
+        color: #fff;
+    }
+
+    .nav_ul .nav_items a:hover{
+        color: #000;
+    }
+
+}
+.nav_active{
+    transform: translateX(0%);
+}
+
+/* =========================*/
+        /** HOME PAGE **/
+/*===========================*/
+
+/**===== HERO SECTION ======**/
+.hero{
+    height: 90vh;
+    background: #FFC123;
+}
+
+.hero_container{
+    padding: 3rem 5rem;
+}
+
+.hero_note_img{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.hero_note{
+    width: 40%;
+}
+
+.hero_note h4{
+    font-family: 'Kaushan Script', cursive;
+    font-size: 50px;
+}
+
+.hero_note h4 span{
+    color: #3577F9;
+}
+
+.hero_note h2{
+    font-weight: 800;
+    font-size: 54px;
+}
+
+.hero_note h2 span{
+    color: #fff;
+}
+
+.hero_note button{
+    position: absolute;
+    left: 13%;
+    margin-top: 10px;
+    display: block;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 40px;
+    background-color: #3577F9;
+    text-align: center;
+    justify-self: center;
+}
+
+.hero_image{
+    width: 55%;
+    justify-content: end;
+}
+
+.hero_image img{
+    width: 100%;
+}
+
+/**===== TRENDING PRODUCT SECTION ======**/
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 50px;
+    width: 100%;
+}
+
+.trending_product{
+    padding-top: 4em;
+    
+}
+
+.trending_product .heading{
+    font-size: 25px;
+    color:rgba(0, 0, 0, 1);
+}
+
+.card-new {
+    background:rgba(243, 241, 241, 0.998);
+    max-width: 280px;
+    border-radius: 10px;
+    margin: 10px;
+    position: relative;
+}
+
+.card-new a {
+    text-decoration: none;
+    text-align: center;
+    color: #000;
+    position: relative;
+}
+
+.card-new .img-wishlist{
+    padding: 50px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.card-new .wishlist{
+    position: absolute;
+    right: 0;
+    top: 5%;
+    background: #fff;
+    display: block;
+    padding: 10px;
+    font-size: 25px;
+}
+
+.card-new .product_info {
+    padding: 21px 20px;
+}
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card-new .product_info h1{
+    font-size: 20px;
+}
+
+.card-new .add_to_cart {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.card-new .add_to_cart:hover {
+    opacity: 0.7;
+}
+
+/**===== ADVERT SECTION ======**/
+
+.advert{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    background-color: #8783838c;
+}
+
+.image{
+    text-align: center;
+}
+
+/**===== LES MARQUES SECTION ======**/
+.myshoes-marques{
+    padding: 50px 0;
+}
+.myshoes-marques .marque-display{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.myshoes-marques .marque-display .img_resize{
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**===== FOOTER SECTION ======**/
+
+.first_footer{
+    background-color: #8783838c; 
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 7%;
+}
+
+.first_footer h2{
+    font-weight: 800;
+}
+
+.first_footer h2 span{
+    color: #3577F9;
+}
+
+.first_footer h5{
+    color: #FFC123;
+}
+
+.social_media{
+    display: flex;
+    justify-content: space-around;
+}
+
+.social_media i{
+    font-size: 20px;
+}
+
+.footer_livraison .livraison_icons,
+.footer_livraison .payment_icons{
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer_livraison .livraison_icons i{
+    font-size: 40px;
+    color: #FFC123;
+}
+.footer_livraison i{
+    font-size: 30px;
+}
+
+.aide_contact{
+    display: flex;
+    flex-direction: column;
+}
+
+.second_footer{
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.second_footer .policy_section{
+    color: #c6c6c7;
+    margin: 10px 20px;
+}
+
+.second_footer div{
+    background-color: #fff;
+    width: 1px;
+}
+
+/* =========================*/
+        /** MEN'S PAGE **/
+/*===========================*/
+
+.breadcrumbs-two .breadcrumbs-img{
+    background-image: url(../image/coverpage/cover-img-1.jpg);
+    height: 300px;
+    padding: 4em;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.breadcrumbs-img h2 {
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+
+/* =======================================================
+  * 	FILTER (SIZE, CATEGORY, ETC) SECTION
+* ======================================================= */
+
+.side {
+    padding: 1em;
+    width: 100%;
+    float: left;
+}
+
+.accordion-item {
+    color: var(--bs-accordion-color);
+    background-color: var(--bs-accordion-bg);
+    border: none !important;
+}
+.accordion-button:not(.collapsed) {
+    color: #000 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: none !important;
+    outline: none !;
+    box-shadow: none !important;
+}
+
+input[type=checkbox] {
+    accent-color: red;
+}
+
+.side h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: "Montserrat", Arial, sans-serif;
+}
+
+.side ul li {
+    font-size: 14px;
+}
+
+.side ul,
+.side ul li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.block-26 {
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.block-26 ul,
+.block-26 ul li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.block-26 ul li {
+    margin-bottom: 5px;
+    margin-right: 5px;
+    width: 40px;
+    height: 40px;
+    float: left;
+    display: table;
+    text-align: center;
+    background: #cccccc;
+    border-radius: 2px;
+}
+
+.block-26 ul li a {
+    display: table-cell;
+    vertical-align: middle;
+    color: #fff;
+    padding: 0;
+}
+
+.block-26 ul li a:hover {
+    background: #616161;
+}
+
+.block-26 h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: "Montserrat", Arial, sans-serif;
+}
+
+/* =======================================================
+  * 	PRODUCT SECTION
+* ======================================================= */
+.col-lg-4 .all_product{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ==================== MEN'S PAGE ENDS   =========================*/
+
+.nav_right > ul{
+	display: flex;
+	align-items: center;
+}
+
+.nav_right ul li.nr_li{
+	margin-left: 25px;
+	cursor: pointer;
+	color: #fff;
+	font-size: 20px;
+	position: relative;
+}
+
+.nav_right ul li.nr_li:hover {
+    color: #cefffc;
+}
+
+.nav_right ul li img{
+	width: 35px;
+	vertical-align: middle;
+}
+
+.dd_menu {
+    position: absolute;
+    right: -25px;
+    top: 47px;
+    display: flex;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.25);
+    display: none;
+}
+
+.dd_menu .dd_left{
+	background: #74ded8;
+	padding: 15px 20px;
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
+}
+
+.dd_menu .dd_left li{
+	color: #fff;
+}
+
+.dd_menu .dd_right{
+	padding: 15px 20px;
+}
+
+.dd_menu li{
+	margin-bottom: 10px;
+	color: #868686;
+}
+
+.dd_menu:before{
+	content: "";
+	position: absolute;
+	top: -20px;
+	right: 30px;
+	border: 10px solid;
+	border-color: transparent transparent #fff transparent;
+}
+
+.dd_main.account_active .dd_menu{
+	display: flex;
+}
+
+/* =======================================================
+  * 	PRODUCT DETAIL (PRODUCT PAGE DETAIL) SECTION
+* ======================================================= */
+
+.image_detail_product{
+    background-color: #61616168;
+    padding: 20px 0px;
+    border-radius: 10px;
+}
+
+.rating .fa-star{
+    color: #FFC123;
+}
+
+.product-detail-wrap .quantity-left-minus {
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+}
+
+.product-detail-wrap .quantity-right-plus {
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+}
+
+
+.detail_panier_button a{
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 10px 30px;
+}
+
+.detail_wishlist_button button{
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+    padding: 10px 30px;
+    border: none;
+}
+
+.detail_wishlist_button button i{
+    font-size: 25px;
+}
+
+.text_edit{
+    text-align: justify;
+    text-indent: 60px;
+}
+
+/* =======================================================
+  * 	ADRESSE PAGE
+* ======================================================= */
+
+.addrese_delete,
+.addrese_modify{
+    border: 1px solid rgba(65, 65, 67, 0.63);
+    display: block;
+    margin: 0px 3px;
+    padding: 10px;
+    transition: ease-out .3s;
+}
+
+.addrese_delete{
+    color: red;
+    font-size: 20px;
+    
+}
+
+.addrese_delete:hover,
+.addrese_modify:hover{
+    background-color:rgba(146, 144, 144, 0.726);
+    border: none;
+}
+
+a.addrese_delete:hover{
+    color: red;
+}
+
+.addrese_modify{
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* =======================================================
+  * 	VALIDATE COMMANDE PAGE
+* ======================================================= */
+
+fieldset {
+    border: #403f3fec solid 1px;
+    border-radius: 1em;
+}
+
+legend {
+    transform: translatey(-130%);
+    width: max-content;
+    padding: 0 0.15em;
+    background-color: #fff;
+}
+
+#commande_adresse{
+    display: flex;
+    flex-direction: column;
+}
+
+.sous_title{
+    position: relative;
+}
+.btn_commande{
+    position: absolute;
+    bottom: 30px;
+    left: 34%;
+}

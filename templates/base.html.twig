@@ -1,19 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="La boutique qui vend uniquement du made in France">
+        <meta name="author" content="CW Bertrand">
+        <title>{% block title %}Myshoes boutique{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
+        <!--STYLESHEET BOOTSTRAP-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!--FONT AWESOME-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+        <!--STYLESHEET-->
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         {% endblock %}
     </head>
+    
     <body>
+        <!--=============  NAV BAR  ======================-->
+        <nav class="nav_bar">
+            <div class="general_container">
+                <div class="logo">
+                    <h3><a href="{{path ('home')}}">Myshoes</a></h3>
+                </div>
+                <div class="nav_links">
+                    <ul class="nav_ul">
+                        <li class="nav_items">
+                            {# <a href="{{path ('homme')}}">Homme</a> #}
+                        </li>
+                        <li class="nav_items">
+                            <a href="{{path ('home')}}">Femme</a>
+                        </li>
+                        <li class="nav_items">
+                            <a href="{{path ('home')}}">Enfant</a>
+                        </li>
+                        <div class="icon_close">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </ul>
+                </div>
+
+
+                <!--======= DROP DOWN USER ACCOUNT ========-->
+                <div class="nav_right">
+                    <ul>
+                        <li class="nr_li dd_main">
+                            <i class="fa-solid fa-user"></i>
+                            
+                            {# <div class="dd_menu">
+                                <div class="dd_left">
+                                    <ul>
+                                        <li><i class="fas fa-map-marker-alt"></i></li>
+                                        <li><i class="far fa-star"></i></li>
+                                        <li><i class="far fa-plus-square"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="dd_right">
+                                    <ul>
+                                        <li><a href="{{path ('app_login')}}">Connexion</a></li>
+                                        <li><a href="{{path ('app_register')}}">Registrer</a></li>
+                                        <li><a href="{{path ('app_logout')}}">Deconnexion</a></li>
+                                        <li><a href="{{path ('adresse')}}">Compte</a></li>
+                                    </ul>
+                                </div>
+                            </div> #}
+                        </li>
+                        <li class="nr_li">
+                            {# <a href="{{path ('admin')}}"><i class="fa-solid fa-gauge"></a></i> #}
+                        </li>
+                    </ul>
+                </div>
+                <!--======= DROP DOWN USER ACCOUNT ENDS ========-->
+
+
+                <div class="icons">
+                    <div class="account">
+                        <a href="command.html"><i class="fa-solid fa-user"></i></a>
+                    </div>
+                    <div class="wishlist">
+                        <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
+                    </div>
+                    <div class="panier">
+                        <a class="panier" href="panier.html"><i class="fa-solid fa-cart-arrow-down"></i></a>
+                    </div>
+                </div>
+                <!--======= BURGER MENU FOR PHONE SIZE ========-->
+                <div class="burger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
+
+
+        <!--================= FOOTER SECTION ==================-->
+        <footer class="footer">
+            <div class="first_footer hero_container">
+                <div class="footer_about_us">
+                    <h2>My<span>Shoes</span></h2>
+                    <h5>A propos de nous</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectateur adispicing elit. 
+                        Fusce euismod convallis velit, eu auctor lacus vehicula sit amet. 
+                        Lorem ipsum dolor sit amet, consectateur adispicing elit.
+                        Fusce euismod convallis velit, eu auctor lacus vehicula sit amet....
+                    </p>
+                    <div class="social_media">
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer_livraison">
+                    <h4><span><i class="fa-solid fa-truck"></i></span> Modes de livraison</h4>
+                    <div class="livraison_icons">
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                    </div>
+                    <h4><span><i class="fa-solid fa-credit-card-blank"></i></span> Moyens de paiement</h4>
+                    <div class="payment_icons">
+                        <a href="#"><i class="fa-brands fa-cc-visa"></i></a>
+                        <a href="#"><i class="fa-brands fa-cc-mastercard"></i></a>
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact">
+                    <h4><span><i class="fa-solid fa-user-gear"></i></span> Aide & Contact</h4>
+                    <div class="aide_contact">
+                        <a href="#">Questions fréquentes (FAQ)</a>
+                        <a href="#">Contact us</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="second_footer">
+                <a href="#" class="policy_section">Mentions légales</a>
+                <div class="policy_section"></div>
+                <a href="#" class="policy_section">Protection des données</a>
+                <div class="policy_section"></div>
+                <a href="#" class="policy_section">CGV</a>
+                <div class="policy_section"></div>
+                <a href="#" class="policy_section">Conditions des offres</a>
+            </div>
+        </footer>
+        {% block javascripts %}
+        <!--JAVASCRIPT-->
+            <script src="js/main.js"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>

@@ -1,20 +1,145 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Myshoes boutique{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <!--=============  HERO SECTION  ======================-->
+    
+    <section class="hero">
+        <div class="hero_container hero_note_img">
+            <div class="hero_note">
+                <h4> Welcome to <span>Myshoes</span></h4>
+                <h2>
+                    You're the best,  <br>
+                    <span>Wear the best</span>
+                </h2>
+                <button class="general_btn shop_now_btn">Shop Now</button>
+            </div>
+            <div class="hero_image">
+                <img src="{{asset ('image/basket/basket (2).png')}}" alt="kappa">
+            </div>
+        </div>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!--================= TRENDING PRODUCTS SECTION ==================-->
+    <section class="trending_product hero_container">
+        <div class="heading">
+            <h1>Les chaussures tendances</h1>
+        </div>
+        <div class="products">
+            <div class="card-new">
+                <a href="">
+                    <div class="img-wishlist">
+                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
+                    </div>
+                    <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
+                    <div class="product_info">
+                        <p>
+                            <span><strong>Marque</strong></span> <br>
+                            <span><strong>Nom de produit</strong></span> <br>
+                            <span>Category</span> <br>
+                            <span class="price">$19.99</span> <br>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/FINAL PROJECT/Myshoes/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/FINAL PROJECT/Myshoes/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+                        </p>
+                    </div>
+                    <p><button class="add_to_cart">Add to Cart</button></p>
+                </a>
+            </div>
+            <div class="card-new">
+                <a href="">
+                    <div class="img-wishlist">
+                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
+                    </div>
+                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
+                    <div class="product_info">
+                        <p>
+                            <span><strong>Marque</strong></span> <br>
+                            <span><strong>Nom de produit</strong></span> <br>
+                            <span>Category</span> <br>
+                            <span class="price">$19.99</span> <br>
+
+                        </p>
+                    </div>
+                    <p><button class="add_to_cart">Add to Cart</button></p>
+                </a>
+            </div>
+            <div class="card-new">
+                <a href="">
+                    <div class="img-wishlist">
+                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
+                    </div>
+                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
+                    <div class="product_info">
+                        <p>
+                            <span><strong>Marque</strong></span> <br>
+                            <span><strong>Nom de produit</strong></span> <br>
+                            <span>Category</span> <br>
+                            <span class="price">$19.99</span> <br>
+
+                        </p>
+                    </div>
+                    <p><button class="add_to_cart">Add to Cart</button></p>
+                </a>
+            </div>
+            <div class="card-new">
+                <a href="">
+                    <div class="img-wishlist">
+                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
+                    </div>
+                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
+                    <div class="product_info">
+                        <p>
+                            <span><strong>Marque</strong></span> <br>
+                            <span><strong>Nom de produit</strong></span> <br>
+                            <span>Category</span> <br>
+                            <span class="price">$19.99</span> <br>
+
+                        </p>
+                    </div>
+                    <p><button class="add_to_cart">Add to Cart</button></p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--================= ADVERTISEMENT SECTION ==================-->
+    <section class="advert hero_container">
+        <div class="advert_info">
+            <h4>Wear active and stay sportive</h4>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to 
+                make a type specimen book. It has survived not only five centuries,
+            </p>
+        </div>
+        <div class="image">
+            <img src="{{asset ('image/basket/basket (2).png')}}" alt="advert_1" class="img_advert">
+        </div>
+    </section>
+
+    <!--================= POPULAR MARKS SECTION ==================-->
+    <section class="myshoes-marques">
+        <div class="hero_container">
+            <div class="heading">
+                <h1>Les Marques Populaire</h1>
+            </div>
+            <div class="marque-display">
+                <div class="marque-image">
+                    <img src="{{asset ('image/brands/puma.jpg')}}" class="img_resize" alt="">
+                </div>
+                <div class="marque-image">
+                    <img src="{{asset ('image/brands/addidas.jpg')}}" class="img_resize" alt="">
+                </div>
+                <div class="marque-image">
+                    <img src="{{asset ('image/brands/gucci.jpg')}}" class="img_resize" alt="">
+                </div>
+                <div class="marque-image">
+                    <img src="{{asset ('image/brands/merrell.jpg')}}" class="img_resize" alt="">
+                </div>
+                <div class="marque-image">
+                    <img src="{{asset ('image/brands/nike.jpg')}}" class="img_resize" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
