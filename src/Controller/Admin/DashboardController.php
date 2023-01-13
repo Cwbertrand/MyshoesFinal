@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Product;
+use App\Entity\User;
+use App\Entity\ShoesCategory;
+use App\Entity\ShoesGender;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -42,6 +46,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('Product', 'fa-solid fa-shoe-prints', Product::class);
+        yield MenuItem::linkToCrud('Category', 'fa-solid fa-list', ShoesCategory::class);
+        yield MenuItem::linkToCrud('Gender Category', 'fa-solid fa-mars-and-venus-burst', ShoesGender::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
