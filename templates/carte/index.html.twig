@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}my carte{% endblock %}
+
+{% block body %}
+{{ dump(cartes) }}
+
+    <main class="container py-5">
+        <div class="row">
+            <!-- ============= carte PRODUCTS =========-->
+            <div class="col-md-8 gap-2 bg-light rounded-4 p-4 me-5">
+                <h2 class="pb-4">My Carte ({{cartes|length}} articles)</h2>
+                
+                {% set total = null %}
+                
+                {% for carte in cartes %}
+                <div class="row">
+                    <div class="col-md-4 bg-warning d-flex justify-content-center align-items-center w-25">
+                        <img src="/upload/{{carte.productdetail.image}}" alt="basket new" class=" text-center img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product_note product-detail-wrap">
+                            <h6>{{carte.productdetail.mark}}</h6>
+                            <h6>{{carte.productdetail.shoesname}}</h6>
+                            <h6>{{carte.productdetail.category.category}}</h6>
+                            <h6>Couleur: black/white(Colour)</h6>
+                            <h6>Taille: 43(size)</h6>
+                            <div class="input-group mb-4 w-50">
+                                <span class="input-group-btn">
+                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                        <a href="{{path('minus_my_carte', {'id': carte.productdetail.id})}}"><i class="fa-solid fa-minus"></i></a>
+                                        
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="text-center form-control input-number" value="{{carte.quantity}}" min="1" max="100" disabled>
+                                <span class="input-group-btn ml-1">
+                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                        <a href="{{path('add_my_carte', {'id': carte.productdetail.id})}}"><i class="fa-solid fa-plus"></i></a>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>{{ ((carte.productdetail.price * carte.quantity)/100) | number_format(2, ',', '.') }} €</h5>
+                        <p>({{ (carte.productdetail.price/100) | number_format(2, ',', '.') }} € /unit)</p>
+                    </div>
+                </div>
+                <div class="delete_wishlist d-flex justify-content-center pt-3">
+                    <div class="delete me-5">
+                        <button class="text-muted border-0 bg-transparent">
+                            <a href="{{path('delete_from_carte', {'id': carte.productdetail.id})}}">
+                                <i class="fa-solid fa-trash-can"></i> <span>Supprimer</span>
+                            </a></button>
+                    </div>
+                    <div class="delete">
+                        <button class="text-muted border-0 bg-transparent"><i class="fa-regular fa-heart"></i> <span>Déplacer vers mes préférés</span></button>
+                    </div>
+                </div>
+                <hr>
+                {% set total = total + (carte.productdetail.price * carte.quantity) %}
+                {% endfor %}
+            </div>
+
+            <!-- ============= SUB TITLE =========-->
+            <div class="col-md-3 bg-light d-flex flex-column justify-content-center rounded-4 p-4" style="height: 150px;">
+                <div class="sous_total d-flex justify-content-between">
+                    <h5>Sous titre: </h5>
+                    <p>{{ (total/100) | number_format(2, ',', '.') }} €</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    {# <a href="{{path ('commande')}}" class="d-block rounded-3 bg-warning border-0 py-1 px-3">Passez la commande</a> #}
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= PAYMENT METHOD WE ACCEPT =========-->
+        <div class="row">
+            <div class="col-md-8 gap-2 bg-light rounded-4 p-4 mt-3">
+                <h4>Nous acceptons</h4>
+                <p><i class="fa-brands fa-cc-stripe display-5"></i></p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

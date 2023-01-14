@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Men products{% endblock %}
+
+{% block body %}
+    <div class="breadcrumbs-two py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs-img">
+                        <h2>Men's</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======= men's product section with filter ===========  -->
+    <main class="container py-5">
+        <section class="myshoes-product">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- ======= filter section ===========  -->
+
+                    <div class="col-lg-3 col-xl-3">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="side border mb-1">
+                                    <h3>Filtre</h3>
+                                </div>
+                            </div>
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="col-sm-12">
+                                    <div class="accordion-item">
+                                        <div class="side border mb-1">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                                                    aria-controls="panelsStayOpen-collapseOne">
+                                                    <h3>Brand</h3>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+                                                aria-labelledby="panelsStayOpen-headingOne">
+                                                <div class="accordion-body">
+                                                    <ul>
+
+                                                        <div class="brand d-flex justify-content-between">
+                                                            {{form_start(form)}}
+                                                            {{form_end(form)}}
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="accordion-item">
+                                        <div class="side border mb-1">
+                                            <div class="block-26 mb-2">
+                                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                                        aria-controls="panelsStayOpen-collapseTwo">
+                                                        <h4>Size</h4>
+                                                    </button>
+                                                </h2>
+                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                                                    aria-labelledby="panelsStayOpen-headingTwo">
+                                                    <div class="accordion-body">
+                                                        <ul>
+                                                            <li><a href="#">7</a></li>
+                                                            <li><a href="#">7.5</a></li>
+                                                            <li><a href="#">8</a></li>
+                                                            <li><a href="#">8.5</a></li>
+                                                            <li><a href="#">9</a></li>
+                                                            <li><a href="#">9.5</a></li>
+                                                            <li><a href="#">10</a></li>
+                                                            <li><a href="#">10.5</a></li>
+                                                            <li><a href="#">11</a></li>
+                                                            <li><a href="#">11.5</a></li>
+                                                            <li><a href="#">12</a></li>
+                                                            <li><a href="#">12.5</a></li>
+                                                            <li><a href="#">13</a></li>
+                                                            <li><a href="#">13.5</a></li>
+                                                            <li><a href="#">14</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="accordion-item">
+                                        <div class="side border mb-1">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                                    aria-controls="panelsStayOpen-collapseThree">
+                                                    <h3>Material</h3>
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                                                aria-labelledby="panelsStayOpen-headingThree">
+                                                <div class="accordion-body">
+                                                    <ul>
+                                                        <li>Leather</li>
+                                                        <li>Suede</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ======= product section ===========  -->
+
+                    <div class="col-lg-9 col-xl-9">
+                        <div class="row row-pb-md">
+                            {% for product in products %}
+                            <div class="col-lg-4 my-4">
+                                <div class="all_product">
+                                    <div class="card-new">
+                                        <a href="{{path ('detail_men_product', {'slug': product.slug})}}"> 
+                                            <div class="img-wishlist">
+                                                <img src="/upload/{{product.image}}" alt="Denim Jeans" style="width:60%">
+                                            </div>
+                                            <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
+                                            <div class="product_info">
+                                                <p>
+                                                    <span><strong>{{product.mark}}</strong></span> <br>
+                                                    <span><strong>{{product.shoesname}}</strong></span> <br>
+                                                    <span>{{product.category.category}}</span> <br>
+                                                    <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+
+                                                </p>
+                                            </div>
+                                            <p><a class="add_to_cart" href="{{path('add_my_carte', {'id': product.id} )}}">
+                                                Add to Cart
+                                            </a></p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- ======= pagination section ===========  -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
