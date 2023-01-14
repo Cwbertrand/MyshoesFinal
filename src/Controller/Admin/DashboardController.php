@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Entity\User;
 use App\Entity\ShoesCategory;
 use App\Entity\ShoesGender;
+use App\Entity\Transporter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -51,6 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Product', 'fa-solid fa-shoe-prints', Product::class);
         yield MenuItem::linkToCrud('Category', 'fa-solid fa-list', ShoesCategory::class);
         yield MenuItem::linkToCrud('Address', 'fa-solid fa-map-location-dot', Address::class);
+        yield MenuItem::linkToCrud('Transport Agencies', 'fa-solid fa-truck-fast', Transporter::class);
         yield MenuItem::linkToCrud('Gender Category', 'fa-solid fa-mars-and-venus-burst', ShoesGender::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
