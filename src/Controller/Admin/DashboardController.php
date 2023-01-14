@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Address;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Entity\ShoesCategory;
@@ -49,6 +50,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
         yield MenuItem::linkToCrud('Product', 'fa-solid fa-shoe-prints', Product::class);
         yield MenuItem::linkToCrud('Category', 'fa-solid fa-list', ShoesCategory::class);
+        yield MenuItem::linkToCrud('Address', 'fa-solid fa-map-location-dot', Address::class);
         yield MenuItem::linkToCrud('Gender Category', 'fa-solid fa-mars-and-venus-burst', ShoesGender::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Address{% endblock %}
+
+{% block body %}
+<main class="container py-5">
+    <div class="row">
+        
+        <h2 class="text-center ">addresss</h2>
+        <p class="text-center pb-2">Ajoutez ou modifiez vos addresss ici</p>
+        <!-- ============= SIDE BAR USER ACCOUNT =========-->
+        <div class="col-md-3 bg-light rounded-4 py-4 me-2" style="height: 300px;">
+            <h4 class="text-center">Mon compte</h4>
+            <div class="sous_total d-flex flex-column">
+                <a href="#">Résumé</a>
+                <a href="#">Mes Commandes</a>
+                <a href="#">Données personnelles</a>
+                <a href="address.html">addresss</a>
+            </div>
+        </div>
+
+        <!-- ============= COMMAND BY USERS =========-->
+        
+        <div class="col-md-8">
+            <div class="d-flex">
+                <a href="{{path ('add_address')}}" class="mx-3">
+                    <div class="card bg-light d-flex justify-content-center align-items-center" style="width: 14rem; height: 24rem">
+                        <i class="display-4 fa-solid fa-circle-plus mb-2"></i>
+                        <p class="h5">Add an address</p>
+                    </div>
+                </a>
+                {% for address in form %}
+                    
+                <div class="me-3 card bg-light p-3" style="width: 17rem; height: 24rem">
+                    <h6>House Address</h6>
+                    <h5 class="my-4"><span>{{address.firstname}}</span> {{address.lastname}}</h5>
+                    <p>
+                        {{address.company}}<br>
+                        {{address.mobile}}<br>
+                        {{address.street}} <br>
+                        {{address.postalcode}} <br>
+                        {{address.city}} <br>
+                        {{address.country}} <br>
+                    </p>
+                    <div class="d-flex justify-content-center m-auto">
+                        <a href="{{path ('delete_address', {'id': address.id})}}" class="addrese_delete"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="{{path ('edit_address', {'id': address.id})}}" class="addrese_modify"> Modifier </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
