@@ -1,0 +1,246 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{detailproduct.shoesname}}{% endblock %}
+
+{% block body %}
+    <!-- ============= PRODUCT DETAIL SECTION AND IMAGES =========-->
+
+    <main class="container py-5">
+        <section class="image_detail_product">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 d-flex justify-content-center align-items-center">
+                        <div>
+                            <img src="/upload/{{detailproduct.image}}" class="text-center" alt="basket new 7">
+                        </div>
+                    </div>
+                    <div class="col-md-7 text-center">
+                        <div class="about_product">
+                            <h5>{{detailproduct.mark}}</h5>
+                            <p>{{detailproduct.shoesname}} - {{detailproduct.category.category}}</p>
+                            <p>{{ (detailproduct.price/100) | number_format(2, ',', '.') }} €</p>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            (74 Rating)
+                        </div>
+                        <div class="row justify-content-center pt-4">
+                            <div class="col-6 product-detail-wrap">
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="col-sm-12">
+                                        <div class="accordion-item">
+                                            <div class="block-26 mb-2">
+                                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                                        aria-controls="panelsStayOpen-collapseTwo">
+                                                        <h4><strong>Size</strong></h4>
+                                                    </button>
+                                                </h2>
+                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                                                    aria-labelledby="panelsStayOpen-headingTwo">
+                                                    <div class="accordion-body">
+                                                        <ul>
+                                                            <li><a href="#">7</a></li>
+                                                            <li><a href="#">7.5</a></li>
+                                                            <li><a href="#">8</a></li>
+                                                            <li><a href="#">8.5</a></li>
+                                                            <li><a href="#">9</a></li>
+                                                            <li><a href="#">9.5</a></li>
+                                                            <li><a href="#">10</a></li>
+                                                            <li><a href="#">10.5</a></li>
+                                                            <li><a href="#">11</a></li>
+                                                            <li><a href="#">11.5</a></li>
+                                                            <li><a href="#">12</a></li>
+                                                            <li><a href="#">12.5</a></li>
+                                                            <li><a href="#">13</a></li>
+                                                            <li><a href="#">13.5</a></li>
+                                                            <li><a href="#">14</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    </span>
+                                    <input type="text" id="quantity" name="quantity" class="text-center form-control input-number" value="1" min="1" max="100">
+                                    <span class="input-group-btn ml-1">
+                                        <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8 detail_panier_button">
+                                    <a href="">Ajouter au panier</a> {# {{path('add_panier', {'id': detailproduct.id})}} #}
+                                    </div>
+                                    <div class="col-4 detail_wishlist_button">
+                                        <button><i class="fa-regular fa-heart"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product_description px-3">
+                    <h3>Description de Produit</h3>
+                    <p class="text_edit">
+                        {{detailproduct.description}}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+            <!--================= TRENDING PRODUCTS SECTION ==================-->
+        <section class="trending_product container">
+            <div class="heading">
+                <h1>Les chaussures tendances</h1>
+            </div>
+            <div class="products">
+                <div class="card-new">
+                    <a href="">
+                        <div class="img-wishlist">
+                            <img src="assets/image/basket/basket (7) new.png" alt="Denim Jeans" style="width:60%">
+                        </div>
+                        <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
+                        <div class="product_info">
+                            <p>
+                                <span><strong>Marque</strong></span> <br>
+                                <span><strong>Nom de produit</strong></span> <br>
+                                <span>Category</span> <br>
+                                <span class="price">$19.99</span> <br>
+
+                            </p>
+                        </div>
+                        <p><button class="add_to_cart">Add to Cart</button></p>
+                    </a>
+                </div>
+                <div class="card-new">
+                    <a href="">
+                        <div class="img-wishlist">
+                            <img src="assets/image/basket/basket (7) new.png" alt="Denim Jeans" style="width:60%">
+                        </div>
+                        <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
+                        <div class="product_info">
+                            <p>
+                                <span><strong>Marque</strong></span> <br>
+                                <span><strong>Nom de produit</strong></span> <br>
+                                <span>Category</span> <br>
+                                <span class="price">$19.99</span> <br>
+
+                            </p>
+                        </div>
+                        <p><button class="add_to_cart">Add to Cart</button></p>
+                    </a>
+                </div>
+                <div class="card-new">
+                    <a href="">
+                        <div class="img-wishlist">
+                            <img src="assets/image/basket/basket (7) new.png" alt="Denim Jeans" style="width:60%">
+                        </div>
+                        <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
+                        <div class="product_info">
+                            <p>
+                                <span><strong>Marque</strong></span> <br>
+                                <span><strong>Nom de produit</strong></span> <br>
+                                <span>Category</span> <br>
+                                <span class="price">$19.99</span> <br>
+
+                            </p>
+                        </div>
+                        <p><button class="add_to_cart">Add to Cart</button></p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="customer_remark">
+            <div class="row">
+                <div class="col-md-5">
+                    <h4>Avis (8 nb des avis)</h4>
+                    <p>4.3/5</p>
+                    <p class="text-justify">
+                        Seuls les clients Myshoes qui ont acheté cet article peuvent 
+                        donner une note et partager leur avis sans aucune contrepartie. 
+                        La note générale (sur 5 étoiles) est une moyenne de toutes les notes. 
+                        Les clients peuvent également donner leur avis par écrit. Nous publions 
+                        les avis positifs et négatifs après les avoir modérés.
+                    </p>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-6">
+                    <h4>Trier par date</h4>
+                    <div class="customer_comment">
+                        <hr>
+                        <div class="rating_info">
+                            <h6>Bert(Prénom)</h6>
+                            <p>Acheté : 20.3.2021</p>
+                            <p>Évalué : 31.3.2021</p>
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-justify">
+                            Pas encore essayer mais état impeccable Les chaussures sont très 
+                            jolies La toile de la chaussure est parfaite Chaussure très confortable.
+                        </p>
+                    </div>
+                    <div class="customer_comment">
+                        <hr>
+                        <div class="rating_info">
+                            <h6>Bert(Prénom)</h6>
+                            <p>Acheté : 20.3.2021</p>
+                            <p>Évalué : 31.3.2021</p>
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-justify">
+                            Pas encore essayer mais état impeccable Les chaussures sont très 
+                            jolies La toile de la chaussure est parfaite Chaussure très confortable.
+                        </p>
+                    </div>
+                    <div class="customer_comment">
+                        <hr>
+                        <div class="rating_info">
+                            <h6>Bert(Prénom)</h6>
+                            <p>Acheté : 20.3.2021</p>
+                            <p>Évalué : 31.3.2021</p>
+                            <div class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-justify">
+                            Pas encore essayer mais état impeccable Les chaussures sont très 
+                            jolies La toile de la chaussure est parfaite Chaussure très confortable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

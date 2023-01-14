@@ -39,6 +39,29 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findWithSearch($search): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('c', 'p', 'g')
+            ->join('p.category', 'c')
+            ->join('p.gendershoes', 'g');
+
+            //It searches the checkboxes.
+            if (!empty($search->categorycheckbox)) {
+                $query = 
+                    $query->andWhere('c.id IN (:category)')
+                    ->andWhere('g.id IN (:genershoes)')
+                    ->setParameter('genershoes', 1)
+                    ->setParameter('category', $search->categorycheckbox);
+            }
+
+            return $query->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
