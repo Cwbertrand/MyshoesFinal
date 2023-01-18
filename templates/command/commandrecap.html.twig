@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}recap of your command{% endblock %}
+
+{% block body %}
+    <main class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- ============= lIVRAISON AND ADRESSE =========-->
+                <fieldset class="col-md-12 rounded-4 p-4 form-group">
+                    <legend><strong>Delivery address</strong></legend>
+                    <div id="order_addresses">
+                        <div>
+                            <p>
+                                {{deliveryaddress.firstname}} {{deliveryaddress.lastname}} <br>
+                                {{deliveryaddress.mobile}} <br>
+                                {{deliveryaddress.company}} <br>
+                                {{deliveryaddress.street}} <br>
+                                {{deliveryaddress.postalcode}} {{deliveryaddress.city}} - {{deliveryaddress.country}}<br>
+                            </p>
+                        </div>
+                    </div>
+                </fieldset>
+        
+                <!-- ============= CHOOSE YOUR DELIVERY AGENCY =========-->
+                <fieldset class="col-md-12 rounded-4 p-4 mt-5">
+                    <legend><strong>Delivery agency</strong></legend>
+                    <div>
+                        <address>
+                            <p>
+                                {{transport.transportagency}}<br>
+                                <span><strong>Price: </strong></span>{{(transport.price/100)|number_format(2, ',', '.') }} € <br>
+                                {{transport.description}} <br>
+                            </p>
+                        </address>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <!-- ============= SELECTED PRODUCTS =========-->
+                <div class="col-md-12 bg-light rounded-4 p-4 sous_title" style="height: 35rem;">
+                    <div class="d-flex">
+                        <div class="col-md-4">
+                            <p></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p></p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>Quantity</strong></p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>Price</strong></p>
+                        </div>
+                    </div>
+                    {% set total = null %}
+                    {% set qtytotal = 0 %}
+                    {% for productdetail in fullproducts %}
+                    <div class="d-flex my-3">
+                        <div class="col-md-4">
+                            <img src="/upload/{{productdetail.productdetail.image}}" alt="" class=" w-50 bg-warning img-fluid">
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                {{productdetail.productdetail.mark}} <br>
+                                {{productdetail.productdetail.shoesname}}
+                            </p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p>{{productdetail.quantity}}</p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p>{{ ((productdetail.productdetail.price * productdetail.quantity)/100)|number_format(2, ',', '.') }} €</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% set total = total + (productdetail.productdetail.price * productdetail.quantity) %}
+                    {% set qtytotal = qtytotal + (productdetail.quantity) %}
+                    {% endfor %}
+
+                    <div class="d-flex">
+                        <div class="col-md-4">
+                            <p></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-center"><strong>Sub total:</strong></p> 
+                            <p class="text-center"><strong>Delivery:</strong></p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>{{qtytotal}}</strong></p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>{{ (total/100)|number_format(2, ',', '.') }} €</strong></p>
+                            <p><strong>{{(transport.price/100)|number_format(2, ',', '.') }} €</strong></p>
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                        <div class="col-md-4">
+                            <p></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-center"><strong>Total:</strong></p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong></strong></p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>{{ (total/100 + transport.price/100)|number_format(2, ',', '.') }} €</strong></p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="btn_commande">
+                        <button type="submit" class="btn bg-warning mt-5">Pay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
