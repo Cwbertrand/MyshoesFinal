@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pass your command{% endblock %}
+
+{% block body %}
+{{form_start(forms, {action:path('command_recap')} )}}
+    <main class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- ============= lIVRAISON AND ADRESSE =========-->
+                <fieldset class="col-md-12 rounded-4 p-4 form-group">
+                    <legend><strong>Choose your address for delivery</strong></legend>
+                    <div id="order_addresses">
+                        <div>
+                            {{ form_widget(forms.address)|replace({'[br]' : '<br>', '[hr]' : '<hr>'})|raw}}
+                        </div>
+                    </div>
+                </fieldset>
+        
+                <!-- ============= CHOOSE YOUR DELIVERY AGENCY =========-->
+                <fieldset class="col-md-12 rounded-4 p-4 mt-5">
+                    <legend><strong>Choose your delivery agency</strong></legend>
+                    <div>
+                        <address>
+                            {{ form_widget(forms.transport)|replace({'[br]' : '<br>', '[hr]' : '<hr>'})|raw }}
+                        </address>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <!-- ============= SELECTED PRODUCTS =========-->
+                <div class="col-md-12 bg-light rounded-4 p-4 sous_title" style="height: 35rem;">
+                    <div class="d-flex">
+                        <div class="col-md-4">
+                            <p></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p></p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>Quantity</strong></p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>Prix</strong></p>
+                        </div>
+                    </div>
+
+                    {% set total = null %}
+                    {% set qtytotal = 0 %}
+                    {% for productdetail in fullproducts %}
+                    <div class="d-flex my-3">
+                        <div class="col-md-4">
+                            <img src="/upload/{{productdetail.productdetail.image}}" alt="" class=" w-50 bg-warning img-fluid">
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                {{productdetail.productdetail.mark}} <br>
+                                {{productdetail.productdetail.shoesname}}
+                            </p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p>{{productdetail.quantity}}</p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p>{{ ((productdetail.productdetail.price * productdetail.quantity)/100)|number_format(2, ',', '.') }} €</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% set total = total + (productdetail.productdetail.price * productdetail.quantity) %}
+                    {% set qtytotal = qtytotal + (productdetail.quantity) %}
+                    {% endfor %}
+
+                    <div class="d-flex">
+                        <div class="col-md-4">
+                            <p></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-center"><strong>Total:</strong></p> 
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>{{qtytotal}}</strong></p>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p><strong>{{ (total/100)|number_format(2, ',', '.') }} €</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="btn_commande">
+                        <button type="submit" class="btn bg-warning mt-5">Pass your command</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{{form_end(forms)}}
+{% endblock %}

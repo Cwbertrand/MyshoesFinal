@@ -141,6 +141,14 @@ class Address
         return $this;
     }
 
+    public function __toString()
+    {
+        return  $this->getFirstname().' '.$this->getLastname().'[br]'.
+                $this->getMobile().'[br]'.$this->getCompany().'[br]'.
+                $this->getStreet().'[br]'.$this->getPostalcode().'[br]'.
+                $this->getCity().'[br]'.$this->getCountry().'[hr]';
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
