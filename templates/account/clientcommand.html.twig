@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+<main class="container py-5">
+    <div class="row">
+        
+        <h2 class="pb-4 text-center">Vos commandes</h2>
+        <!-- ============= SIDE BAR USER ACCOUNT =========-->
+        <div class="col-md-3 bg-light rounded-4 py-4 me-2" style="height: 300px;">
+            <h4 class="text-center">Mon compte</h4>
+            <div class="sous_total d-flex flex-column">
+                <a href="#">Résumé</a>
+                <a href="{{path ('client_command')}}">Mes Commandes</a>
+                <a href="#">Données personnelles</a>
+                <a href="{{path ('address')}}">addresss</a>
+            </div>
+        </div>
+
+        <!-- ============= COMMAND BY USERS =========-->
+        {# {{ dump(command) }} #}
+        <div class="col-md-8">
+            {% for product in command %}
+                <div class="bg-light a_command mb-4">
+                    <div class="command_number bg-black px-3">
+                        <h6 class="text-white pe-3">Numéro de commande: {{product.reference}}</h6>
+                        <h6 class="text-white">COMMANDE EFFECTUÉE LE: {{ product.createAt|date('D, d.m.Y') }}</h6>
+                    </div>
+                    {% for productdetails in product.CommandDetails %}
+                    <div class="row pt-5">
+                        <div class="col-md-4 bg-warning d-flex justify-content-center align-items-center w-25">
+                            <img src="assets/image/basket/basket (7) new.png" alt="basket new" class=" text-center img-fluid">
+                        </div>
+                        <div class="col-md-5">
+                            <div class="product_note product-detail-wrap">
+                                <h6>{{productdetails.productmark}}</h6>
+                                <h6>{{productdetails.productname}}</h6>
+                                <h6>Taille: 43(size)</h6>
+                                <h6>Quantity: {{productdetails.quantity}}</h6>
+                                <h6>Price: {{(productdetails.productprice/100)|number_format(2, ',', '.')}} € </h6>
+                            </div>
+                        </div>
+                        <div class="detail_facture col-md-3 d-flex flex-column justify-content-center align-items-center">
+                            <a href="#" class="bg-warning mb-2">Detail de la Commande</a>
+                            <button class="bg-info">Téléchagez la facture</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

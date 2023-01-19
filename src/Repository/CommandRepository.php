@@ -39,6 +39,22 @@ class CommandRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Command[] Returns an array of Command objects
+     */
+    public function findByIsPaid($user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('co', 'c')
+            ->join('c.commandDetails', 'co')
+            ->andWhere('c.IsPaid = 1')
+            ->andWhere('c.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Command[] Returns an array of Command objects
 //     */
