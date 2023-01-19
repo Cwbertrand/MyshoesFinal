@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment Success!{% endblock %}
+
+{% block body %}
+
+
+<div class="container py-5">
+    <h2>Confirmation de commande</h2>
+    <p>
+        Bonjour,<br><br>
+        Nous vous remercions pour votre commande numero <strong> {{command.reference}} </strong>. <br>
+        Une confirmation vient de vous etre envoyee par email a l'adresse <strong> {{command.user.email}} </strong>
+        
+        <hr>
+        Pour suivre votre commande, rendez-vous dans votre <a href="{{ path ('address')}}">Compte</a>
+    </p>
+</div>
+
+<div>
+
+</div>
+{% endblock %}
