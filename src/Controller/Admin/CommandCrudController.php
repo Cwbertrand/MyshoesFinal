@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class CommandCrudController extends AbstractCrudController
 {
@@ -40,6 +41,7 @@ class CommandCrudController extends AbstractCrudController
             IdField::new('id'),
             TextField::new('user.Email', 'User email'),
             TextField::new('reference'),
+            BooleanField::new('ispaid', 'Paid/Unpaid'),
             DateTimeField::new('createAt', 'Command date')->hideOnIndex(),
             ArrayField::new('commandDetails', 'Shoes name'),
         ];

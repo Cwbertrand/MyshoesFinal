@@ -59,6 +59,12 @@ class Command
     #[ORM\OneToMany(mappedBy: 'command', targetEntity: CommandDetail::class)]
     private Collection $commandDetails;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripesessionid = null;
+
+    #[ORM\Column]
+    private ?bool $IsPaid = null;
+
     public function __construct()
     {
         $this->commandDetails = new ArrayCollection();
@@ -251,6 +257,30 @@ class Command
                 $commandDetail->setCommand(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStripesessionid(): ?string
+    {
+        return $this->stripesessionid;
+    }
+
+    public function setStripesessionid(?string $stripesessionid): self
+    {
+        $this->stripesessionid = $stripesessionid;
+
+        return $this;
+    }
+
+    public function isIsPaid(): ?bool
+    {
+        return $this->IsPaid;
+    }
+
+    public function setIsPaid(bool $IsPaid): self
+    {
+        $this->IsPaid = $IsPaid;
 
         return $this;
     }

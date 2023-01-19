@@ -2,6 +2,12 @@
 
 {% block title %}recap of your command{% endblock %}
 
+{% block javascript %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    {# <script src="{{ asset('js/stripepayment.js')}}"></script> #}
+{% endblock %}
+
 {% block body %}
     <main class="container py-5">
         <div class="row">
@@ -114,10 +120,19 @@
                     </div>
                     
                     <div class="btn_commande">
-                        <button type="submit" class="btn bg-warning mt-5">Pay</button>
+                        <form action="/command/create-session/{{reference}}" method="POST">
+                            <button type="submit" class="btn btn-primary btn-lg">Checkout</button>
+                        </form>
+                        {# <form action="">
+                        <a  type="submit" class="btn bg-warning mt-5" id="button_pay">Pay</a>
+                    </form> #}
                     </div>
                 </div>
             </div>
         </div>
     </main>
+{% endblock %}
+
+{% block script %}
+
 {% endblock %}
