@@ -23,7 +23,7 @@ class AddressController extends AbstractController
     {
         $form = $this->em->getRepository(Address::class)->findBy([], ['firstname' => 'ASC']);
 
-        return $this->render('address/index.html.twig', [
+        return $this->render('account/clientaddress.html.twig', [
             'form' => $form,
         ]);
     }
