@@ -65,6 +65,9 @@ class Command
     #[ORM\Column]
     private ?bool $IsPaid = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $deliverystatus = null;
+
     public function __construct()
     {
         $this->commandDetails = new ArrayCollection();
@@ -281,6 +284,18 @@ class Command
     public function setIsPaid(bool $IsPaid): self
     {
         $this->IsPaid = $IsPaid;
+
+        return $this;
+    }
+
+    public function getDeliverystatus(): ?int
+    {
+        return $this->deliverystatus;
+    }
+
+    public function setDeliverystatus(?int $deliverystatus): self
+    {
+        $this->deliverystatus = $deliverystatus;
 
         return $this;
     }
