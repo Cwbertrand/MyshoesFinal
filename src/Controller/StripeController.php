@@ -26,7 +26,7 @@ class StripeController extends AbstractController
     {
         //passing array of product for STRIPE payment
         $stripepayment = [];
-        $YOUR_DOMAIN = 'http://127.0.0.1:8000';
+        $YOUR_DOMAIN = 'https://127.0.0.1:8000';
 
         $command = $this->em->getRepository(Command::class)->findOneByReference($reference);
         //dd($command->getCommandDetails()->getValues());

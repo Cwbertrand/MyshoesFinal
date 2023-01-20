@@ -124,31 +124,36 @@
                     <div class="col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
                             {% for product in products %}
-                            <div class="col-lg-4 my-4">
-                                <div class="all_product">
-                                    <div class="card-new">
-                                        <a href="{{path ('detail_men_product', {'slug': product.slug})}}"> 
-                                            <div class="img-wishlist">
-                                                <img src="/upload/{{product.image}}" alt="Denim Jeans" style="width:60%">
-                                            </div>
-                                            <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
-                                            <div class="product_info">
-                                                <p>
-                                                    <span><strong>{{product.mark}}</strong></span> <br>
-                                                    <span><strong>{{product.shoesname}}</strong></span> <br>
-                                                    <span>{{product.category.category}}</span> <br>
-                                                    <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                <div class="col-lg-4 my-4">
+                                    <div class="all_product">
+                                        <div class="card-new">
+                                            <a href="{{path ('detail_men_product', {'slug': product.slug})}}"> 
+                                                <div class="img-wishlist">
+                                                    <img src="/upload/{{product.image}}" alt="photo {{product.shoesname}}" style="width:60%">
+                                                </div>
+                                                <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
+                                                <div class="product_info">
+                                                    <p>
+                                                        <span><strong>{{product.mark}}</strong></span> <br>
+                                                        <span><strong>{{product.shoesname}}</strong></span> <br>
+                                                        <span>{{product.category.category}}</span> <br>
+                                                        <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
 
-                                                </p>
-                                            </div>
-                                            <p><a class="add_to_cart" href="{{path('add_my_carte', {'id': product.id} )}}">
-                                                Add to Cart
-                                            </a></p>
-                                        </a>
+                                                    </p>
+                                                </div>
+                                                <p><a class="add_to_cart" href="{{path('add_my_carte', {'id': product.id} )}}">
+                                                    Add to Cart
+                                                </a></p>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
+
+                            <div class="text-center">
+                                {% do products.setPageRange(2) %}
+                                {{ knp_pagination_render(products, 'base/pagination.html.twig')}}
+                            </div>
                         </div>
 
                         <!-- ======= pagination section ===========  -->
