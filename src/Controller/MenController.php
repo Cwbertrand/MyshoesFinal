@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Form\SearchType;
 use App\Entity\ShoesGender;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +23,7 @@ class MenController extends AbstractController
     }
 
     #[Route('/men', name: 'men')]
-    public function index(Request $request): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
@@ -40,10 +41,16 @@ class MenController extends AbstractController
 
          //Query to select all men's shoes
         $men = $this->em->getRepository(ShoesGender::class)->find(1);   // the find(1) gets the id of ShoesGender
+        $newman = $men->getProducts();
 
+        $man = $paginator->paginate(
+            $newman, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            6/*limit per page*/
+        );
         return $this->render('men/index.html.twig', [
             // c'est la methode qui fait la relation MAnytoMany
-            'products' => $men->getProducts(),//->toArray(),
+            'products' => $man,//->toArray(),
             'form' => $form->createView(),
         ]);
     }
