@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Men products{% endblock %}
+{% block title %}women products{% endblock %}
 
 {% block body %}
     <div class="breadcrumbs-two py-5">
@@ -127,7 +127,7 @@
                                 <div class="col-lg-4 my-4">
                                     <div class="all_product">
                                         <div class="card-new">
-                                            <a href="{{path ('detail_men_product', {'slug': product.slug})}}"> 
+                                            <a href="{{path ('detail_product', {'slug': product.slug})}}"> 
                                                 <div class="img-wishlist">
                                                     <img src="/upload/{{product.image}}" alt="photo {{product.shoesname}}" style="width:60%">
                                                 </div>
