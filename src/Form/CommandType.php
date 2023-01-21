@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Entity\Transporter;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +16,7 @@ class CommandType extends AbstractType
     {
         $user = $options['user']; 
         $builder
+            //->add('firstname', TextType::class)
             ->add('address', EntityType::class, [
                 'label' => false,
                 'required' => true,
