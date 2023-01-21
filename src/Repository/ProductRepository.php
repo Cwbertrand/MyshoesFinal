@@ -76,7 +76,7 @@ class ProductRepository extends ServiceEntityRepository
                 $query = 
                     $query->andWhere('c.id IN (:category)')
                     ->andWhere('g.id IN (:genershoes)')
-                    ->setParameter('genershoes', 3)
+                    ->setParameter('genershoes', 2)
                     ->setParameter('category', $search->categorycheckbox);
             }
 
