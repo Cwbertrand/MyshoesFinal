@@ -93,6 +93,41 @@ class GenderController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    //products for children
+    #[Route('/children', name: 'children')]
+    public function childrenProduct(Request $request): Response
+    {
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $search = $this->em->getRepository(Product::class)->searchwithWomen($search);
+            $search = $this->paginator->paginate( $search, $request->query->getInt('page', 1), 6);
+
+            return $this->render('gender/childrenproducts.html.twig', [
+                'products' => $search,
+                'form' => $form->createView(),
+            ]);
+        }
+
+         //Query to select all men's shoes
+        $children = $this->em->getRepository(ShoesGender::class)->find(3);   // the find(1) gets the id of ShoesGender
+        $newchildren = $children->getProducts();
+
+        $children = $this->paginator->paginate(
+            $newchildren, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            6/*limit per page*/
+        );
+        return $this->render('gender/childrenproducts.html.twig', [
+            // c'est la methode qui fait la relation MAnytoMany
+            'products' => $children,//->toArray(),
+            'form' => $form->createView(),
+        ]);
+    }
 
     //Show product details
     #[Route('/product/detail/{slug}', name: 'detail_product')]
