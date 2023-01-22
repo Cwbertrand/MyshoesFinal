@@ -108,13 +108,13 @@ class CommandController extends AbstractController
                 $commanddetail->setProductmark($allproduct['productdetail']->getMark());
                 $commanddetail->setProductdescription($allproduct['productdetail']->getDescription());
                 $commanddetail->setProductimage($allproduct['productdetail']->getImage());
-                $commanddetail->setproductprice($allproduct['productdetail']->getPrice());
-                $commanddetail->setCommandtotal($allproduct['quantity'] * $allproduct['productdetail']->getPrice());
+                $commanddetail->setproductprice($allproduct['productdetail']->discountPrice());
+                $commanddetail->setCommandtotal($allproduct['quantity'] * $allproduct['productdetail']->discountPrice());
                 
                 $this->em->persist($commanddetail);
-                $this->em->flush();
+                //$this->em->flush();
                 //dd($allproduct);
-                //dd($commanddetail);
+                dd($commanddetail);
             }
 
         }
