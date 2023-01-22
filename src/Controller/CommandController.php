@@ -112,9 +112,9 @@ class CommandController extends AbstractController
                 $commanddetail->setCommandtotal($allproduct['quantity'] * $allproduct['productdetail']->discountPrice());
                 
                 $this->em->persist($commanddetail);
-                //$this->em->flush();
+                $this->em->flush();
                 //dd($allproduct);
-                dd($commanddetail);
+                //dd($commanddetail);
             }
 
         }

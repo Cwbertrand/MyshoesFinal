@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Class\Email;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
@@ -55,6 +56,11 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
+            $email = new Email();
+
+            $content = $this->redirectToRoute('app_verify_email');
+
+            $email->sendEmail($user->getEmail(), $user->getEmail(), 'Welcome to myshoes', $content);
 
             return $userAuthenticator->authenticateUser(
                 $user,
