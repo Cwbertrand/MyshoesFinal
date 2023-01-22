@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Class\Carte;
 use Stripe\Stripe;
+use App\Class\Carte;
+use App\Class\Email;
 use App\Entity\Command;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
@@ -103,6 +104,11 @@ class StripeController extends AbstractController
             //Modify the payment status
             $command->setIsPaid(1);
             $this->em->flush();
+
+            $email = new Email();
+            $content = 'Thanks for purchasing from us';
+
+            $email->sendEmail('email@gmail.com', 'john doe', 'Thanks for purchasing from us.', $content);
         }
 
         return $this->render('payment/success.html.twig', [
