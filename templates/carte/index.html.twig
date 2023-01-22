@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <h5>{{ ((carte.productdetail.price * carte.quantity)/100) | number_format(2, ',', '.') }} €</h5>
+                        <h5>{{ ((carte.productdetail.discountPrice * carte.quantity)/100) | number_format(2, ',', '.') }} €</h5>
                         <p>({{ (carte.productdetail.price/100) | number_format(2, ',', '.') }} € /unit)</p>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <hr>
-                {% set total = total + (carte.productdetail.price * carte.quantity) %}
+                {% set total = total + (carte.productdetail.discountPrice * carte.quantity) %}
                 {% endfor %}
             </div>
 

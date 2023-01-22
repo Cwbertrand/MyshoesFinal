@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
@@ -39,6 +40,7 @@ class ProductCrudController extends AbstractCrudController
                 //require is false because...
                 ->setRequired(false),
             MoneyField::new('price')->setCurrency('EUR'),
+            IntegerField::new('promotion')->hideOnIndex(),
             TextareaField::new('description')->hideOnIndex(),
             SlugField::new('slug')->setTargetFieldName('shoesname')->hideOnIndex(),
         ];

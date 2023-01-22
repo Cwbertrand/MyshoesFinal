@@ -77,11 +77,11 @@
                             <p>{{productdetail.quantity}}</p>
                         </div>
                         <div class="col-md-2 text-center">
-                            <p>{{ ((productdetail.productdetail.price * productdetail.quantity)/100)|number_format(2, ',', '.') }} €</p>
+                            <p>{{ ((productdetail.productdetail.discountPrice * productdetail.quantity)/100)|number_format(2, ',', '.') }} €</p>
                         </div>
                     </div>
                     <hr>
-                    {% set total = total + (productdetail.productdetail.price * productdetail.quantity) %}
+                    {% set total = total + (productdetail.productdetail.discountPrice * productdetail.quantity) %}
                     {% set qtytotal = qtytotal + (productdetail.quantity) %}
                     {% endfor %}
 

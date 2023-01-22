@@ -46,6 +46,9 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?ShoesCategory $category = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $promotion = null;
+
     public function __construct()
     {
         $this->gendershoes = new ArrayCollection();
@@ -186,6 +189,25 @@ class Product
         $this->category = $category;
 
         return $this;
+    }
+
+    public function getPromotion(): ?int
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?int $promotion): self
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function discountPrice()
+    {
+        $newprice = $this->getPrice() - ($this->getPrice() * $this->getPromotion() / 100);
+        
+        return $newprice;
     }
 
 }
