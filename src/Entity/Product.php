@@ -49,9 +49,13 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?int $promotion = null;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Remarks::class)]
+    private Collection $remarks;
+
     public function __construct()
     {
         $this->gendershoes = new ArrayCollection();
+        $this->remarks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +212,36 @@ class Product
         $newprice = $this->getPrice() - ($this->getPrice() * $this->getPromotion() / 100);
         
         return $newprice;
+    }
+
+    /**
+     * @return Collection<int, Remarks>
+     */
+    public function getRemarks(): Collection
+    {
+        return $this->remarks;
+    }
+
+    public function addRemark(Remarks $remark): self
+    {
+        if (!$this->remarks->contains($remark)) {
+            $this->remarks->add($remark);
+            $remark->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemark(Remarks $remark): self
+    {
+        if ($this->remarks->removeElement($remark)) {
+            // set the owning side to null (unless already changed)
+            if ($remark->getProduct() === $this) {
+                $remark->setProduct(null);
+            }
+        }
+
+        return $this;
     }
 
 }

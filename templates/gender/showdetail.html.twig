@@ -3,6 +3,23 @@
 {% block title %}{{detailproduct.shoesname}}{% endblock %}
 
 {% block body %}
+<style>
+    .progress-label-left {
+        float: left;
+        margin-right: 0.5em;
+        line-height: 1em;
+    }
+
+    .progress-label-right {
+        float: right;
+        margin-left: 0.3em;
+        line-height: 1em;
+    }
+
+    .star-light {
+        color: #e9ecef;
+    }
+</style>
     <!-- ============= PRODUCT DETAIL SECTION AND IMAGES =========-->
 
     <main class="container py-5">
@@ -20,15 +37,7 @@
                             <p>{{detailproduct.shoesname}} - {{detailproduct.category.category}}</p>
                             <p>{{ (detailproduct.price/100) | number_format(2, ',', '.') }} €</p>
                         </div>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            (74 Rating)
-                        </div>
-                        <div class="row justify-content-center pt-4">
+                        <div class="row justify-content-center pt-2">
                             <div class="col-6 product-detail-wrap">
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="col-sm-12">
@@ -165,11 +174,12 @@
             </div>
         </section>
 
+        <!--================= RATING SECTION ==================-->
         <section class="customer_remark">
             <div class="row">
                 <div class="col-md-5">
-                    <h4>Avis (8 nb des avis)</h4>
-                    <p>4.3/5</p>
+                    <h4>Review ({{newremarks|length}} nb des avis)</h4>
+                    <p>{{((reviewTotal|join)/(newremarks|length))|round(1, 'floor')}}/5</p>
                     <p class="text-justify">
                         Seuls les clients Myshoes qui ont acheté cet article peuvent 
                         donner une note et partager leur avis sans aucune contrepartie. 
@@ -177,70 +187,177 @@
                         Les clients peuvent également donner leur avis par écrit. Nous publions 
                         les avis positifs et négatifs après les avoir modérés.
                     </p>
+
+                    {% if app.user %}
+                    <!-- Button trigger modal -->
+                    <button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
+                    {% endif %}
                 </div>
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-6">
                     <h4>Trier par date</h4>
+                    {% for review in newremarks %}
                     <div class="customer_comment">
-                        <hr>
                         <div class="rating_info">
-                            <h6>Bert(Prénom)</h6>
-                            <p>Acheté : 20.3.2021</p>
-                            <p>Évalué : 31.3.2021</p>
+                            {% if review.user %}
+                                <h6>{{review.user}}</h6>
+                                {% else %}
+                                <h6>Anonymous </h6>
+                            {% endif %}
+                            
+                            <p>Evaluated : {{review.createAt|date("d/m/Y")}}</p>
                             <div class="rating">
+                                {% if review.rating == 1 %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                {% elseif review.rating == 2 %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                {% elseif review.rating == 3 %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                {% elseif review.rating == 4 %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fas fa-star text-secondary"></i>
+                                {% elseif review.rating == 5 %}
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
+                                {% endif %}
                             </div>
                         </div>
-                        <p class="text-justify">
-                            Pas encore essayer mais état impeccable Les chaussures sont très 
-                            jolies La toile de la chaussure est parfaite Chaussure très confortable.
+                        <p class="">
+                            {{review.comment}}
                         </p>
                     </div>
-                    <div class="customer_comment">
-                        <hr>
-                        <div class="rating_info">
-                            <h6>Bert(Prénom)</h6>
-                            <p>Acheté : 20.3.2021</p>
-                            <p>Évalué : 31.3.2021</p>
-                            <div class="rating">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="text-justify">
-                            Pas encore essayer mais état impeccable Les chaussures sont très 
-                            jolies La toile de la chaussure est parfaite Chaussure très confortable.
-                        </p>
-                    </div>
-                    <div class="customer_comment">
-                        <hr>
-                        <div class="rating_info">
-                            <h6>Bert(Prénom)</h6>
-                            <p>Acheté : 20.3.2021</p>
-                            <p>Évalué : 31.3.2021</p>
-                            <div class="rating">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="text-justify">
-                            Pas encore essayer mais état impeccable Les chaussures sont très 
-                            jolies La toile de la chaussure est parfaite Chaussure très confortable.
-                        </p>
-                    </div>
+                    <hr>
+                    {% endfor %}
                 </div>
             </div>
         </section>
     </main>
+
+    {# MODAL #}
+    <div id="review_modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Submit Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center mt-2 mb-4">
+                        <i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
+                        <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
+                        <i class="fas fa-star star-light submit_star mr-1" id="submit_star_3" data-rating="3"></i>
+                        <i class="fas fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
+                        <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
+                    </h4>
+                    <div class="form-group">
+                        <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
+                    </div>
+                    <div class="form-group text-center mt-4">
+                        <button type="button" class="btn btn-primary" id="save_review">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        
+        $(document).ready(function(){
+
+            ///=========== INSERTING DATA INTO THE DATABASE =======///
+
+            var rating_data = 0;
+
+            $('#add_review').click(function(){
+                $('#review_modal').modal('show')
+            })
+            
+            //hovering over the stars to change color
+            $(document).on('mouseenter', '.submit_star', function (){
+
+                //this fectches data_rating value (e.g 1,2,3) and stores it in the var rating
+                var rating = $(this).data('rating');
+
+                reset_background()
+
+                //we perform a for loop to collect the values entered
+                for(var count = 1; count <= rating; count++)
+                {
+                    $('#submit_star_'+count).addClass('text-warning');
+                }
+                
+            });
+
+            //this resets the text-warning color to text-light when the mouse leaves the star.
+            function reset_background() {
+                for (var count = 1; count <= 5; count++){
+    
+                    $('#submit_star_' + count).addClass('star-light');
+    
+                    $('#submit_star_' + count).removeClass('text-warning');
+                }
+            }
+    
+            //when mouse leaves, the color automatically resets
+            $(document).on('mouseleave', '.submit_star', function() {
+    
+                reset_background();
+    
+                for (var count = 1; count <= rating_data; count++) {
+    
+                    $('#submit_star_' + count).removeClass('star-light');
+    
+                    $('#submit_star_' + count).addClass('text-warning');
+                }
+    
+            });
+
+            //this we collect the value the user has clicked upon and save
+            $(document).on('click', '.submit_star', function (){
+                rating_data = $(this).data('rating');
+                //console.log(rating_data);
+            });
+            
+
+            //Now we go further to submit the entire review. that is the star value and the text.
+            $('#save_review').click(function(){
+                var userReview = $('#user_review').val();
+
+                if(rating_data == '' || userReview == ''){
+                    alert('Please fill both fields');
+                    return false;
+                }else{
+                    $.ajax({
+                        url:"/product/detail/rating/{{slug}}",
+                        method: "POST",
+                        data:{rating_data:rating_data, userReview:userReview},
+                        success: $('#review_modal').modal('hide'),
+                    });
+                }
+                
+            });
+        
+        });
+    </script>
 {% endblock %}

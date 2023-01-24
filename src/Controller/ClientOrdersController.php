@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Command;
+use App\Entity\CommandDetail;
+use App\Entity\Product;
+use App\Entity\Remarks;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,19 +17,21 @@ use Symfony\Component\HttpFoundation\Request;
 class ClientOrdersController extends AbstractController
 {
     private $em;
+    private $paginator;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, PaginatorInterface $paginator)
     {
         $this->em = $em;
+        $this->paginator = $paginator;
     }
 
     #[Route('/client/command', name: 'client_command')]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
         
         $command = $this->em->getRepository(Command::class)->findByIsPaid($this->getUser());
         
-        $command = $paginator->paginate(
+        $command = $this->paginator->paginate(
             $command, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             2/*limit per page*/

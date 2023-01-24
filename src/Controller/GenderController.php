@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Class\Search;
 use App\Entity\Product;
+use App\Entity\Remarks;
 use App\Form\SearchType;
 use App\Entity\ShoesGender;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +13,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GenderController extends AbstractController
@@ -133,8 +136,49 @@ class GenderController extends AbstractController
     #[Route('/product/detail/{slug}', name: 'detail_product')]
     public function productDetail(Product $product): Response
     {
+        
+        // selecting it from the database
+        $newremarks = $this->em->getRepository(Remarks::class)->findProductId($product);
+        //dd(count($newremarks));
+
+        //this is the total reviews of the client
+        $reviewTotal = $this->em->getRepository(Remarks::class)->sumProductReview($product);
+
+
         return $this->render('gender/showdetail.html.twig', [
             'detailproduct' => $product,
+            'slug' => $product->getSlug(),
+            'newremarks' => $newremarks,
+            'reviewTotal' => $reviewTotal,
         ]);
+    }
+
+    #[Route('/product/detail/rating/{slug}', name: 'rating_product')]
+    public function productRating(Product $product, Request $request)
+    {
+        $remarks = new Remarks();
+        
+        //$userReview = filter_input(INPUT_POST, 'userReview', FILTER_SANITIZE_SPECIAL_CHARS);
+        //$rating_data = filter_input(INPUT_POST, 'rating_data', FILTER_DEFAULT);
+
+        if($request->request->get('rating_data')){
+            $stars = $request->request->get('rating_data');
+            $comment = $request->request->get('userReview');
+            
+            $date = new DateTime();
+            $remarks->setComment($comment);
+            $remarks->setRating($stars);
+            $remarks->setProduct($product);
+            $remarks->setUser($this->getUser());
+            $remarks->setCreateAt($date);
+    
+            $this->em->persist($remarks);
+            $this->em->flush();
+            $this->addFlash('message', 'Your review and rating has successfully been submitted');
+
+            echo "Your Review & Rating Successfully Submitted";
+            dd($remarks);
+        }
+        
     }
 }
