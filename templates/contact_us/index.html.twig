@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactUsController!{% endblock %}
+{% block body %}
+{% for notice in app.flashes('message') %}
+    <p class="bg-success text-white">{{ notice }}</p>
+{% endfor %}
+{{form(form)}}
+{% endblock %}

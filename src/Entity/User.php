@@ -43,11 +43,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Remarks::class)]
     private Collection $remarks;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ContactUs::class)]
+    private Collection $contactUs;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
         $this->commands = new ArrayCollection();
         $this->remarks = new ArrayCollection();
+        $this->contactUs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,6 +225,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($remark->getUser() === $this) {
                 $remark->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContactUs>
+     */
+    public function getContactUs(): Collection
+    {
+        return $this->contactUs;
+    }
+
+    public function addContactUs(ContactUs $contactUs): self
+    {
+        if (!$this->contactUs->contains($contactUs)) {
+            $this->contactUs->add($contactUs);
+            $contactUs->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactUs(ContactUs $contactUs): self
+    {
+        if ($this->contactUs->removeElement($contactUs)) {
+            // set the owning side to null (unless already changed)
+            if ($contactUs->getUser() === $this) {
+                $contactUs->setUser(null);
             }
         }
 
