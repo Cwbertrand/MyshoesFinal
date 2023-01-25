@@ -25,6 +25,7 @@
 </head>
 
 <body>
+    {% if block('navbar') is defined %}
     <!--=============  NAV BAR  ======================-->
     <nav class="nav_bar">
         <div class="general_container">
@@ -98,10 +99,13 @@
             </div>
         </div>
     </nav>
+    {% endif %}
     {% block body %}{% endblock %}
 
 
     <!--================= FOOTER SECTION ==================-->
+    {% if block('footer') is defined %}
+        
     <footer class="footer">
         <div class="first_footer hero_container">
             <div class="footer_about_us">
@@ -155,6 +159,7 @@
             <a href="#" class="policy_section">Conditions des offres</a>
         </div>
     </footer>
+    {% endif %}
 
     {% block javascript %}{% endblock %}
     {% block javascripts %}

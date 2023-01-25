@@ -3,10 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Command;
-use App\Entity\CommandDetail;
-use App\Entity\Product;
-use App\Entity\Remarks;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,17 +24,29 @@ class ClientOrdersController extends AbstractController
     #[Route('/client/command', name: 'client_command')]
     public function index(Request $request): Response
     {
-        
+        //this gets the orders that are successfully paid only. The findByIsPaid() is created in the repository
         $command = $this->em->getRepository(Command::class)->findByIsPaid($this->getUser());
         
-        $command = $this->paginator->paginate(
-            $command, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            2/*limit per page*/
-        );
+        // $command = $this->paginator->paginate(
+        //     $command, /* query NOT result */
+        //     $request->query->getInt('page', 1)/*page number*/,
+        //     2/*limit per page*/
+        //);
         //dd($command);
         return $this->render('account/clientcommand.html.twig', [
             'command' => $command,
         ]);
     }
+
+    #[Route('/client/command/in/details/{reference}', name: 'details_command')]
+    public function CommandDetails($reference): Response
+    {
+        //This get the command that is referenced to this particular command
+        $commanddetail = $this->em->getRepository(Command::class)->findOneByReference($reference);
+
+        return $this->render('account/clientDetailCommand.html.twig', [
+            'commanddetails' => $commanddetail,
+        ]);
+    }
+
 }
