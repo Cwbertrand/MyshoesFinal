@@ -2,6 +2,8 @@
 
 {% block title %}{{detailproduct.shoesname}}{% endblock %}
 
+{% block navbar %}{% endblock %}
+
 {% block body %}
 <style>
     .progress-label-left {
@@ -21,7 +23,9 @@
     }
 </style>
     <!-- ============= PRODUCT DETAIL SECTION AND IMAGES =========-->
-
+    {% for notice in app.flashes('message') %}
+        <p class="bg-success text-white">{{ notice }}</p>
+    {% endfor %}
     <main class="container py-5">
         <section class="image_detail_product">
             <div class="container">
@@ -179,13 +183,16 @@
             <div class="row">
                 <div class="col-md-5">
                     <h4>Review ({{newremarks|length}} nb des avis)</h4>
+                    {% if newremarks|length != 0 %}
                     <p>{{((reviewTotal|join)/(newremarks|length))|round(1, 'floor')}}/5</p>
+                    {% else %}
+                    <p>0/5</p>
+                    {% endif %}
                     <p class="text-justify">
-                        Seuls les clients Myshoes qui ont acheté cet article peuvent 
-                        donner une note et partager leur avis sans aucune contrepartie. 
-                        La note générale (sur 5 étoiles) est une moyenne de toutes les notes. 
-                        Les clients peuvent également donner leur avis par écrit. Nous publions 
-                        les avis positifs et négatifs après les avoir modérés.
+                        Only Myshoes customers who have purchased this item can give a rating and share their 
+                        opinion without any compensation. The overall rating (out of 5 stars) is an average 
+                        of all the ratings. Customers can also give their review in writing. 
+                        We publish both positive and negative reviews after moderating them.
                     </p>
 
                     {% if app.user %}
@@ -280,7 +287,10 @@
     </div>
 {% endblock %}
 
+{% block footer %}{% endblock %}
+
 {% block script %}
+{# <script src="{{ asset('js/rating.js') }}"></script> #}
     <script>
         
         $(document).ready(function(){
@@ -352,12 +362,17 @@
                         url:"/product/detail/rating/{{slug}}",
                         method: "POST",
                         data:{rating_data:rating_data, userReview:userReview},
-                        success: $('#review_modal').modal('hide'),
+                        success: function(data){
+                            document.write(data);
+                        },
                     });
                 }
+
                 
             });
         
-        });
+        }); 
     </script>
 {% endblock %}
+
+

@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}My commands{% endblock %}
+
+{% block navbar %}
+{% endblock %}
 
 {% block body %}
 <main class="container py-5">
@@ -19,7 +22,7 @@
         </div>
 
         <!-- ============= COMMAND BY USERS =========-->
-        {{ dump(command) }}
+        {# {{ dump(command) }} #}
         <div class="col-md-8">
             {% for product in command %}
                 <div class="bg-light a_command mb-4">
@@ -41,20 +44,23 @@
                                 <h6>Price: {{(productdetails.productprice/100)|number_format(2, ',', '.')}} € </h6>
                             </div>
                         </div>
-                        <div class="detail_facture col-md-3 d-flex flex-column justify-content-center align-items-center">
-                            <a href="#" class="bg-warning mb-2">Detail de la Commande</a>
-                            <button class="bg-info">Téléchagez la facture</button>
-                        </div>
                     </div>
                     {% endfor %}
+                    <div class="detail_facture col-md-3 d-flex flex-column justify-content-center align-items-center">
+                        <a href="{{path('details_command', {'reference': product.reference})}}" class="bg-warning mb-2">Detail de la Commande</a>
+                        <a href="{{path('invoice_pdf', {'reference': product.reference})}}" class="bg-info mb-2">Téléchagez la facture</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
         <div class="d-flex justify-content-center">
-            {% do command.setPageRange(2) %}
-            {{ knp_pagination_render(command, 'base/pagination.html.twig')}}
+            {# {% do command.setPageRange(2) %}
+            {{ knp_pagination_render(command, 'base/pagination.html.twig')}} #}
         </div>
     </div>
 </main>
 
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

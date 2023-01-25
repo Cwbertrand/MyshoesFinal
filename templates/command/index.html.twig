@@ -2,6 +2,8 @@
 
 {% block title %}Pass your command{% endblock %}
 
+{% block navbar %}{% endblock %}
+
 {% block body %}
 {{form_start(forms, {action:path('command_recap')} )}}
     <main class="container py-5">
@@ -95,3 +97,5 @@
     </main>
 {{form_end(forms)}}
 {% endblock %}
+
+{% block footer %}{% endblock %}

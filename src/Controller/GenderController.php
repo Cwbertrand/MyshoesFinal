@@ -176,8 +176,8 @@ class GenderController extends AbstractController
             $this->em->flush();
             $this->addFlash('message', 'Your review and rating has successfully been submitted');
 
-            echo "Your Review & Rating Successfully Submitted";
-            dd($remarks);
+            return $this->redirectToRoute('detail_product', ['slug' => $product->getSlug()]);
+            //dd($remarks);
         }
         
     }
