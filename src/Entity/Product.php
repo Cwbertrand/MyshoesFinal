@@ -52,6 +52,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Remarks::class)]
     private Collection $remarks;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isBest = null;
+
     public function __construct()
     {
         $this->gendershoes = new ArrayCollection();
@@ -240,6 +243,18 @@ class Product
                 $remark->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setIsBest(?bool $isBest): self
+    {
+        $this->isBest = $isBest;
 
         return $this;
     }

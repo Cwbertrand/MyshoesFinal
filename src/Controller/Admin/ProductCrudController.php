@@ -30,6 +30,7 @@ class ProductCrudController extends AbstractCrudController
             AssociationField::new('gendershoes'),
             AssociationField::new('category'),
             BooleanField::new('status'),
+            BooleanField::new('isBest', 'Best promotion'),
             DateTimeField::new('createAt')->hideOnIndex(),
             ImageField::new('image')
                 //this is where the images will go to

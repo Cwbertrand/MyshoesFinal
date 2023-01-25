@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block owlcarouselcss %}
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+{% endblock %}
 
 {% block title %}Myshoes boutique{% endblock %}
 
@@ -7,19 +11,19 @@
 
 {% block body %}
     <!--=============  HERO SECTION  ======================-->
-    
+
     <section class="hero">
-        <div class="hero_container hero_note_img">
-            <div class="hero_note">
-                <h4> Welcome to <span>Myshoes</span></h4>
-                <h2>
-                    You're the best,  <br>
-                    <span>Wear the best</span>
-                </h2>
-                <button class="general_btn shop_now_btn">Shop Now</button>
-            </div>
-            <div class="hero_image">
-                <img src="{{asset ('image/basket/basket (2).png')}}" alt="kappa">
+        <div>
+            <div class="owl-carousel owl-theme">
+                {% for header in carousels %}
+                <div class="hero_background" style="background: url('/HeaderImage/{{header.headerimage}}');">
+                    <div class="background_data">
+                        <h4 >{{header.headertitle}}</h4>
+                        <p class="hero_note">{{header.headertext}}</p>
+                        <a href="{{header.headerurl}}" role="button">{{header.headerbtn}}</a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -27,81 +31,41 @@
     <!--================= TRENDING PRODUCTS SECTION ==================-->
     <section class="trending_product hero_container">
         <div class="heading">
-            <h1>Les chaussures tendances</h1>
+            <h1>Best Promotion & Best Sales</h1>
         </div>
         <div class="products">
-            <div class="card-new">
-                <a href="">
-                    <div class="img-wishlist">
-                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
-                    </div>
-                    <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
-                    <div class="product_info">
-                        <p>
-                            <span><strong>Marque</strong></span> <br>
-                            <span><strong>Nom de produit</strong></span> <br>
-                            <span>Category</span> <br>
-                            <span class="price">$19.99</span> <br>
+            {% for product in products %}
+                <div class="col-lg-4 mb-4">
+                    <div class="all_product">
+                        <div class="card-new">
+                            <a href="{{path ('detail_product', {'slug': product.slug})}}"> 
+                                <div class="img-wishlist">
+                                    <img src="/upload/{{product.image}}" alt="photo {{product.shoesname}}" style="width:60%">
+                                </div>
+                                <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
+                                <div class="product_info">
+                                    <p>
+                                        <span><strong>{{product.mark}}</strong></span> <br>
+                                        <span><strong>{{product.shoesname}}</strong></span> <br>
+                                        <span>{{product.category.category}}</span> <br>
+                                        {% if product.promotion > 0 %}
+                                        <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small>
+                                        <span class="price">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</span>
+                                        <small class="bg-danger p-1 text-white">{{product.promotion}}% Promo</small>
+                                        {% else %}
+                                        <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                        {% endif %}
 
-                        </p>
+                                    </p>
+                                </div>
+                                <p><a class="add_to_cart" href="{{path('add_my_carte', {'id': product.id} )}}">
+                                    Add to Cart
+                                </a></p>
+                            </a>
+                        </div>
                     </div>
-                    <p><button class="add_to_cart">Add to Cart</button></p>
-                </a>
-            </div>
-            <div class="card-new">
-                <a href="">
-                    <div class="img-wishlist">
-                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
-                    </div>
-                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
-                    <div class="product_info">
-                        <p>
-                            <span><strong>Marque</strong></span> <br>
-                            <span><strong>Nom de produit</strong></span> <br>
-                            <span>Category</span> <br>
-                            <span class="price">$19.99</span> <br>
-
-                        </p>
-                    </div>
-                    <p><button class="add_to_cart">Add to Cart</button></p>
-                </a>
-            </div>
-            <div class="card-new">
-                <a href="">
-                    <div class="img-wishlist">
-                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
-                    </div>
-                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
-                    <div class="product_info">
-                        <p>
-                            <span><strong>Marque</strong></span> <br>
-                            <span><strong>Nom de produit</strong></span> <br>
-                            <span>Category</span> <br>
-                            <span class="price">$19.99</span> <br>
-
-                        </p>
-                    </div>
-                    <p><button class="add_to_cart">Add to Cart</button></p>
-                </a>
-            </div>
-            <div class="card-new">
-                <a href="">
-                    <div class="img-wishlist">
-                        <img src="{{asset ('image/basket/basket (2).png')}}" alt="Denim Jeans" style="width:60%">
-                    </div>
-                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
-                    <div class="product_info">
-                        <p>
-                            <span><strong>Marque</strong></span> <br>
-                            <span><strong>Nom de produit</strong></span> <br>
-                            <span>Category</span> <br>
-                            <span class="price">$19.99</span> <br>
-
-                        </p>
-                    </div>
-                    <p><button class="add_to_cart">Add to Cart</button></p>
-                </a>
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </section>
 
@@ -145,7 +109,25 @@
             </div>
         </div>
     </section>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block owlcarouseljs %}
+    <script src="{{asset('js/owl.carousel.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 {% endblock %}
 
-{% block footer %}
+{% block script %}
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            animateOut: 'fadeOut',
+            items : 1,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            dots: true,
+            nav: true,
+        });
+    </script>
 {% endblock %}
