@@ -1,21 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block signupincss %}
+<link rel="stylesheet" href="{{asset('css/signupin.css')}}">
+{% endblock %}
+
+{% block title %}Sign up{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div class="mt-1 mx-3 home">
+        <h2><a href="{{path ('home')}}">MyShoes</a></h2>
+    </div>
+    <section class="d-flex justify-content-center w-100">
+        <div class="background_sign container">
+            <div class="container background_sign_main">
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                {% endfor %}
 
-    <h1>Register</h1>
+                <h1 class="text-center mb-3">Sign up</h1>
+                <div class="px-4">
+                    {{ form_start(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                        {{ form_row(registrationForm.pseudo) }}
+                        {{ form_row(registrationForm.email) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                        {{ form_row(registrationForm.plainPassword, {
+                            label: 'Password'
+                        }) }}
+
+                        <div class="mt-2">{{ form_row(registrationForm.agreeTerms) }}</div>
+
+                        <button type="submit" class="btn btn_sign mt-3">Register</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+                <div class="text-center">
+                    <p>Have an account? <span><a class="btn_signin" href="{{path ('app_login')}}">Sign in</a></span></p>
+                </div>
+            </div>
+            <div class="image_sign">
+            </div>
+        </div>
+        <div></div>
+    </section>
+
 {% endblock %}

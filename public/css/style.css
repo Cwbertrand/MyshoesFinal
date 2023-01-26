@@ -29,6 +29,31 @@ li{
     color: #000;
 }
 
+In the end I changed the following css entry in bootstrap.css
+
+textarea:focus,
+.form-control.is-invalid :focus, 
+.was-validated .form-control:invalid:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: black;
+    box-shadow: none;
+    outline: 0 none;
+}
+
 a{
     font-style: none;
     color: #000;
@@ -82,6 +107,76 @@ a{
 
 .general_container .icons{
     width: 10%;
+}
+
+.nav_right > ul{
+	display: flex;
+	align-items: center;
+}
+
+.nav_right ul li.nr_li{
+	margin-left: 25px;
+	cursor: pointer;
+	color: #fff;
+	font-size: 20px;
+	position: relative;
+}
+
+.nav_right ul li.nr_li:hover {
+    color: #cefffc;
+}
+
+.dd_menu {
+    position: absolute;
+    right: -25px;
+    top: 47px;
+    display: flex;
+    background: #fff;
+    width: 10rem;
+    border-radius: 15px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.25);
+    display: none;
+    z-index: 1000;
+}
+
+.dd_menu .dd_right{
+	padding: 15px 0px;
+    width: 100%;
+}
+
+.dd_menu .dd_right ul{
+	padding-left: 10px !important;
+}
+
+.dd_menu .dd_right ul .btn_nav a{
+    background: rgb(0, 0, 0);
+    color: #ffff;
+    display: inline;
+    padding: 10px 20px;
+    margin: 5px !important;
+}
+
+.dd_menu .dd_right .nav_hover:hover{
+    width: 100%;
+    background:rgba(207, 201, 201, 0.411);
+}
+
+.dd_menu li{
+	margin-bottom: 10px;
+	color: #868686;
+}
+
+.dd_menu:before{
+	content: "";
+	position: absolute;
+	top: -20px;
+	right: 30px;
+	border: 10px solid;
+	border-color: transparent transparent #fff transparent;
+}
+
+.dd_main.account_active .dd_menu{
+	display: flex;
 }
 
 /**===== creating burger ======**/
@@ -526,72 +621,6 @@ input[type=checkbox] {
 }
 
 /* ==================== MEN'S PAGE ENDS   =========================*/
-
-.nav_right > ul{
-	display: flex;
-	align-items: center;
-}
-
-.nav_right ul li.nr_li{
-	margin-left: 25px;
-	cursor: pointer;
-	color: #fff;
-	font-size: 20px;
-	position: relative;
-}
-
-.nav_right ul li.nr_li:hover {
-    color: #cefffc;
-}
-
-.nav_right ul li img{
-	width: 35px;
-	vertical-align: middle;
-}
-
-.dd_menu {
-    position: absolute;
-    right: -25px;
-    top: 47px;
-    display: flex;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.25);
-    display: none;
-}
-
-.dd_menu .dd_left{
-	background: #74ded8;
-	padding: 15px 20px;
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
-}
-
-.dd_menu .dd_left li{
-	color: #fff;
-}
-
-.dd_menu .dd_right{
-	padding: 15px 20px;
-}
-
-.dd_menu li{
-	margin-bottom: 10px;
-	color: #868686;
-}
-
-.dd_menu:before{
-	content: "";
-	position: absolute;
-	top: -20px;
-	right: 30px;
-	border: 10px solid;
-	border-color: transparent transparent #fff transparent;
-}
-
-.dd_main.account_active .dd_menu{
-	display: flex;
-}
 
 /* =======================================================
   * 	PRODUCT DETAIL (PRODUCT PAGE DETAIL) SECTION

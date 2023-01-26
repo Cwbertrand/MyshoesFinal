@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="La boutique qui vend uniquement du made in France">
+    <meta name="description" content="The shop which sell shoes only made in France">
     <meta name="author" content="CW Bertrand">
     <title>{% block title %}Myshoes boutique{% endblock %}</title>
     <link rel="icon"
@@ -16,6 +16,7 @@
     {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {% block owlcarouselcss %}{% endblock %}
+    {% block signupincss %}{% endblock %}
     <!--STYLESHEET BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--FONT AWESOME-->
@@ -56,21 +57,17 @@
                 <ul>
                     <li class="nr_li dd_main">
                         <i class="fa-solid fa-user"></i>
-
                         <div class="dd_menu">
-                            <div class="dd_left">
-                                <ul>
-                                    <li><i class="fas fa-map-marker-alt"></i></li>
-                                    <li><i class="far fa-star"></i></li>
-                                    <li><i class="far fa-plus-square"></i></li>
-                                </ul>
-                            </div>
                             <div class="dd_right">
                                 <ul>
-                                    <li><a href="{{path ('app_login')}}">Connexion</a></li>
-                                    <li><a href="{{path ('app_register')}}">Registrer</a></li>
-                                    <li><a href="{{path ('app_logout')}}">Deconnexion</a></li>
-                                    <li><a href="{{path ('address')}}">Compte</a></li>
+                                    {% if app.user %}
+                                        <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_logout')}}">Disconnect</a></li>
+                                        <li class="nav_hover"><a href="{{path ('address')}}">Account</a></li>
+                                        <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
+                                    {% endif %}
+                                    <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_login')}}">Log in</a></li>
+                                    <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_register')}}" >Sign up</a></li>
+                                    <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -82,18 +79,6 @@
             </div>
             <!--======= DROP DOWN USER ACCOUNT ENDS ========-->
 
-
-            <div class="icons">
-                <div class="account">
-                    <a href="command.html"><i class="fa-solid fa-user"></i></a>
-                </div>
-                <div class="wishlist">
-                    <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
-                </div>
-                <div class="panier">
-                    <a class="panier" href="{{path ('carte')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
-                </div>
-            </div>
             <!--======= BURGER MENU FOR PHONE SIZE ========-->
             <div class="burger">
                 <i class="fa-solid fa-bars"></i>
