@@ -65,9 +65,8 @@ class CommandController extends AbstractController
 
             $transport = $form->get('transport')->getData();
             $address = $form->get('address')->getData();
-            //$firstname = $form->get('firstname')->getData();
-
-            //dd($firstname);
+            $firstname = $form->get('firstname')->getData();
+            $lastname = $form->get('lastname')->getData();
 
             //Setting Command into the database
             $command = new Command();
@@ -77,6 +76,8 @@ class CommandController extends AbstractController
 
             $command->setCreateAt($date);
             $command->setReference($reference);
+            $command->setFirstname($firstname);
+            $command->setLastname($lastname);
             $command->setTransportagency($transport->getTransportagency());
             $command->setTransportprice($transport->getPrice());
             $command->setDescription($transport->getDescription());
@@ -94,6 +95,7 @@ class CommandController extends AbstractController
             $command->setUser($this->getUser());
             $command->setIsPaid(0);
             $command->setDeliverystatus(0);
+            //dd($command);
 
             //prep the order object to insert into the bdd
             $this->em->persist($command);
