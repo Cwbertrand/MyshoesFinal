@@ -1,0 +1,62 @@
+/* GENERAL STYLES */
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99); 
+}
+
+.background_sign{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.background_sign_main
+{
+    border-radius: 8px 0px 0px 8px;
+    background: #fff;
+    padding: 30px;
+}
+
+.image_sign{
+    background: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%), url(../images/signup.jpg);
+    background-size: cover !important;
+    object-fit: cover !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 0px 8px 8px 0px;
+}
+
+.btn_sign{
+    background: rgba(35, 65, 103, 0.776) !important;
+    display: block;
+    padding: 4px;
+    color: #fff !important;
+    transform: translate(ease-in 4s);
+}
+
+.btn_signin{
+    background: rgba(171, 140, 16, 0.776) !important;
+    border-radius: 7px;
+    padding: 7px;
+    color: #fff !important;
+    transform: translate(ease-in 4s);
+}
+
+.btn_sign:hover,
+.btn_signin:hover{
+    border: solid 1px #000 !important;
+    background: transparent !important;
+    color: #000 !important;
+}
+
+
+
