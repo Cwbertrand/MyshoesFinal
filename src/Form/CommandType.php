@@ -16,7 +16,18 @@ class CommandType extends AbstractType
     {
         $user = $options['user']; 
         $builder
-            //->add('firstname', TextType::class)
+            ->add('firstname', TextType::class, [
+                'label' => 'First name',
+                'attr' => [
+                    'placeholder' => 'Enter your first name',
+                ]
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'Last name',
+                'attr' => [
+                    'placeholder' => 'Enter your last name',
+                ]
+            ])
             ->add('address', EntityType::class, [
                 'label' => false,
                 'required' => true,

@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <!--STYLESHEET-->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/mediaquery480px.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/mediaquery768px.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/mediaquery1024px.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/mediaquery1200px.css') }}" type="text/css">
     {% endblock %}
 </head>
 
@@ -64,10 +68,11 @@
                                         <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_logout')}}">Disconnect</a></li>
                                         <li class="nav_hover"><a href="{{path ('address')}}">Account</a></li>
                                         <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
+                                    {% else %}
+                                        <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_login')}}">Log in</a></li>
+                                        <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_register')}}" >Sign up</a></li>
+                                        <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
                                     {% endif %}
-                                    <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_login')}}">Log in</a></li>
-                                    <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_register')}}" >Sign up</a></li>
-                                    <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
                                 </ul>
                             </div>
                         </div>

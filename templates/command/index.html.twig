@@ -31,6 +31,20 @@
             </div>
 
             <div class="col-md-6">
+                <!-- ============= ENTER YOUR NAMES =========-->
+                <fieldset class="col-md-12 rounded-4 p-4">
+                    <legend><strong>Enter your names</strong></legend>
+                    <div>
+                        {{ form_start(forms) }}
+                        <div class="my-2">
+                            {{ form_row(forms.firstname) }}
+                        </div>
+                        <div class="my-2">
+                            {{ form_row(forms.lastname) }}
+                        </div>
+                        {{ form_end(forms) }}
+                    </div>
+                </fieldset>
                 <!-- ============= SELECTED PRODUCTS =========-->
                 <div class="col-md-12 bg-light rounded-4 p-4 sous_title" style="height: 35rem;">
                     <div class="d-flex">
