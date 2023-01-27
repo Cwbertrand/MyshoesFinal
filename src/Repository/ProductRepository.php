@@ -84,6 +84,22 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function relatedProducts($id): array
+    {
+        return $this->createQueryBuilder('p')
+            ->addselect('sg')
+            ->leftjoin('p.gendershoes', 'sg')
+            ->Where(':id MEMBER OF sg.products')
+            ->andWhere('p.status = 1')
+            ->setParameter('id', $id)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

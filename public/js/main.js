@@ -18,6 +18,7 @@ const navSlide = () => {
 
 }
 
+//this is for the user Icon
 var dd_main = document.querySelector(".dd_main");
 
 	dd_main.addEventListener("click", function(){

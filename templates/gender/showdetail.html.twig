@@ -6,18 +6,6 @@
 
 {% block body %}
 <style>
-    .progress-label-left {
-        float: left;
-        margin-right: 0.5em;
-        line-height: 1em;
-    }
-
-    .progress-label-right {
-        float: right;
-        margin-left: 0.3em;
-        line-height: 1em;
-    }
-
     .star-light {
         color: #e9ecef;
     }
@@ -80,22 +68,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="input-group mb-4">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                                            <i class="fa-solid fa-minus"></i>
-                                        </button>
-                                    </span>
-                                    <input type="text" id="quantity" name="quantity" class="text-center form-control input-number" value="1" min="1" max="100">
-                                    <span class="input-group-btn ml-1">
-                                        <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                    </span>
-                                </div>
                                 <div class="row">
-                                    <div class="col-8 detail_panier_button">
-                                    <a href="">Ajouter au panier</a> {# {{path('add_panier', {'id': detailproduct.id})}} #}
+                                    <div class="col-8 detail_panier_button mt-3">
+                                    <a href="{{path('add_my_carte', {'id': detailproduct.id} )}}">Ajouter au panier</a>
                                     </div>
                                     <div class="col-4 detail_wishlist_button">
                                         <button><i class="fa-regular fa-heart"></i></button>
@@ -118,63 +93,29 @@
             <!--================= TRENDING PRODUCTS SECTION ==================-->
         <section class="trending_product container">
             <div class="heading">
-                <h1>Les chaussures tendances</h1>
+                <h1>Products Frequently Bought</h1>
             </div>
-            <div class="products">
+
+            <div class="products mb-4">
+                {% for product in relatedproducts %}
                 <div class="card-new">
-                    <a href="">
+                    <a href="{{path ('related_products', {'id': product.id})}}p">
                         <div class="img-wishlist">
-                            <img src="assets/image/basket/basket (7) new.png" alt="Denim Jeans" style="width:60%">
+                            <img src="/upload/{{product.image}}" alt="{{product.shoesname}}" style="width:60%">
                         </div>
                         <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
                         <div class="product_info">
                             <p>
-                                <span><strong>Marque</strong></span> <br>
-                                <span><strong>Nom de produit</strong></span> <br>
-                                <span>Category</span> <br>
-                                <span class="price">$19.99</span> <br>
+                                <span><strong>{{product.mark}}</strong></span> <br>
+                                <span><strong>{{product.shoesname}}</strong></span> <br>
+                                <span>{{product.category.category}}</span> <br>
+                                <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
 
                             </p>
                         </div>
-                        <p><button class="add_to_cart">Add to Cart</button></p>
                     </a>
                 </div>
-                <div class="card-new">
-                    <a href="">
-                        <div class="img-wishlist">
-                            <img src="assets/image/basket/basket (7) new.png" alt="Denim Jeans" style="width:60%">
-                        </div>
-                        <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
-                        <div class="product_info">
-                            <p>
-                                <span><strong>Marque</strong></span> <br>
-                                <span><strong>Nom de produit</strong></span> <br>
-                                <span>Category</span> <br>
-                                <span class="price">$19.99</span> <br>
-
-                            </p>
-                        </div>
-                        <p><button class="add_to_cart">Add to Cart</button></p>
-                    </a>
-                </div>
-                <div class="card-new">
-                    <a href="">
-                        <div class="img-wishlist">
-                            <img src="assets/image/basket/basket (7) new.png" alt="Denim Jeans" style="width:60%">
-                        </div>
-                        <a class="wishlist" href="#"><i class="fa-regular fa-heart"></i></a>
-                        <div class="product_info">
-                            <p>
-                                <span><strong>Marque</strong></span> <br>
-                                <span><strong>Nom de produit</strong></span> <br>
-                                <span>Category</span> <br>
-                                <span class="price">$19.99</span> <br>
-
-                            </p>
-                        </div>
-                        <p><button class="add_to_cart">Add to Cart</button></p>
-                    </a>
-                </div>
+                {% endfor %}
             </div>
         </section>
 

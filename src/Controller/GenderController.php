@@ -133,10 +133,12 @@ class GenderController extends AbstractController
     }
 
     //Show product details
+    #[Route('/product/detail/{id}', name: 'related_products')]
     #[Route('/product/detail/{slug}', name: 'detail_product')]
-    public function productDetail(Product $product): Response
+    public function productDetail(Product $product, $id): Response
     {
-        
+        $relatedProducts = $this->em->getRepository(Product::class)->relatedProducts($id);
+        //dd($relatedProducts);
         // selecting it from the database
         $newremarks = $this->em->getRepository(Remarks::class)->findProductId($product);
         //dd(count($newremarks));
@@ -146,10 +148,12 @@ class GenderController extends AbstractController
 
 
         return $this->render('gender/showdetail.html.twig', [
+
             'detailproduct' => $product,
             'slug' => $product->getSlug(),
             'newremarks' => $newremarks,
             'reviewTotal' => $reviewTotal,
+            'relatedproducts' => $relatedProducts,
         ]);
     }
 
@@ -176,7 +180,7 @@ class GenderController extends AbstractController
             $this->em->flush();
             $this->addFlash('message', 'Your review and rating has successfully been submitted');
 
-            return $this->redirectToRoute('detail_product', ['slug' => $product->getSlug()]);
+            return $this->redirectToRoute('related_products', ['id' => $product->getId()]);
             //dd($remarks);
         }
         

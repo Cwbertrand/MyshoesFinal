@@ -39,6 +39,21 @@ class ShoesGenderRepository extends ServiceEntityRepository
         }
     }
 
+    // /**
+    //  * @return ShoesGender[] Returns an array of ShoesGender objects
+    //  */
+    // public function relatedProducts($id): array
+    // {
+    //     return $this->createQueryBuilder('s')
+    //         ->addSelect('p')
+    //         ->leftJoin('s.products', 'p')
+    //         ->Where(':id MEMBER OF s.products')
+    //         ->setParameter('id', $id)
+    //         ->setMaxResults(3)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
 //    /**
 //     * @return ShoesGender[] Returns an array of ShoesGender objects
 //     */
