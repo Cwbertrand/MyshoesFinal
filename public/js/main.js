@@ -27,14 +27,18 @@ var dd_main = document.querySelector(".dd_main");
 
 navSlide();
 
-/* owl-carousel for blog---------*/
+// Get all navigation links
+const navLinks = document.querySelectorAll('.nav_ul a');
 
-// $('.owl-carousel').owlCarousel({
-//     loop: true,
-//     autoplay: true,
-//     autoplayTimeout: 3000,
-//     dots: false,
-//     nav: true,
-//     navText: [$('.owl-navigation .owl-nav-prev'), $('.owl-navigation .owl-nav-next')]
-// });
+//Get current URL
+//in the place of href, you can also use pathname
+const currentURL = window.location.href;
+
+//Checking if current URL matches any of the navigation links
+navLinks.forEach(link => {
+    if(link.href === currentURL){
+        link.classList.add('menwochild');
+    }
+})
+
 

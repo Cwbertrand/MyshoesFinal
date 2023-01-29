@@ -74,6 +74,9 @@ class Command
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
+    #[ORM\Column]
+    private ?float $shoessize = null;
+
     public function __construct()
     {
         $this->commandDetails = new ArrayCollection();
@@ -326,6 +329,18 @@ class Command
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getShoessize(): ?float
+    {
+        return $this->shoessize;
+    }
+
+    public function setShoessize(float $shoessize): self
+    {
+        $this->shoessize = $shoessize;
 
         return $this;
     }

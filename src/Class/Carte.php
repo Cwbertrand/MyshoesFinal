@@ -4,6 +4,7 @@ namespace App\Class;
 
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 Class Carte
@@ -66,6 +67,29 @@ Class Carte
         return $this->session->remove('carte');
     }
 
+    public function productSize($idadultsize = null, Product $product = null)
+    {
+        $return = false;
+
+        if ($product) {
+            $sizeid = $this->em->getRepository(AdultSize::class)->findOneById($idadultsize);
+            
+            if ($sizeid && $this->session->get('carte') !== null){
+                $carte = $this->session->get('carte');
+                $carte['adultsize'] = $sizeid->getAdultsize();
+                $this->session->set('carte', $carte);
+                
+
+                $return = true;
+            }
+            
+        }
+
+        return new JsonResponse($return);
+
+        
+    }
+
     //To get all the product details
     public function productDetails(){
 
@@ -79,6 +103,9 @@ Class Carte
             // $Id for key and $productQty for the value
             foreach ($this->getCarte() as $id => $productQty) {
                 $product = $this->em->getRepository(Product::class)->findOneById($id);
+                
+                //$sizeid = $this->em->getRepository(AdultSize::class)->findOneById($id);
+                //dd($sizeid);
 
                 //if product doesn't exist, delete the product then return to the carte
                 if(!$product){
@@ -90,7 +117,8 @@ Class Carte
 
                 $productdetail[] = [
                     'quantity' => $productQty,
-                    'productdetail' => $product
+                    'productdetail' => $product,
+                    //'carte' => $sizeid->getAdultsize(),
                 ];
 
             }

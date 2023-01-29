@@ -105,26 +105,20 @@ a{
     margin: 0px 1rem;
 }
 
-.general_container .icons{
-    width: 10%;
-}
-
 .nav_right > ul{
 	display: flex;
 	align-items: center;
 }
 
 .nav_right ul li.nr_li{
-	margin-left: 25px;
+	margin-left: 20px;
 	cursor: pointer;
 	color: #fff;
 	font-size: 20px;
 	position: relative;
 }
 
-.nav_right ul li.nr_li:hover {
-    color: #cefffc;
-}
+/* TODO:: HOVER .nr_li */
 
 .dd_menu {
     position: absolute;
@@ -166,7 +160,7 @@ a{
 	color: #868686;
 }
 
-.dd_menu:before{
+.dd_menu::before{
 	content: "";
 	position: absolute;
 	top: -20px;
@@ -178,6 +172,42 @@ a{
 .dd_main.account_active .dd_menu{
 	display: flex;
 }
+
+/* Class active on navLinks */
+
+.menwochild{
+    background: red;
+    padding: 20px;
+}
+
+
+/**===== CART AND WISHLIST ICONS ======**/
+.cart_number{
+    position: relative;
+}
+
+.cart_icon{
+    /* color: white; */
+    position: relative;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 25px;
+}
+
+.cart_data{
+    position: absolute;
+    top: -3px;
+    left: 27px;
+    font-size: 15px;
+    background-color: #ffffff;
+    border: 0.5px solid rgb(180, 178, 178);
+    border-radius: 50%;
+    display: inline-block;
+    padding: 0.1px 6px;
+}
+
+
+
 /* =========================*/
         /** HOME PAGE **/
 /*===========================*/

@@ -55,10 +55,19 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?bool $isBest = null;
 
+    #[ORM\ManyToMany(targetEntity: AdultSize::class, inversedBy: 'products')]
+    private Collection $adultsize;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Wishlist::class, orphanRemoval: true)]
+    private Collection $wishlists;
+
+
     public function __construct()
     {
         $this->gendershoes = new ArrayCollection();
         $this->remarks = new ArrayCollection();
+        $this->adultsize = new ArrayCollection();
+        $this->wishlists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,6 +266,72 @@ class Product
         $this->isBest = $isBest;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, AdultSize>
+     */
+    public function getAdultsize(): Collection
+    {
+        return $this->adultsize;
+    }
+
+    public function addAdultsize(AdultSize $adultsize): self
+    {
+        if (!$this->adultsize->contains($adultsize)) {
+            $this->adultsize->add($adultsize);
+        }
+
+        return $this;
+    }
+
+    public function removeAdultsize(AdultSize $adultsize): self
+    {
+        $this->adultsize->removeElement($adultsize);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Wishlist>
+     */
+    public function getWishlists(): Collection
+    {
+        return $this->wishlists;
+    }
+
+    public function addWishlist(Wishlist $wishlist): self
+    {
+        if (!$this->wishlists->contains($wishlist)) {
+            $this->wishlists->add($wishlist);
+            $wishlist->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWishlist(Wishlist $wishlist): self
+    {
+        if ($this->wishlists->removeElement($wishlist)) {
+            // set the owning side to null (unless already changed)
+            if ($wishlist->getProduct() === $this) {
+                $wishlist->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    //this shows the products the user has wished
+    public function isWishedByUser(User $user): bool
+    {
+        //the foreach loops through all the products which the user has wished
+        foreach ($this->wishlists as $wishlist) {
+            if($wishlist->getUser() === $user)
+            return true;
+        }
+
+        return false;
     }
 
 }
