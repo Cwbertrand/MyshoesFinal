@@ -29,6 +29,7 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('shoesname'),
             AssociationField::new('gendershoes'),
             AssociationField::new('category'),
+            AssociationField::new('adultsize'),
             BooleanField::new('status'),
             BooleanField::new('isBest', 'Best promotion'),
             DateTimeField::new('createAt')->hideOnIndex(),

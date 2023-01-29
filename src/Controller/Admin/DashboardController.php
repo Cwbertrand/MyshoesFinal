@@ -3,9 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Address;
+use App\Entity\AdultSize;
 use App\Entity\Command;
 use App\Entity\CommandDetail;
 use App\Entity\Header;
+use App\Entity\OtherCategories;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Entity\ShoesCategory;
@@ -56,6 +58,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Command', 'fas fa-shopping-cart', Command::class);
         yield MenuItem::linkToCrud('Command Details', 'fas fa-circle-info', CommandDetail::class);
         yield MenuItem::linkToCrud('Product', 'fa-solid fa-shoe-prints', Product::class);
+        yield MenuItem::linkToCrud('Adult sizes', 'fa-solid fa-bell', AdultSize::class);
         yield MenuItem::linkToCrud('Category', 'fa-solid fa-list', ShoesCategory::class);
         yield MenuItem::linkToCrud('Address', 'fa-solid fa-map-location-dot', Address::class);
         yield MenuItem::linkToCrud('Transport Agencies', 'fa-solid fa-truck-fast', Transporter::class);

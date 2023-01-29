@@ -38,11 +38,18 @@
                 <div class="col-lg-4 mb-4">
                     <div class="all_product">
                         <div class="card-new">
-                            <a href="{{path ('detail_product', {'slug': product.slug})}}"> 
+                            <a href="{{path ('related_products', {'id': product.id})}}"> 
                                 <div class="img-wishlist">
                                     <img src="/upload/{{product.image}}" alt="photo {{product.shoesname}}" style="width:60%">
                                 </div>
-                                <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
+                                <a id="select_wishes" class="wishlist wishlist_update" data-productid="" href="{{path ('add_wishlist', {'id': product.id})}}">
+                                    
+                                    {% if app.user and product.isWishedByUser(app.user) %}
+                                    <i class="fa-solid fa-heart"></i>
+                                        {% else %}
+                                    <i class="fa-regular fa-heart"></i>
+                                    {% endif %}
+                                </a>
                                 <div class="product_info">
                                     <p>
                                         <span><strong>{{product.mark}}</strong></span> <br>
@@ -101,15 +108,53 @@
 {% endblock %}
 
 {% block script %}
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script>
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            animateOut: 'fadeOut',
-            items : 1,
-            autoplay: true,
-            autoplayTimeout: 4000,
-            dots: true,
-            nav: true,
+        $(document).ready(function(){
+
+            //Owl carousel
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                animateOut: 'fadeOut',
+                items : 1,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                dots: true,
+                nav: true,
+            });
+
         });
+
+
+
+        function onClickBtn(event){
+            //the preventDefault() prevents that when you click on the button, for it not to go
+            // to the next page.
+            event.preventDefault();
+
+            //(this) is js is a pseudonym that stucks html information
+            //like here, we stock the <a> html link inside this.
+            const url = this.href;
+            const icon = this.querySelector('i');
+
+            axios.get(url).then(function(response){
+                if(icon.classList.contains('fa-heart')){
+                    icon.classList.replace('fa-regular', 'fa-solid');
+                }else {
+                    icon.classList.replace('fa-solid', 'fa-regular');
+                };
+            }).catch(function(error){
+                //if the user is not connected
+                if(error.response.status === 403){
+                    window.alert('You cannot like this product, please can you sign in?');
+                }
+            });
+        }
+
+        //var link = 
+        document.querySelectorAll('a.wishlist_update').forEach(function(link){
+            link.addEventListener('click', onClickBtn);
+        });
+
     </script>
 {% endblock %}
