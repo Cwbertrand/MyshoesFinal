@@ -33,81 +33,7 @@
 <body>
     {% if block('navbar') is defined %}
     <!--=============  NAV BAR  ======================-->
-    <nav class="nav_bar">
-        <div class="general_container">
-            <div class="logo">
-                <h3><a href="{{path ('home')}}">Myshoes</a></h3>
-            </div>
-            <div class="nav_links">
-                <ul class="nav_ul">
-                    <li class="nav_items">
-                        <a href="{{path ('men')}}">Men</a>
-                    </li>
-                    <li class="nav_items">
-                        <a href="{{path ('women')}}">Women</a>
-                    </li>
-                    <li class="nav_items">
-                        <a href="{{path ('children')}}">Children</a>
-                    </li>
-                    <div class="icon_close">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </ul>
-            </div>
-
-
-            <!--======= DROP DOWN USER ACCOUNT ========-->
-            <div class="nav_right">
-                <ul>
-                    <li class="nr_li dd_main">
-                        <i class="fa-solid fa-user"></i>
-                        <div class="dd_menu">
-                            <div class="dd_right">
-                                <ul>
-                                    {% if app.user %}
-                                        <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_logout')}}">Disconnect</a></li>
-                                        <li class="nav_hover"><a href="{{path ('address')}}">Account</a></li>
-                                        <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
-                                    {% else %}
-                                        <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_login')}}">Log in</a></li>
-                                        <li class="text-center btn_nav mt-2"><a class="mt-2" href="{{path ('app_register')}}" >Sign up</a></li>
-                                        <li class="nav_hover"><a href="{{path ('contact_us')}}">Help & Contact</a></li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nr_li">
-                        <a href="{{path ('admin')}}"><i class="fa-solid fa-gauge"></a></i>
-                    </li>
-                    <li class="nr_li">
-                        <a href="">
-                            <div class="cart_number">
-                                <i class="fa-regular fa-heart cart_icon"></i>
-                                <span class="cart_data">5</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nr_li">
-                        <a href="">
-                            <div class="cart_number">
-                                <i class="fa-solid fa-cart-shopping cart_icon"></i>
-                                <span class="cart_data">5</span>
-                            </div>
-                        </a>
-                    </li>
-
-
-                </ul>
-            </div>
-            <!--======= DROP DOWN USER ACCOUNT ENDS ========-->
-
-            <!--======= BURGER MENU FOR PHONE SIZE ========-->
-            <div class="burger">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </div>
-    </nav>
+    {% include('headfoot/navbar.html.twig') %}
     {% endif %}
     {% block body %}{% endblock %}
 
@@ -115,59 +41,59 @@
     <!--================= FOOTER SECTION ==================-->
     {% if block('footer') is defined %}
         
-    <footer class="footer">
-        <div class="first_footer hero_container">
-            <div class="footer_about_us">
-                <h2>My<span>Shoes</span></h2>
-                <h5>A propos de nous</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectateur adispicing elit.
-                    Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-                    Lorem ipsum dolor sit amet, consectateur adispicing elit.
-                    Fusce euismod convallis velit, eu auctor lacus vehicula sit amet....
-                </p>
-                <div class="social_media">
-                    <a href="#"><i class="fa-brands fa-twitter" target="_blank"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                </div>
-            </div>
-
-            <div class="footer_livraison">
-                <h4><span><i class="fa-solid fa-truck"></i></span> Modes de livraison</h4>
-                <div class="livraison_icons">
-                    <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                    <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                    <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                </div>
-                <h4><span><i class="fa-solid fa-credit-card-blank"></i></span> Moyens de paiement</h4>
-                <div class="payment_icons">
-                    <a href="#"><i class="fa-brands fa-cc-visa"></i></a>
-                    <a href="#"><i class="fa-brands fa-cc-mastercard"></i></a>
-                    <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                </div>
-            </div>
-
-            <div class="contact">
-                <h4><span><i class="fa-solid fa-user-gear"></i></span> Aide & Contact</h4>
-                <div class="aide_contact">
-                    <a href="#">Questions fréquentes (FAQ)</a>
-                    <a href="{{path ('contact_us')}}">Contact us</a>
+        <footer class="footer">
+            <div class="first_footer hero_container">
+                <div class="footer_about_us">
+                    <h2>My<span>Shoes</span></h2>
+                    <h5>A propos de nous</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectateur adispicing elit.
+                        Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                        Lorem ipsum dolor sit amet, consectateur adispicing elit.
+                        Fusce euismod convallis velit, eu auctor lacus vehicula sit amet....
+                    </p>
+                    <div class="social_media">
+                        <a href="#"><i class="fa-brands fa-twitter" target="_blank"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
                 </div>
 
+                <div class="footer_livraison">
+                    <h4><span><i class="fa-solid fa-truck"></i></span> Modes de livraison</h4>
+                    <div class="livraison_icons">
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                    </div>
+                    <h4><span><i class="fa-solid fa-credit-card-blank"></i></span> Moyens de paiement</h4>
+                    <div class="payment_icons">
+                        <a href="#"><i class="fa-brands fa-cc-visa"></i></a>
+                        <a href="#"><i class="fa-brands fa-cc-mastercard"></i></a>
+                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact">
+                    <h4><span><i class="fa-solid fa-user-gear"></i></span> Aide & Contact</h4>
+                    <div class="aide_contact">
+                        <a href="#">Questions fréquentes (FAQ)</a>
+                        <a href="{{path ('contact_us')}}">Contact us</a>
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div class="second_footer">
-            <a href="#" class="policy_section">Mentions légales</a>
-            <div class="policy_section"></div>
-            <a href="#" class="policy_section">Protection des données</a>
-            <div class="policy_section"></div>
-            <a href="#" class="policy_section">CGV</a>
-            <div class="policy_section"></div>
-            <a href="#" class="policy_section">Conditions des offres</a>
-        </div>
-    </footer>
+            <div class="second_footer">
+                <a href="#" class="policy_section">Mentions légales</a>
+                <div class="policy_section"></div>
+                <a href="#" class="policy_section">Protection des données</a>
+                <div class="policy_section"></div>
+                <a href="#" class="policy_section">CGV</a>
+                <div class="policy_section"></div>
+                <a href="#" class="policy_section">Conditions des offres</a>
+            </div>
+        </footer>
     {% endif %}
 
     {% block javascript %}{% endblock %}

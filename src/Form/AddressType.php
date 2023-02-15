@@ -36,16 +36,20 @@ class AddressType extends AbstractType
             ]
         ])
         ->add('city', TextType::class,[
-            'label' => 'City'
+            'label' => 'City',
+            'required' => true
         ])
         ->add('postalcode', TextType::class,[
-            'label' => 'Postal Code'
+            'label' => 'Postal Code',
+            'required' => true
         ])
         ->add('country', CountryType::class,[
-            'label' => 'Country'
+            'label' => 'Country',
+            'required' => true
         ])
         ->add('mobile', TelType::class,[
-            'label' => 'Mobile'
+            'label' => 'Mobile',
+            'required' => true
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'Save my address',

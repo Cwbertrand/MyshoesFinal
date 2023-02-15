@@ -4,126 +4,111 @@ namespace App\Class;
 
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 Class Carte
 {
     private $em;
-    private $requestStack;
+    /**
+     * @var SessionInterface
+     */
     private $session;
 
-    public function __construct(EntityManagerInterface $em, RequestStack $requestStack)
-    {
-        $this->em = $em;
-        $this->requestStack = $requestStack;
-        $this->session = $this->requestStack->getSession();
-    }
+    // public function __construct(EntityManagerInterface $em, RequestStack $requestStack)
+    // {
+    //     $this->em = $em;
+    //     $this->session = $requestStack->getSession();
+    // }
 
-    public function getCarte(){
-        return $this->session->get('carte');
-    }
+    // //This function retrieves the total quantity of products in the shopping cart
+    // public function totalQuantity(): int
+    // {
+    //     $qty = $this->session->get('carte', []);
 
-    //this adds the quantity of the product into the carte
-    public function addCarte($id){
+    //     return array_sum($qty);
+    // }
 
-        //setting a session which is called 'carte' and associating it with an array which contains all the products
-        $carte = $this->session->get('carte', []);
+    // public function getCarte(){
+    //     return $this->session->get('carte');
+    // }
 
-        //adding the product when the carte is not empty
-        if(!empty($carte[$id])){
-            $carte[$id]++;
-        }else{
-            $carte[$id] = 1;
-        }
+    // //this adds the quantity of the product into the carte
+    // public function addCarte($id){
 
-        return $this->session->set('carte', $carte);
+    //     //setting a session which is called 'carte' and associating it with an array which contains all the products
+    //     $carte = $this->session->get('carte', []);
+
+    //     //adding the product when the carte is not empty
+    //     if(!empty($carte[$id])){
+    //         $carte[$id]++;
+    //     }else{
+    //         $carte[$id] = 1;
+    //     }
+
+    //     return $this->session->set('carte', $carte);
         
-    }
+    // }
 
-    //this minus the quantity of the product from the carte
-    public function minusCarte($id){
-        $carte = $this->session->get('carte', []);
+    // //this minus the quantity of the product from the carte
+    // public function minusCarte($id){
+    //     $carte = $this->session->get('carte', []);
 
-        if($carte[$id] > 1){
-            $carte[$id]--;
-        }else{
-            unset($carte[$id]);
-        }
+    //     if($carte[$id] > 1){
+    //         $carte[$id]--;
+    //     }else{
+    //         unset($carte[$id]);
+    //     }
 
-        return $this->session->set('carte', $carte);
-    }
+    //     return $this->session->set('carte', $carte);
+    // }
 
-    //delete a product from the carte
-    public function deleteProduct($id){
-        $carte = $this->session->get('carte', []);
-        unset($carte[$id]);
+    // //delete a product from the carte
+    // public function deleteProduct($id){
+    //     $carte = $this->session->get('carte', []);
+    //     unset($carte[$id]);
 
-        return $this->session->set('carte', $carte);
-    }
+    //     return $this->session->set('carte', $carte);
+    // }
 
-    //Clear the entire carte content
-    public function removeCarte(){
-        return $this->session->remove('carte');
-    }
+    // //Clear the entire carte content
+    // public function removeCarte(){
+    //     return $this->session->remove('carte');
+    // }
 
-    public function productSize($idadultsize = null, Product $product = null)
-    {
-        $return = false;
 
-        if ($product) {
-            $sizeid = $this->em->getRepository(AdultSize::class)->findOneById($idadultsize);
+    // //To get all the product details
+    // public function productDetails(){
+
+    //     //we declare an empty table so as to collect more info concerning a product
+    //     $productdetail = [];
+
+    //     //if product exist in the carte, show all the product's information
+    //     if ($this->getCarte()) {
             
-            if ($sizeid && $this->session->get('carte') !== null){
-                $carte = $this->session->get('carte');
-                $carte['adultsize'] = $sizeid->getAdultsize();
-                $this->session->set('carte', $carte);
+    //         //this collects more information concerning a product e.g product name, color, etc.
+    //         // $Id for key and $productQty for the value
+    //         foreach ($this->getCarte() as $id => $productQty) {
+    //             $product = $this->em->getRepository(Product::class)->findOneById($id);
                 
 
-                $return = true;
-            }
-            
-        }
+    //             //if product doesn't exist, delete the product then return to the carte
+    //             if(!$product){
+    //                 $this->deleteProduct($id);
 
-        return new JsonResponse($return);
+    //                 //it comes out from the foreach loop and goes to the next product
+    //                 continue;
+    //             }
 
-        
-    }
+    //             $productdetail[] = [
+    //                 'quantity' => $productQty,
+    //                 'productdetail' => $product,
+    //                 //'size' => $size,
+    //             ];
 
-    //To get all the product details
-    public function productDetails(){
+    //         }
+    //     }
 
-        //we declare an empty table so as to collect more info concerning a product
-        $productdetail = [];
-
-        //if product exist in the carte, show all the product's information
-        if ($this->getCarte()) {
-            
-            //this collects more information concerning a product e.g product name, color, etc.
-            // $Id for key and $productQty for the value
-            foreach ($this->getCarte() as $id => $productQty) {
-                $product = $this->em->getRepository(Product::class)->findOneById($id);
-                
-                //$sizeid = $this->em->getRepository(AdultSize::class)->findOneById($id);
-                //dd($sizeid);
-
-                //if product doesn't exist, delete the product then return to the carte
-                if(!$product){
-                    $this->deleteProduct($id);
-
-                    //it comes out from the foreach loop and goes to the next product
-                    continue;
-                }
-
-                $productdetail[] = [
-                    'quantity' => $productQty,
-                    'productdetail' => $product,
-                    //'carte' => $sizeid->getAdultsize(),
-                ];
-
-            }
-        }
-
-        return $productdetail;
-    }
+    //     return $productdetail;
+    // }
 }

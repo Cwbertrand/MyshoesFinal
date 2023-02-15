@@ -9,11 +9,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CarteController extends AbstractController
 {
@@ -32,77 +30,89 @@ class CarteController extends AbstractController
     }
 
     #[Route('/mon_carte', name: 'carte')]
-    public function index(Carte $carte): Response
+    public function index(): Response
     {
-        $carte->getCarte();
-        
         return $this->render('carte/index.html.twig', [
-            'cartes' => $carte->productDetails(),
+            'cartes' => $this->session->get('carte', [])
         ]);
     }
 
-    //Add shoes size
-    // #[ParamConverter('product', options: ['mapping' => ['idproduct' => 'id']])]
-    // #[ParamConverter('adultsize', options: ['mapping' => ['id' => 'id']])]
-    #[Route('/carte/add/size/{id}', name: 'product_size')]
-    public function productSize($idadultsize, Product $product = null, Carte $carte): Response
+    //This function retrieves the total quantity of products in the shopping carte
+    public function totalQuantity(): int
     {
-        $return = false;
+        $carte = $this->session->get('carte', []);
 
-
-        if ($product) {
-
-            $sizeid = $this->em->getRepository(AdultSize::class)->findOneById($idadultsize);
-            
-            if ($sizeid && $this->session->get('carte') !== null){
-                $carte = $this->session->get('carte');
-                $carte['adultsize'] = $sizeid->getAdultsize();
-                $this->session->set('carte', $carte);
-                
-
-                $return = dd($carte['adultsize']);
-            }
-
-            dd();
-            
-        }
-
-        return new JsonResponse($return);
-
-        
+        $qty = $carte['quantity'];
+        return array_sum($qty);
     }
 
     //Add product in the carte
-    #[Route('/carte/add/{id}', name: 'add_my_carte')]
-    public function addCarte(Carte $carte, $id): Response
+    #[Route('/add-to-carte/{id}', name: 'add_my_carte')]
+    public function addCarte($id, Request $request): Response
     {
-        $carte->addCarte($id);
+        $product = $this->em->getRepository(Product::class)->find($id);
+
+        //data collected from the ajax function
+        $selectedSize = $request->get('size');
+        //storing data into the session
+        $request->getSession()->set('selected_size', $selectedSize);
+
+        if(!$product){
+            //handle error.
+        }
+
+
+        $carte = $this->session->get('carte', []);
+        if (isset($carte[$id])) {
+            $carte[$id]['quantity']++;
+        } else {
+            $carte[$id] = [
+                'productdetail' => $product,
+                'selectedsize' => $selectedSize,
+                'quantity' => 1,
+            ];
+        }
+        $this->session->set('carte', $carte);
+        
         return $this->redirectToRoute('carte');
     }
 
     //Minus product in the carte
-    #[Route('/carte/minus/{id}', name: 'minus_my_carte')]
-    public function minusCarte(Carte $carte, $id): Response
+    #[Route('/minus-to-carte/{id}', name: 'minus_my_carte')]
+    public function minusCarte($id): Response
     {
-        $carte->minusCarte($id);
+        $carte = $this->session->get('carte', []);
 
+        if(isset($carte[$id]) && $carte[$id]['quantity'] > 1){
+            $carte[$id]['quantity']--;
+        }else{
+            unset($carte[$id]);
+        }
+
+        $this->session->set('carte', $carte);
         return $this->redirectToRoute('carte');
     }
 
     //delete product in the carte
     #[Route('/carte/delete/{id}', name: 'delete_from_carte')]
-    public function deleteCarte(Carte $carte, $id): Response
+    public function deleteCarte($id): Response
     {
-        $carte->deleteProduct($id);
+        $carte = $this->session->get('carte', []);
 
+        unset($carte[$id]);
+
+        $this->session->set('carte', $carte);
         return $this->redirectToRoute('carte');
     }
-    //Remove product in the carte
-    #[Route('/carte/remove', name: 'remove_from_carte')]
-    public function removeCarte(Carte $carte): Response
-    {
-        $carte->removeCarte();
+    
+    // //Remove product in the carte
+    // #[Route('/carte/remove', name: 'remove_from_carte')]
+    // public function removeCarte(): Response
+    // {
+    //    $carte = $this->session->get('carte', []);
+    //     $this->session->remove('carte');
+    //    $this->session->set('carte', $carte);
+    //     return $this->redirectToRoute('men');
+    // }
 
-        return $this->redirectToRoute('men');
-    }
 }

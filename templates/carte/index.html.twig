@@ -6,7 +6,6 @@
 
 {% block body %}
 {{ dump(cartes) }}
-
     <main class="container py-5">
         <div class="row">
             <!-- ============= carte PRODUCTS =========-->
@@ -27,8 +26,7 @@
                                 <h6>{{carte.productdetail.mark}}</h6>
                                 <h6>{{carte.productdetail.shoesname}}</h6>
                                 <h6>{{carte.productdetail.category.category}}</h6>
-                                <h6>Couleur: black/white(Colour)</h6>
-                                <h6>Taille: 43(size)</h6>
+                                <h6>Size: {{carte.selectedsize}}</h6>
                                 <div class="input-group mb-4 w-50">
                                     <span class="input-group-btn">
                                         <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">

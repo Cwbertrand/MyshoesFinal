@@ -33,22 +33,27 @@ class AddressController extends AbstractController
     #[Route('/edit/address/{id}', name: 'edit_address')]
     public function addaddress(Address $address = null, Request $request)
     {
+        // If an address object is not provided, create a new one
         if(!$address){
             $address = new Address();
         }
 
+        // Create the form for the address
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
+        // If the form is submitted and valid, save the address
         if($form->isSubmitted() && $form->isValid()){
             $address = $form->getData();
             $address->setUser($this->getUser());
             $this->em->persist($address);
             $this->em->flush();
 
+             // Redirect to the address list after saving
             return $this->redirectToRoute('address');
         }
 
+        // Render the template for the add/edit address form
         return $this->render('address/addaddress.html.twig', [
             'form' => $form->createView(),
         ]);

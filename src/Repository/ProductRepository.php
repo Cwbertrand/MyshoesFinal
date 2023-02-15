@@ -56,8 +56,11 @@ class ProductRepository extends ServiceEntityRepository
                     ->andWhere('g.id IN (:genershoes)')
                     ->setParameter('genershoes', 1)
                     ->setParameter('category', $search->categorycheckbox);
-            }
-
+            }else {
+                $query = $query
+                    ->andWhere('g.id IN (:genershoes)')
+                    ->setParameter('genershoes', 1);
+                }
             return $query->getQuery()->getResult();
     }
 
@@ -78,7 +81,11 @@ class ProductRepository extends ServiceEntityRepository
                     ->andWhere('g.id IN (:genershoes)')
                     ->setParameter('genershoes', 2)
                     ->setParameter('category', $search->categorycheckbox);
-            }
+            }else {
+                $query = $query
+                    ->andWhere('g.id IN (:genershoes)')
+                    ->setParameter('genershoes', 2);
+                }
 
             return $query->getQuery()->getResult();
     }
