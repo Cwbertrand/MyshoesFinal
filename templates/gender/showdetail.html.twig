@@ -53,12 +53,14 @@
                                                         <ul id="ul_select_size">
                                                             {% for adultsizes in detailproduct.adultsize %}
                                                                 <li class="select_size">
-                                                                    <a href="#" data-size="{{adultsizes}}" >{{adultsizes}}</a>
+                                                                    <a class="size-link" href="{{ path('add_my_carte', {'id': detailproduct.id}) }}" data-size="{{adultsizes}}" >{{adultsizes}}</a>
                                                                 </li>
                                                                 {# {{ path('product_size', {'idadultsize': adultsizes.id,
                                                                     'idproduct': detailproduct.id}) }} #}
                                                             {% endfor %}
                                                         </ul>
+
+                                                        
 
 
 
@@ -238,7 +240,6 @@
         $(document).ready(function(){
 
             ///=========== INSERTING DATA INTO THE DATABASE =======///
-
             var rating_data = 0;
 
             $('#add_review').click(function(){
@@ -316,25 +317,33 @@
         }); 
 
         $(document).ready(function(){
-            $(document).on('click', '.select_size', function(event){
-                //this prevents the href from going to another page
+            $('.size-link').click(function(event){
                 event.preventDefault();
-                $('#ul_select_size').children('li').removeClass('bg-danger');
-                $(this).addClass('bg-danger');
+
+                //De-select the previous selected sizes
+                $('.size-link.bg-danger').removeClass('bg-danger');
+
+                //select the new size
+                $(this).addClass('bg-danger')
+
+                let size = $(this).data('size');
+
+                // Make an AJAX request to add the selected size to the carte
                 $.ajax({
-                    url: $(this).children('a').attr('href'),
-                    method: "GET",
-                    success: function(data){
-                        if(data == false){
-                            $(this).removeClass('bg-danger');
-                            alert('Please choose your size');
-                        }
-                        
-                    },
-                });
+                    url: "{{ path('add_my_carte', {'id': detailproduct.id}) }}",
+                    type: 'POST',
+                    data: {size: size},
+                    success: function(response){
+                        console.log(response);
+                    }
+                })
+                
             });
         });
+
     </script>
 {% endblock %}
+
+
 
 

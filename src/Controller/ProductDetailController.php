@@ -29,9 +29,6 @@ class ProductDetailController extends AbstractController
     {
         $relatedProducts = $this->em->getRepository(Product::class)->relatedProducts($id);
 
-
-        
-
         // selecting it from the database
         $newremarks = $this->em->getRepository(Remarks::class)->findProductId($product);
 

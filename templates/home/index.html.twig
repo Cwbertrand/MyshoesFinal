@@ -11,7 +11,6 @@
 
 {% block body %}
     <!--=============  HERO SECTION  ======================-->
-
     <section class="hero">
         <div>
             <div class="owl-carousel owl-theme">
@@ -108,7 +107,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
     <script>
         $(document).ready(function(){
 
@@ -125,35 +124,40 @@
 
         });
 
+        
 
-
-        function onClickBtn(event){
-            //the preventDefault() prevents that when you click on the button, for it not to go
-            // to the next page.
-            event.preventDefault();
-
-            //(this) is js is a pseudonym that stucks html information
-            //like here, we stock the <a> html link inside this.
-            const url = this.href;
-            const icon = this.querySelector('i');
-
-            axios.get(url).then(function(response){
-                if(icon.classList.contains('fa-heart')){
-                    icon.classList.replace('fa-regular', 'fa-solid');
-                }else {
-                    icon.classList.replace('fa-solid', 'fa-regular');
-                };
-            }).catch(function(error){
-                //if the user is not connected
-                if(error.response.status === 403){
-                    window.alert('You cannot like this product, please can you sign in?');
-                }
+        $(document).ready(function () {
+            $('.wishlist_update').on('click', function (event) {
+                event.preventDefault();
+                var select_wishes = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: select_wishes.attr('href'),
+                    success: function (response) {
+                        if (response.code === 200) {
+                            // show success message
+                            console.log(response.message);
+                            // update the UI
+                            // if product has been added to the wishlist, change the icon to a solid heart
+                            if (select_wishes.find('i').hasClass('fa-regular')) {
+                                 // If the current state is not in the wishlist, add the product to the wishlist
+                                select_wishes.find('i').removeClass('fa-regular').addClass('fa-solid');
+                            } else {
+                                // If the current state is in the wishlist, remove the product from the wishlist
+                                select_wishes.find('i').removeClass('fa-solid').addClass('fa-regular');
+                            }
+                        } else {
+                            // show error message
+                            console.error(response.message);
+                        }
+                    },
+                    error: function(error) {
+                        // If there was an error making the AJAX call, show an error message
+                        console.error(error);
+                        alert('You are not logged in. Can you please connect to use this functionality?');
+                    }
+                });
             });
-        }
-
-        //var link = 
-        document.querySelectorAll('a.wishlist_update').forEach(function(link){
-            link.addEventListener('click', onClickBtn);
         });
 
     </script>
