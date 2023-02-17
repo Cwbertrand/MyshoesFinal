@@ -18,10 +18,12 @@ class CarteExtensionRuntime implements RuntimeExtensionInterface
     //This function retrieves the total quantity of products in the shopping cart
     public function totalQuantity(): int
     {
-        $carte = $this->session->getSession()->get('carte', []);
+        $cart = $this->session->getSession()->get('cart', []);
         $totalQuantity = 0;
-        foreach ($carte as $item) {
-            $totalQuantity += $item['quantity'];
+        foreach ($cart as $item) {
+            if (isset($item['quantity'])) {
+                $totalQuantity += $item['quantity'];
+            }
         }
         return $totalQuantity;
     }

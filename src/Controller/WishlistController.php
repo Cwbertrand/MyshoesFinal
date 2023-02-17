@@ -68,7 +68,7 @@ class WishlistController extends AbstractController
 
         return new JsonResponse([
             'code' => 200,
-            'message' => 'Yor product has been added successfully',
+            'message' => 'Your product has been added successfully',
             //'totalwishlist' => count($product),
         ], 200);
     }

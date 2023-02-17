@@ -23,24 +23,26 @@ class CarteExtension extends AbstractExtension
             // If your filter generates SAFE HTML, you should add a third
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
-            new TwigFilter('carte_total_quantity', [CarteExtensionRuntime::class, 'totalQuantity']),
+            new TwigFilter('cart_total_quantity', [CarteExtensionRuntime::class, 'totalQuantity']),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('carte_total_quantity', [CarteExtensionRuntime::class, 'totalQuantity']),
+            new TwigFunction('cart_total_quantity', [CarteExtensionRuntime::class, 'totalQuantity']),
         ];
     }
 
         //This function retrieves the total quantity of products in the shopping cart
         public function totalQuantity(): int
         {
-            $carte = $this->session->getSession()->get('carte', []);
+            $cart = $this->session->getSession()->get('cart', []);
             $totalQuantity = 0;
-            foreach ($carte as $item) {
-                $totalQuantity += $item['quantity'];
+            foreach ($cart as $item) {
+                if (isset($item['quantity'])) {
+                    $totalQuantity += $item['quantity'];
+                }
             }
             return $totalQuantity;
         }

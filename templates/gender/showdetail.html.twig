@@ -30,57 +30,28 @@
                             <p>{{ (detailproduct.price/100) | number_format(2, ',', '.') }} €</p>
                         </div>
                         <div class="row justify-content-center pt-2">
-                            <div class="col-6 product-detail-wrap">
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="col-sm-12">
-                                        <div class="accordion-item">
-                                            <div class="block-26 mb-2">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                                        aria-controls="panelsStayOpen-collapseTwo">
-                                                        <h4><strong>Size</strong></h4>
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-                                                    aria-labelledby="panelsStayOpen-headingTwo">
-                                                    <div class="accordion-body">
 
-
-
-
-
-                                                        <ul id="ul_select_size">
-                                                            {% for adultsizes in detailproduct.adultsize %}
-                                                                <li class="select_size">
-                                                                    <a class="size-link" href="{{ path('add_my_carte', {'id': detailproduct.id}) }}" data-size="{{adultsizes}}" >{{adultsizes}}</a>
-                                                                </li>
-                                                                {# {{ path('product_size', {'idadultsize': adultsizes.id,
-                                                                    'idproduct': detailproduct.id}) }} #}
-                                                            {% endfor %}
-                                                        </ul>
-
-                                                        
-
-
-
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <form method="post" action="{{ path('add_to_cart', { 'id': detailproduct.id }) }}">
+                                {# <label for="size">Select size:</label> #}
+                                <select id="size" name="size" required>
+                                    <option disabled selected>Select Size</option>
+                                    {% for size in detailproduct.adultsize %}
+                                    <option value="{{ size.id }}">{{ size.adultsize }}</option>
+                                    {% endfor %}
+                                </select>
+                                
+                                <div class="col-6 product-detail-wrap">
+                                    <div class="row">
+                                        <div class="col-8 detail_panier_button mt-3">
+                                            <button type="submit">Add to cart</button>
+                                        </div>
+                                        <div class="col-4 detail_wishlist_button">
+                                            <button><i class="fa-regular fa-heart"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-8 detail_panier_button mt-3">
-                                    <a href="{{path('add_my_carte', {'id': detailproduct.id} )}}">Ajouter au panier</a>
-                                    </div>
-                                    <div class="col-4 detail_wishlist_button">
-                                        <button><i class="fa-regular fa-heart"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -234,8 +205,16 @@
 {% block footer %}{% endblock %}
 
 {% block script %}
-{# <script src="{{ asset('js/rating.js') }}"></script> #}
     <script>
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (event) {
+            const select = document.querySelector('#size');
+            if (!select.value) {
+                event.preventDefault();
+                alert('Please select a size.');
+            }
+        });
         
         $(document).ready(function(){
 
@@ -314,31 +293,6 @@
                 
             });
         
-        }); 
-
-        $(document).ready(function(){
-            $('.size-link').click(function(event){
-                event.preventDefault();
-
-                //De-select the previous selected sizes
-                $('.size-link.bg-danger').removeClass('bg-danger');
-
-                //select the new size
-                $(this).addClass('bg-danger')
-
-                let size = $(this).data('size');
-
-                // Make an AJAX request to add the selected size to the carte
-                $.ajax({
-                    url: "{{ path('add_my_carte', {'id': detailproduct.id}) }}",
-                    type: 'POST',
-                    data: {size: size},
-                    success: function(response){
-                        console.log(response);
-                    }
-                })
-                
-            });
         });
 
     </script>

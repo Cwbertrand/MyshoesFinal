@@ -64,7 +64,7 @@
 
                                     </p>
                                 </div>
-                                <p><a class="add_to_cart" href="{{path('add_my_carte', {'id': product.id} )}}">
+                                <p><a class="add_to_cart" href="{{path('add_to_cart', {'id': product.id} )}}">
                                     Add to Cart
                                 </a></p>
                             </a>
@@ -136,7 +136,7 @@
                     success: function (response) {
                         if (response.code === 200) {
                             // show success message
-                            console.log(response.message);
+                            alert(response.message);
                             // update the UI
                             // if product has been added to the wishlist, change the icon to a solid heart
                             if (select_wishes.find('i').hasClass('fa-regular')) {
@@ -154,7 +154,7 @@
                     error: function(error) {
                         // If there was an error making the AJAX call, show an error message
                         console.error(error);
-                        alert('You are not logged in. Can you please connect to use this functionality?');
+                        alert('Can you please log in to enable this functionality?');
                     }
                 });
             });
