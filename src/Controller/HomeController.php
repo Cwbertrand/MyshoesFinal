@@ -23,10 +23,6 @@ class HomeController extends AbstractController
     public function index(RequestStack $requestStack): Response
     {
 
-        $session = $requestStack->getSession();
-        $qty = $session->get('carte', []);
-
-        $totalqty = array_sum($qty);
         $bestpromotion = $this->em->getRepository(Product::class)->findByisBest(1);
         $header = $this->em->getRepository(Header::class)->findByisPublish(1);
         //dd($header);
