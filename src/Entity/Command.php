@@ -74,8 +74,6 @@ class Command
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\Column]
-    private ?float $shoessize = null;
 
     public function __construct()
     {
@@ -333,15 +331,4 @@ class Command
         return $this;
     }
 
-    public function getShoessize(): ?float
-    {
-        return $this->shoessize;
-    }
-
-    public function setShoessize(float $shoessize): self
-    {
-        $this->shoessize = $shoessize;
-
-        return $this;
-    }
 }

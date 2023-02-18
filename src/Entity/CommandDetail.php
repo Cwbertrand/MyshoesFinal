@@ -39,6 +39,9 @@ class CommandDetail
     #[ORM\JoinColumn(nullable: false)]
     private ?Command $command = null;
 
+    #[ORM\Column]
+    private ?float $size = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -141,6 +144,18 @@ class CommandDetail
     public function setCommand(?Command $command): self
     {
         $this->command = $command;
+
+        return $this;
+    }
+
+    public function getSize(): ?float
+    {
+        return $this->size;
+    }
+
+    public function setSize(float $size): self
+    {
+        $this->size = $size;
 
         return $this;
     }
