@@ -6,6 +6,7 @@ use Stripe\Stripe;
 use App\Class\Carte;
 use App\Class\Email;
 use App\Entity\Command;
+use App\Service\CartService;
 use Stripe\Checkout\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,14 +28,11 @@ class StripeController extends AbstractController
     {
         //passing array of product for STRIPE payment
         $stripepayment = [];
+        
         $YOUR_DOMAIN = 'https://127.0.0.1:8000';
 
         $command = $this->em->getRepository(Command::class)->findOneByReference($reference);
-        //dd($command->getCommandDetails()->getValues());
 
-        // if(!$command){
-        //     new JsonResponse(['error' => 'command']);
-        // }
         //this is for the product
         foreach($command->getCommandDetails()->getValues() as $product){
             $stripepayment[] = [
@@ -57,7 +55,6 @@ class StripeController extends AbstractController
                 'unit_amount' => $command->getTransportprice(),
                 'product_data' => [
                     'name' => $command->getTransportagency(),
-                    //'images' => [$YOUR_DOMAIN],
                 ],
             ],
             'quantity' => 1,
@@ -87,7 +84,7 @@ class StripeController extends AbstractController
     }
 
     #[Route('/payment/successfull/{stripesessionid}', name: 'success_url')]
-    public function successUrl(Carte $carte, $stripesessionid): Response
+    public function successUrl(CartService $cartservice, $stripesessionid): Response
     {
         $command = $this->em->getRepository(Command::class)->findOneBy(['stripesessionid' => $stripesessionid]);
 
@@ -98,8 +95,8 @@ class StripeController extends AbstractController
         }
 
         if(!$command->isIsPaid()){
-            //vider le panier apres le paiement
-            $carte->removeCarte();
+            //Clear the cart after payment
+            $cartservice->removeCart();
 
             //Modify the payment status
             $command->setIsPaid(1);

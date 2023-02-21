@@ -139,7 +139,6 @@ class CommandCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        
         return $crud->setDefaultSort(['id' => 'DESC']);
     }
 

@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Class\InvoicePdf;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use App\Entity\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +19,7 @@ class InvoicePdfController extends AbstractController
     }
 
     #[Route('/client/command/invoice/pdf/{reference}', name: 'invoice_pdf')]
-    public function invoicePdf($reference, InvoicePdf $invoicePdf)
+    public function invoicePdf($reference, InvoicePdf $invoicePdf): Response
     {
 
         //This get the command that is referenced to this particular command
@@ -33,10 +31,6 @@ class InvoicePdfController extends AbstractController
         ]);
 
         //this calls the function created in invoicepdf class
-        $invoicePdf->showPdf($html);
-
-        // return $this->render('account/invoicepdf.html.twig', [
-        //         'commanddetail' => $commanddetail,
-        //     ]);
+        return $invoicePdf->showPdf($html);
     }
 }

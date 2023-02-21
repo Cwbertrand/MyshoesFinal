@@ -42,6 +42,13 @@ final class CartService
 
         if(isset($cart[$cartKey])){
             $cart[$cartKey]['quantity'] += 1;
+        }else if(isset($cart[$id])) {
+            // If a cart item with the specified product ID exists, create a new cart item with the specified size and a quantity of 1
+            $cart[$this->generate_cart_key($id, $sizeId)] = [
+                'productdetail' => $product,
+                'size' => $size,
+                'quantity' => 1
+            ];
         }else{
              // If a cart item with the same product and size does not exist, create a new cart item
             $cart[$cartKey] = [
@@ -91,12 +98,19 @@ final class CartService
     public function deleteCart($id){
         $cart = $this->session->get('cart', []);
         foreach ($cart as $cartItemKey => $cartItem){
-            if($cartItem['productdetail']->getId() == $id){
+            if($cartItem['productdetail']->getId() === intval($id)){
                 unset($cart[$cartItemKey]);
+
+                 // Exit the loop early since we've already found and removed the matching cart item
                 break;
             }
         }
         $this->session->set('cart', $cart);
+    }
+
+    //Clearing everything in the cart
+    public function removeCart(){
+        return $this->session->remove('cart');
     }
 
 

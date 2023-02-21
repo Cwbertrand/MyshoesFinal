@@ -7,7 +7,6 @@ use App\Entity\AdultSize;
 use App\Entity\Command;
 use App\Entity\CommandDetail;
 use App\Entity\Header;
-use App\Entity\OtherCategories;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Entity\ShoesCategory;

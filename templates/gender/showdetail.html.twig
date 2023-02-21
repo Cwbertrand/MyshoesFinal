@@ -39,7 +39,6 @@
                                     <option value="{{ size.id }}">{{ size.adultsize }}</option>
                                     {% endfor %}
                                 </select>
-                                
                                 <div class="col-6 product-detail-wrap">
                                     <div class="row">
                                         <div class="col-8 detail_panier_button mt-3">
@@ -123,7 +122,7 @@
                     <div class="customer_comment">
                         <div class="rating_info">
                             {% if review.user %}
-                                <h6>{{review.user}}</h6>
+                                <h6>{{review.user.pseudo}}</h6>
                                 {% else %}
                                 <h6>Anonymous </h6>
                             {% endif %}
@@ -206,31 +205,18 @@
 
 {% block script %}
     <script>
-
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function (event) {
-            const select = document.querySelector('#size');
-            if (!select.value) {
-                event.preventDefault();
-                alert('Please select a size.');
-            }
-        });
-        
         $(document).ready(function(){
-
             ///=========== INSERTING DATA INTO THE DATABASE =======///
             var rating_data = 0;
-
+            // When the user clicks the "Add Review" button, show the review modal
             $('#add_review').click(function(){
                 $('#review_modal').modal('show')
             })
             
             //hovering over the stars to change color
             $(document).on('mouseenter', '.submit_star', function (){
-
                 //this fectches data_rating value (e.g 1,2,3) and stores it in the var rating
                 var rating = $(this).data('rating');
-
                 reset_background()
 
                 //we perform a for loop to collect the values entered
@@ -238,28 +224,22 @@
                 {
                     $('#submit_star_'+count).addClass('text-warning');
                 }
-                
             });
 
             //this resets the text-warning color to text-light when the mouse leaves the star.
             function reset_background() {
                 for (var count = 1; count <= 5; count++){
-    
                     $('#submit_star_' + count).addClass('star-light');
-    
                     $('#submit_star_' + count).removeClass('text-warning');
                 }
             }
     
             //when mouse leaves, the color automatically resets
             $(document).on('mouseleave', '.submit_star', function() {
-    
                 reset_background();
-    
+
                 for (var count = 1; count <= rating_data; count++) {
-    
                     $('#submit_star_' + count).removeClass('star-light');
-    
                     $('#submit_star_' + count).addClass('text-warning');
                 }
     
@@ -271,28 +251,25 @@
                 //console.log(rating_data);
             });
             
-
-            //Now we go further to submit the entire review. that is the star value and the text.
+            // When the user clicks the "Save Review" button, submit the rating and review via AJAX
             $('#save_review').click(function(){
                 var userReview = $('#user_review').val();
-
                 if(rating_data == '' || userReview == ''){
                     alert('Please fill both fields');
                     return false;
                 }else{
+                    // Submit the rating and review to the server via AJAX
                     $.ajax({
                         url:"/product/detail/rating/{{slug}}",
                         method: "POST",
                         data:{rating_data:rating_data, userReview:userReview},
                         success: function(data){
+                            // Display the server response (data) on the page
                             document.write(data);
                         },
                     });
                 }
-
-                
             });
-        
         });
 
     </script>
