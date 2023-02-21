@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\AdultSize;
+
 use DateTime;
 use App\Entity\Product;
 use App\Entity\Remarks;
-use App\Form\AdultSizeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,6 +72,5 @@ class ProductDetailController extends AbstractController
             return $this->redirectToRoute('related_products', ['id' => $product->getId()]);
             //dd($remarks);
         }
-        
     }
 }

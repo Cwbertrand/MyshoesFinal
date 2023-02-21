@@ -3,7 +3,7 @@
 namespace App\Class;
 
 use Dompdf\Dompdf;
-use Dompdf\Options;
+use Symfony\Component\HttpFoundation\Response;
 
 class InvoicePdf
 {
@@ -13,27 +13,31 @@ class InvoicePdf
     {
         // instantiate and use the dompdf class
         $this->dompdf = new Dompdf();
-
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-        $this->dompdf->setOptions($pdfOptions);
     }
 
-    public function showPdf($html){
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+    public function showPdf($html): Response
+    {
+        // (Optional) Setup the paper size and orientation 'portrait' or 'landscape'
         $this->dompdf->setPaper('A4', 'portrait');
         $this->dompdf->loadHtml($html);
         $this->dompdf->render();
-        $this->dompdf->stream('invoice.php', [
+
+        // Output the generated PDF to Browser
+        $this->dompdf->stream('invoice.pdf', [
             'Attachment' => false,
+        ]);
+
+        return new Response('', 200, [
+            'Content-Type' => 'application/pdf',
         ]);
     }
 
-    public function generatePdfEmail($html){
-        $this->dompdf->loadHtml($html);
-        $this->dompdf->render();
-        $this->dompdf->output();
-    }
+        //generating a pdf invoice to send by email
+    // public function generatePdfEmail($html){
+    //     $this->dompdf->loadHtml($html);
+    //     $this->dompdf->render();
+    //     $this->dompdf->output();
+    // }
 
 
 }

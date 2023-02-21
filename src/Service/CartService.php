@@ -108,6 +108,11 @@ final class CartService
         $this->session->set('cart', $cart);
     }
 
+    //Clearing everything in the cart
+    public function removeCart(){
+        return $this->session->remove('cart');
+    }
+
 
     //Getting the entire cart array (product, quantity and size)
     public function getCart() {
