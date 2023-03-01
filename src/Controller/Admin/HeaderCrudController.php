@@ -25,8 +25,8 @@ class HeaderCrudController extends AbstractCrudController
             BooleanField::new('isPublish'),
             ImageField::new('headerimage')
                 //this is where the images will go to
-                ->setUploadDir('public/HeaderImage')
-                ->setBasePath('HeaderImage/')
+                ->setUploadDir('public/images/HeaderImage')
+                ->setBasePath('images/HeaderImage/')
                 //this renames and hashes the images and gets the various extensions (jpg,png)
                 ->setUploadedFileNamePattern('[randomhash], [extension]')
                 //require is false because...

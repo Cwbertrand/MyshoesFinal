@@ -1,4 +1,4 @@
-
+/composer.lock
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -10,8 +10,8 @@
 /public/Upload/
 /var/
 /vendor/
-###< symfony/framework-bundle ###
 
+###< symfony/framework-bundle ###
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache

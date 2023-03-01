@@ -33,67 +33,14 @@
 <body>
     {% if block('navbar') is defined %}
     <!--=============  NAV BAR  ======================-->
-    {% include('headfoot/navbar.html.twig') %}
+    {% include('_partials/navbar.html.twig') %}
     {% endif %}
     {% block body %}{% endblock %}
 
 
     <!--================= FOOTER SECTION ==================-->
     {% if block('footer') is defined %}
-        
-        <footer class="footer">
-            <div class="first_footer hero_container">
-                <div class="footer_about_us">
-                    <h2>My<span>Shoes</span></h2>
-                    <h5>A propos de nous</h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectateur adispicing elit.
-                        Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-                        Lorem ipsum dolor sit amet, consectateur adispicing elit.
-                        Fusce euismod convallis velit, eu auctor lacus vehicula sit amet....
-                    </p>
-                    <div class="social_media">
-                        <a href="#"><i class="fa-brands fa-twitter" target="_blank"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer_livraison">
-                    <h4><span><i class="fa-solid fa-truck"></i></span> Modes de livraison</h4>
-                    <div class="livraison_icons">
-                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                    </div>
-                    <h4><span><i class="fa-solid fa-credit-card-blank"></i></span> Moyens de paiement</h4>
-                    <div class="payment_icons">
-                        <a href="#"><i class="fa-brands fa-cc-visa"></i></a>
-                        <a href="#"><i class="fa-brands fa-cc-mastercard"></i></a>
-                        <a href="#"><i class="fa-brands fa-dhl"></i></a>
-                    </div>
-                </div>
-
-                <div class="contact">
-                    <h4><span><i class="fa-solid fa-user-gear"></i></span> Aide & Contact</h4>
-                    <div class="aide_contact">
-                        <a href="#">Questions fréquentes (FAQ)</a>
-                        <a href="{{path ('contact_us')}}">Contact us</a>
-                    </div>
-
-                </div>
-            </div>
-            <div class="second_footer">
-                <a href="#" class="policy_section">Mentions légales</a>
-                <div class="policy_section"></div>
-                <a href="#" class="policy_section">Protection des données</a>
-                <div class="policy_section"></div>
-                <a href="#" class="policy_section">CGV</a>
-                <div class="policy_section"></div>
-                <a href="#" class="policy_section">Conditions des offres</a>
-            </div>
-        </footer>
+    {% include('_partials/footer.html.twig') %}
     {% endif %}
 
     {% block javascript %}{% endblock %}

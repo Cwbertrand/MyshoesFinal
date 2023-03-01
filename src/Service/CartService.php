@@ -68,28 +68,38 @@ final class CartService
             $cart = $this->session->get('cart', []);
 
             //declaring a default flag to false (assuming that no updates have been made)
-            $updated = false;
+            //$updated = false;
 
-            foreach ($cart as $cartItemKey => $cartItem) {
-                if ($cartItem['productdetail']->getId() === intval($cartKey)) {
-                    //adds the quantity if the action is strictly 'add' if not, the quantity is minus
-                    if ($action === 'add') {
-                        $cart[$cartItemKey]['quantity'] += 1;
-                    } elseif ($action === 'minus') {
-                        if ($cart[$cartItemKey]['quantity'] > 1) {
-                            $cart[$cartItemKey]['quantity'] -= 1;
-                        } else {
-                            unset($cart[$cartItemKey]);
-                        }
-                    }
-                    // Set the flag to indicate that the update has been made
-                    $updated = true;
-                }
-                // Check the flag to see if the update has been made, and exit the loop if it has
-                if ($updated) {
-                    break;
+            if ($action === 'add') {
+                    $cart[$cartKey]['quantity'] += 1;
+            } elseif ($action === 'minus') {
+                if ($cart[$cartKey]['quantity'] > 1) {
+                    $cart[$cartKey]['quantity'] -= 1;
+                } else {
+                    unset($cart[$cartKey]);
                 }
             }
+
+            // foreach ($cart as $cartItemKey => $cartItem) {
+            //     if ($cartItem['productdetail']->getId() === intval($cartKey)) {
+            //         //adds the quantity if the action is strictly 'add' if not, the quantity is minus
+            //         if ($action === 'add') {
+            //             $cart[$cartItemKey]['quantity'] += 1;
+            //         } elseif ($action === 'minus') {
+            //             if ($cart[$cartItemKey]['quantity'] > 1) {
+            //                 $cart[$cartItemKey]['quantity'] -= 1;
+            //             } else {
+            //                 unset($cart[$cartItemKey]);
+            //             }
+            //         }
+            //         // Set the flag to indicate that the update has been made
+            //         $updated = true;
+            //     }
+            //     // Check the flag to see if the update has been made, and exit the loop if it has
+            //     if ($updated) {
+            //         break;
+            //     }
+            // }
             $this->session->set('cart', $cart);
         }
     }

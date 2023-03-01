@@ -1,4 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* hOVER BUTTON
+.hero_btn:hover{
+    color: white;
+    box-shadow: 
+    inset -5.5em 0 0 0 var(--button_colors),
+    inset 5.4em 0 0 0 var(--button_colors);
+} 
+transition: all .5s;
+*/
+
+/* Variables */
+:root{
+    --button_colors: #FFA500;
+    --main_color: #F3F3F3;
+    --product_card_color: #bfbebe29;
+    --promo_color: #fb0000;
+    --footer_color: #201C1C;
+}
+
+/* GENERAL CLASSES */
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+.heart_icon{
+    color: #ff0303;
+}
+
+h2{
+    font-weight: 600;
+    color:#000000d2;
+}
+
+.product_section h2,
+.brand_myshoes h2,
+.newsletter_myshoes h2{
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.brand_myshoes.general_container,
+.newsletter_myshoes.general_container{
+    height: 35vh;
+}
+
+a,
+ul,
+li{
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
+    list-style: none;
+}
+
+.fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.myshoes_btn{
+    border: .5px solid #0000007b;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    transition: 0.35s;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #000000;
+}
+
+.icons{
+    font-size: 20px;
+    text-align: center;
+}
+.general_container{
+    width: 100%;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
 /*=============== SCROLL BAR ===============*/
 ::-webkit-scrollbar {
     
@@ -16,20 +109,9 @@
 }
 
 /*=============== GENERAL STYLING ===============*/
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
 
-li{
-    text-decoration: none;
-    font-style: none;
-    list-style: none;
-    color: #000;
-}
 
-In the end I changed the following css entry in bootstrap.css
+/* In the end I changed the following css entry in bootstrap.css */
 
 textarea:focus,
 .form-control.is-invalid :focus, 
@@ -54,134 +136,137 @@ input[type="color"]:focus,
     outline: 0 none;
 }
 
-a{
-    font-style: none;
-    color: #000;
-    text-decoration: none;
-
-}
-
-.text-justify{
-    text-align: justify;
-    text-indent: 50px;
-}
-.general_btn{
-    border: none;
-    background: transparent;
-    text-decoration: none;
-    font-style: none;
-    list-style: none;
-    text-align: center;
-    
-}
-
 
 /**===== NAV BAR ======**/
-.nav_bar{
-    background: #c6c6c7a2;
-    width: 100%;
-}
-.nav_bar .general_container{
+/* NAVBAR */
+
+.myshoes_first_nav {
+    position: relative;
+    height: 5rem;
+    background: var(--main_color);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 50px;
+    align-items:center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
 }
 
-.general_container .logo{
+.myshoes_nav_items{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.logo{
     font-weight: 800;
-    text-transform: uppercase;
+    font-size: 20px;
 }
 
-.general_container .nav_links,
-.general_container .nav_ul,
-.general_container .icons{
+.myshoes_search_bar{
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    width: 20%;
+    justify-content: center;
+    width: 90%;
+}
+.myshoes_search_nav{
+    width: 60%;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: .5px solid rgb(143, 143, 143);
+    padding: 10px 60px 10px 10px;
 }
 
-.nav_ul .nav_items{
-    margin: 0px 1rem;
-}
-
-.nav_right > ul{
-	display: flex;
-	align-items: center;
-}
-
-.nav_right ul li.nr_li{
-	margin-left: 20px;
-	cursor: pointer;
-	color: #fff;
-	font-size: 20px;
-	position: relative;
-}
-
-/* TODO:: HOVER .nr_li */
-
-.dd_menu {
+.myshoes_nav_search_button{
     position: absolute;
-    right: -25px;
-    top: 47px;
+    height: 2.5rem;
+    border-radius: 5px;
+    background: var(--button_colors);
+    border: .5px solid rgb(143, 143, 143);
+    width: 8%;
+    right: 172px;
+}
+
+.myshoes_nav_items ul,
+.second_nav_myshoes ul{
     display: flex;
-    background: #fff;
-    width: 10rem;
-    border-radius: 15px;
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.25);
-    display: none;
-    z-index: 1000;
 }
 
-.dd_menu .dd_right{
-	padding: 15px 0px;
+.myshoes_nav_items ul li{
+    margin: 0px 20px;
+}
+
+.myshoes_nav_items ul li i{
+    font-size: 25px;
+    margin-top: 13px;
+    transition: ease-out .3s;
+}
+
+/* dropdown_user styles */
+.dropdown_user {
+    position: relative;
+    cursor: pointer;
+    transition: ease-out .9s;
+}
+
+.myshoes_nav_items ul li i:hover{
+    color: var(--button_colors);
+}
+
+.dropdown_user ul {
+    position: absolute;
+    flex-direction: column;
+    margin: 10px 0 0px 0;
+    padding: 20px 0;
+    width: 160px;
+    left: 50%;
+    margin-left: -80px;
+    z-index: 999;
+    /* opacity: 0; */
+    box-sizing: border-box;
+    background: var(--product_card_color);
+    border-radius: 6px;
+    list-style: none;
+    transform: scale(0) translate(-10%, -10%);
+    transition: ease-out .5s;
+}
+
+/* dropdown_user triangle */
+.dropdown_user ul::before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent var(--product_card_color) transparent;
+}
+
+.dropdown_user ul li{
+    margin: 0px !important;
+}
+
+.dropdown_user ul li a:link,
+.dropdown_user ul li a:visited {
+    display: inline-block;
+    transition: ease-out .7s;
+    padding: 10px 0.8rem;
     width: 100%;
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
-.dd_menu .dd_right ul{
-	padding-left: 10px !important;
-}
-
-.dd_menu .dd_right ul .btn_nav a{
-    background: rgb(0, 0, 0);
+.dropdown_user ul li a:hover {
+    background-color: var(--button_colors);
     color: #ffff;
-    display: inline;
-    padding: 10px 20px;
-    margin: 5px !important;
 }
 
-.dd_menu .dd_right .nav_hover:hover{
-    width: 100%;
-    background:rgba(207, 201, 201, 0.411);
+.dropdown_user:hover ul{
+    opacity: 1;
+    transform: scale(1) translate(0%, 0%);
 }
 
-.dd_menu li{
-	margin-bottom: 10px;
-	color: #868686;
-}
-
-.dd_menu::before{
-	content: "";
-	position: absolute;
-	top: -20px;
-	right: 30px;
-	border: 10px solid;
-	border-color: transparent transparent #fff transparent;
-}
-
-.dd_main.account_active .dd_menu{
-	display: flex;
-}
-
-/* Class active on navLinks */
-
-.menwochild{
-    background: red;
-    padding: 20px;
-}
-
-
-/**===== CART AND WISHLIST ICONS ======**/
 .cart_number{
     position: relative;
 }
@@ -189,23 +274,57 @@ a{
 .cart_icon{
     /* color: white; */
     position: relative;
-    border-radius: 50%;
-    padding: 10px;
-    font-size: 25px;
 }
 
 .cart_data{
     position: absolute;
-    top: -3px;
-    left: 27px;
+    top: -15px;
+    left: 16px;
     font-size: 15px;
-    background-color: #ffffff;
-    border: 0.5px solid rgb(180, 178, 178);
+    color: #fff;
+    background-color: var(--button_colors);
     border-radius: 50%;
     display: inline-block;
     padding: 0.1px 6px;
 }
 
+.second_nav_myshoes{
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+}
+
+.second_nav_myshoes ul{
+    padding-top: 10px;
+    justify-content: center;
+}
+
+.second_nav_myshoes ul li a{
+    position: relative;
+    margin: 0px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all .5s;
+}
+
+.second_nav_myshoes ul li a::before{
+    position: absolute;
+    content: '';
+    display: inline-block;
+    border: 1px solid var(--button_colors);
+    opacity: 0;
+    bottom: -2px;
+    width: 100%;
+    transition: ease-in-out .5s;
+}
+
+.second_nav_myshoes ul li a:hover{
+    color:rgba(0, 0, 0, 0.311);
+}
+
+.second_nav_myshoes ul li a:hover::before{
+    opacity: 1;
+}
 
 
 /* =========================*/
@@ -213,157 +332,242 @@ a{
 /*===========================*/
 
 /**===== HERO SECTION ======**/
-.hero_background{
-    height: 100vh;
+.hero_myshoes{
+    position: relative;
+    height: 80vh;
     background-position: cover !important;
     background-size: cover !important;
     object-fit: cover !important;
 }
 
-.background_data{
+.hero_btn{
+    position:absolute;
+    bottom: 30px;
+    right: 190px;
+
+    padding: 20px 40px;
+    transform: translate(.9 ease);
+}
+
+.hero_btn:hover{
+    color: white;
+    box-shadow: 
+    inset -5.5em 0 0 0 var(--button_colors),
+    inset 5.4em 0 0 0 var(--button_colors);
+}
+
+/* ADVERT */
+.advert_myshoes{
+    position: relative;
+}
+.advert_myshoes::before {
+	content: '';
+	position: absolute;
+    z-index: -1;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(#B7550E, #B7550E);
+	clip-path: circle(30% at right 70%);
+}
+
+.advert_myshoes::after {
+	content: '';
+	position: absolute;
+    z-index: -1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(#E55D87, #5FC3E4);
+	clip-path: circle(20% at 10% 10%);
+}
+
+.advert_info{
+    padding: 50px 70px;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
-.background_data h4{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 50px;
-    color: #fff;
+.advert_description{
+    display: flex;
+    padding-top: 20px;
 }
 
-.hero_note{
-    margin: 0px 120px;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
+.advert_description .advert_icon{
+    margin-right: 20px;
 }
 
-.background_data a{
-    margin-top: 10px;
-    display: block;
-    font-size: 20px;
-    color: #fff;
-    border-radius: 8px;
-    padding: 10px 40px;
-    background-color: #18cf5eb3;
+.advert_icon i{
+    display: inline-block;
+    background: var(--button_colors);
+    padding: 15px;
+    font-size: 30px;
+    border-radius: 5px;
 }
 
-.owl-prev,
-.owl-next{
-    display: none !important;
+.advert_description p{
+    padding-top: 10px;
 }
+
 
 /**===== TRENDING PRODUCT SECTION ======**/
-.products{
+/* PRODUCT */
+.product_section{
     display: flex;
-    flex-wrap: wrap;
-    padding-top: 50px;
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-direction: column;
+    max-height: 150vh;
     width: 100%;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.trending_product{
-    padding-top: 4em;
+.myshoes_product {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.product_card {
+    position: relative;
+    width: 15rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: .25rem;
+    transition: .3s ease-in-out;
+    overflow: hidden;
+}
+
+.card_image{
+    position: relative;
+    height: 20rem;
+    background: var(--product_card_color);
+    border-radius: .25rem;
+    transition: .4s ease-in-out;
+    z-index: 1;
+}
+
+.text {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    background: #fff;
+    transition: .4s ease-in-out;
+    font-size: 15px;
+    opacity: 0;
+
+}
+
+.product_card:hover .card_image {
+    transform: translateY(-2vmin);
+    margin-bottom: 1em;
+}
+
+.product_card:hover .text{
+    opacity: 1;
+}
+
+.card_image .fa-heart{
+    position: absolute;
+    display: inline-block;
+    padding: 5px;
+    margin-top: 9px;
+    right: -1px;
+    z-index: 9999;
+    background: #ffffff;
+    font-size:30px;
+}
+
+.product_img{
+    margin-top: 60px;
+    height: 180px;
+    width: 180px;
+}
+
+.card_image .promo{
+    position: absolute;
+    font-size: 13px;
+    padding-left: 5px;
+    bottom: 0;
+    color: var(--promo_color);
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid var(--promo_color);
     
 }
 
-.trending_product .heading{
-    font-size: 25px;
-    color:rgba(0, 0, 0, 1);
+.card_image .promo span{
+    background: var(--promo_color);
+    color: #fff;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 5px;
 }
 
-.card-new {
-    background:rgba(243, 241, 241, 0.998);
-    max-width: 280px;
-    border-radius: 10px;
-    margin: 10px;
-    position: relative;
+/**===== Marks SECTION ======**/
+
+.brand{
+    display: flex;
 }
 
-.card-new a {
-    text-decoration: none;
-    text-align: center;
-    color: #000;
-    position: relative;
-}
-
-.card-new .img-wishlist{
-    padding: 50px 0px;
+.brand a{
     display: flex;
     justify-content: center;
-    align-items: center
-}
-
-.card-new .wishlist{
-    position: absolute;
-    right: 0;
-    top: 5%;
-    background: #fff;
-    display: block;
-    padding: 10px;
-    font-size: 25px;
-}
-
-.card-new .product_info {
-    padding: 21px 20px;
-}
-
-.price {
-    color: grey;
-    font-size: 22px;
-}
-
-.card-new .product_info h1{
-    font-size: 20px;
-}
-
-.card-new .add_to_cart {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
     width: 100%;
-    font-size: 18px;
-    position: absolute;
-    bottom: 0;
-    border-radius: 0px 0px 10px 10px;
 }
 
-.card-new .add_to_cart:hover {
-    opacity: 0.7;
+.brand a img{
+    width: 50%;
 }
 
-/**===== ADVERT SECTION ======**/
+/**===== Newsletter SECTION ======**/
 
-.advert{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-    background-color: #8783838c;
-}
-
-.image{
+.newsletter_myshoes p{
     text-align: center;
 }
 
-/**===== LES MARQUES SECTION ======**/
-.myshoes-marques{
-    padding: 50px 0;
-}
-.myshoes-marques .marque-display{
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
+.newsletter{
+    text-align: center;
 }
 
-.myshoes-marques .marque-display .img_resize{
-    flex-wrap: wrap;
-    width: 80%;
+.newsletter_input {
+    padding: .8rem 1rem;
+    width: 40%;
+    border-radius: 5rem;
+    outline: none;
+    border: .1rem solid #d1d1d1;
+    font-size: .7rem;
+}
+
+::placeholder {
+    color: #d1d1d1;
+}
+
+.newsletter_btn {
+    padding: .8rem 2rem;
+    border-radius: 5rem;
+    background: linear-gradient(90deg, #ff9966, #ff5e62);
+    color: #fff;
+    font-size: .7rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+.newsletter_btn:hover{
+    border-radius: 5rem;
+    box-shadow: 
+        inset -5.3em 0 0 0 var(--button_colors),
+        inset 5.3em 0 0 0 var(--button_colors);
 }
 
 /* =========================*/
@@ -371,18 +575,22 @@ a{
 /*===========================*/
 
 .breadcrumbs-two .breadcrumbs-img{
-    background-image: url(../image/coverpage/cover-img-1.jpg);
+    /* background-image: url(../image/coverpage/cover-img-1.jpg); */
+    background-image: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%);
     height: 300px;
     padding: 4em;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
     position: relative;
 }
 
-.breadcrumbs-img h2 {
-    font-size: 40px;
-    text-transform: uppercase;
+.breadcrumbs-img h2,
+.breadcrumbs-img h2 a {
+    font-size: 20px;
+    width: 100%;
+    color: #ffff;
+    text-align: center;
 }
 
 
@@ -394,6 +602,10 @@ a{
     padding: 1em;
     width: 100%;
     float: left;
+}
+
+.myshoes_search_product fieldset {
+    border: none;
 }
 
 .accordion-item {
@@ -421,31 +633,14 @@ input[type=checkbox] {
 .side h3 {
     font-size: 14px;
     text-transform: uppercase;
-    font-family: "Montserrat", Arial, sans-serif;
+    font-weight: 300;
 }
 
-.side ul li {
-    font-size: 14px;
-}
 
 .side ul,
 .side ul li {
     padding: 0;
     margin: 0;
-    list-style: none;
-}
-
-.block-26 {
-    display: block;
-    float: left;
-    width: 100%;
-}
-
-.block-26 ul,
-.block-26 ul li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
 }
 
 .block-26 ul li {
@@ -471,15 +666,12 @@ input[type=checkbox] {
     background: #616161;
 }
 
-.block-26 h4 {
-    font-size: 12px;
-    text-transform: uppercase;
-    font-family: "Montserrat", Arial, sans-serif;
-}
+
 
 /* =======================================================
   * 	PRODUCT SECTION
 * ======================================================= */
+
 .col-lg-4 .all_product{
     display: flex;
     justify-content: space-between;
@@ -638,66 +830,111 @@ legend {
 
 /**===== FOOTER SECTION ======**/
 
-.first_footer{
-    background-color: #8783838c; 
+
+footer.footer_myshoes{
+    padding-top: 50px;
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 100%;
+    color: #ffff;
+    margin-top: 20px;
+    background-color: var(--footer_color);
+}
+
+.footer_myshoes .footer_container{
     display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-gap: 4%;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.first_footer h2{
-    font-weight: 800;
+
+.footer_container .footer_services h4{
+    font-size: 17px;
+    font-weight: 700;
 }
 
-.first_footer h2 span{
-    color: #3577F9;
+.footer_container .footer_services p{
+    margin-bottom: 0rem !important;
 }
 
-.first_footer h5{
-    color: #FFC123;
-}
-
-.social_media{
-    display: flex;
-    justify-content: space-around;
-}
-
-.social_media i{
-    font-size: 20px;
-}
-
-.footer_livraison .livraison_icons,
-.footer_livraison .payment_icons{
-    display: flex;
-    justify-content: space-around;
-}
-
-.footer_livraison .livraison_icons i{
-    font-size: 40px;
-    color: #FFC123;
-}
-.footer_livraison i{
-    font-size: 30px;
-}
-
-.aide_contact{
-    display: flex;
-    flex-direction: column;
-}
-
-.second_footer{
-    background-color: #000;
-    display: flex;
-    justify-content: center;
+.footer_container .footer_services p a{
+    color: #fff;
+    font-weight: 100;
+    font-size: 13px;
+    transition: all 0.5s;
     
 }
 
-.second_footer .policy_section{
-    color: #c6c6c7;
-    margin: 10px 20px;
+.footer_container .footer_services p a:hover{
+    color: rgb(174, 168, 168);
+    
 }
 
-.second_footer div{
+.follow_us p{
+    padding-top: 10px;
+    font-size: 10px;
+}
+
+.follow_us a{
+    margin-right: 10px;
+    
+}
+
+.follow_us a i{
     background-color: #fff;
-    width: 1px;
+    margin-top: 10px;
+    display: inline-block;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: ease-in-out .5s;
+}
+
+.follow_us a i:hover{
+    color: #ffff;
+    background: #0000;
+    border: 3px solid #ffff;
+}
+
+.myshoes_copyright.footer_container{
+    padding-top: 5px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    color: #ffff;
+}
+
+.myshoes_copyright .copyright,
+.myshoes_copyright .payment_accept{
+    width: 100%;
+}
+
+.myshoes_copyright .copyright p{
+    font-size: 10px;
+    font-weight: 100;
+}
+
+.myshoes_copyright .payment_accept{
+    display: flex;
+    justify-content: flex-end!important;
+}
+
+.myshoes_copyright .payment_accept p{
+    font-size: 10px;
+    margin-right: 10px;
+}
+
+.myshoes_copyright .payment_accept .payment_accept_img{
+    width: 50%;
+}
+
+.myshoes_copyright .payment_accept .payment_accept_img img{
+    width: 40px;
+    height: 30px;
+    margin-left: 10px;
 }

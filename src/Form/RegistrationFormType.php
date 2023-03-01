@@ -51,7 +51,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                     new Assert\Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/',
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{1,}$/',
                         'message' => 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character'
                     ]),
                 ],

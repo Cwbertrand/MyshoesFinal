@@ -11,99 +11,118 @@
 
 {% block body %}
     <!--=============  HERO SECTION  ======================-->
-    <section class="hero">
-        <div>
-            <div class="owl-carousel owl-theme">
-                {% for header in carousels %}
-                <div class="hero_background" style="background: url('/HeaderImage/{{header.headerimage}}');">
-                    <div class="background_data">
-                        <h4 >{{header.headertitle}}</h4>
-                        <p class="hero_note">{{header.headertext}}</p>
-                        <a href="{{header.headerurl}}" role="button">{{header.headerbtn}}</a>
-                    </div>
+    {% for header in carousels %}
+    <section class="hero_myshoes" style="background: url('images/HeaderImage/{{header.headerimage}}');" alt="background Image">
+        <div class="general_container">
+                <div class="hero_text">
+                    <a href="{{header.headerurl}}" class="hero_btn myshoes_btn" role="button">{{header.headerbtn}}</a>
                 </div>
-                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
+
+    <!-- Advertisement Section -->
+    <section class="advert_myshoes general_container">
+        <div class="advert_info">
+            <div class="advert_writing">
+                <h2>What you wear, we care, <br> so wear quality</h2>
+                <div class="advert_description">
+                    <div class="advert_icon">
+                        <i class="fa-regular fa-gem"></i>
+                    </div>
+                    <p>We provide the best quality</p>
+                </div>
+                <div class="advert_description">
+                    <div class="advert_icon">
+                        <i class="fa-solid fa-ship"></i>
+                    </div>
+                    <p>Fast shipment is what we are known for</p>
+                </div>
+                <div class="advert_description">
+                    <div class="advert_icon">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <p>The prices are at it’s minimum</p>
+                </div>
+            </div>
+            <div class="advert_image">
+                <img class="fluid" src="{{asset('./images/advert Image.png')}}" alt="advert Image">
             </div>
         </div>
     </section>
 
     <!--================= TRENDING PRODUCTS SECTION ==================-->
-    <section class="trending_product hero_container">
-        <div class="heading">
-            <h1>Best Promotion & Best Sales</h1>
-        </div>
-        <div class="products">
-            {% for product in products %}
-                <div class="col-lg-4 mb-4">
-                    <div class="all_product">
-                        <div class="card-new">
-                            <a href="{{path ('related_products', {'id': product.id})}}"> 
-                                <div class="img-wishlist">
-                                    <img src="/upload/{{product.image}}" alt="photo {{product.shoesname}}" style="width:60%">
-                                </div>
-                                <a id="select_wishes" class="wishlist wishlist_update" data-productid="" href="{{path ('add_wishlist', {'id': product.id})}}">
-                                    
-                                    {% if app.user and product.isWishedByUser(app.user) %}
-                                    <i class="fa-solid fa-heart"></i>
-                                        {% else %}
-                                    <i class="fa-regular fa-heart"></i>
-                                    {% endif %}
-                                </a>
-                                <div class="product_info">
-                                    <p>
-                                        <span><strong>{{product.mark}}</strong></span> <br>
-                                        <span><strong>{{product.shoesname}}</strong></span> <br>
-                                        <span>{{product.category.category}}</span> <br>
-                                        {% if product.promotion > 0 %}
-                                        <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small>
-                                        <span class="price">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</span>
-                                        <small class="bg-danger p-1 text-white">{{product.promotion}}% Promo</small>
-                                        {% else %}
-                                        <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
-                                        {% endif %}
+    <!-- Product Section -->
 
-                                    </p>
-                                </div>
-                                <p><a class="add_to_cart" href="{{path('add_to_cart', {'id': product.id} )}}">
-                                    Add to Cart
-                                </a></p>
+    <section class="product_section">
+        <h2>Frequent Buys</h2>
+        <div class="myshoes_product">
+            {% for product in products %}
+            <div class="product_class">
+                <a href="{{path ('related_products', {'id': product.id})}}" class="product">
+                    <div class="product_card">
+                        <div class="card_image">
+                            <img src="/upload/{{product.image}}" class="product_img" alt="photo {{product.shoesname}}">
+                            <a id="select_wishes" class="wishlist wishlist_update" href="{{path ('add_wishlist', {'id': product.id})}}" data-productid="">
+                                {% if app.user and product.isWishedByUser(app.user) %}
+                                <i class="fa-solid fa-heart heart_icon"></i>
+                                {% else %}
+                                <i class="fa-regular fa-heart"></i>
+                                {% endif %}
                             </a>
+                            <p class="promo">Promo<span>-30%</span></p> 
+                        </div>
+                        <div class="text">
+                                {% for size in product.adultsize %}
+                                        {{ size.adultsize }}
+                                {% endfor %}
+                            </p>
                         </div>
                     </div>
-                </div>
+                    <p class="product_info">
+                        {{product.mark}} <br>
+                        {{product.shoesname}} - {{product.category.category}} <br>
+
+                        {% if product.promotion > 0 %}
+                        <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small> - 
+                        <span class="">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</span>
+                        {% else %}
+                            <span class="">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                        {% endif %}
+                    </p>
+                </a>
+            </div>
             {% endfor %}
         </div>
     </section>
 
     <!--================= POPULAR MARKS SECTION ==================-->
-    <section class="myshoes-marques">
-        <div class="hero_container">
-            <div class="marque-display">
-                <div class="marque-image">
-                    <img src="{{asset ('image/brands/puma.jpg')}}" class="img_resize" alt="">
-                </div>
-                <div class="marque-image">
-                    <img src="{{asset ('image/brands/addidas.jpg')}}" class="img_resize" alt="">
-                </div>
-                <div class="marque-image">
-                    <img src="{{asset ('image/brands/gucci.jpg')}}" class="img_resize" alt="">
-                </div>
-                <div class="marque-image">
-                    <img src="{{asset ('image/brands/merrell.jpg')}}" class="img_resize" alt="">
-                </div>
-                <div class="marque-image">
-                    <img src="{{asset ('image/brands/nike.jpg')}}" class="img_resize" alt="">
-                </div>
-            </div>
+    <section class="brand_myshoes general_container">
+        <h2>Popular Marks</h2>
+        <div class="brand">
+            <a href=""><img src="{{asset('./images/brands/addidas.jpg')}}" alt="addidas"></a>
+            <a href=""><img src="{{asset('./images/brands/nike.jpg')}}" alt="nike"></a>
+            <a href=""><img src="{{asset('./images/brands/gucci.jpg')}}" alt="gucci"></a>
+            <a href=""><img src="{{asset('./images/brands/merrell.jpg')}}" alt="merrell"></a>
+            <a href=""><img src="{{asset('./images/brands/puma.jpg')}}" alt="puma"></a>
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter_myshoes general_container">
+        <h2>Newsletter</h2>
+        <p>Subscribe for our shoes updates</p>
+        <div class="newsletter">
+            <input type="text" class="newsletter_input">
+            <button class="newsletter_btn">Subscribe</button>
+        </div>
+    </section>
+
+        <!-- Footer Section -->
+        
+
 {% endblock %}
 {% block footer %}
-{% endblock %}
-{% block owlcarouseljs %}
-    <script src="{{asset('js/owl.carousel.js')}}"></script>
-    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
 {% endblock %}
 
 {% block script %}
