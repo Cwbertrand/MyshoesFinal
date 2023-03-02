@@ -5,104 +5,151 @@
 {% block navbar %}{% endblock %}
 
 {% block body %}
-<style>
-    .star-light {
-        color: #e9ecef;
-    }
-</style>
+    <section class="breadcrum_area">
+        <a href="#">home</a>><a href="#">women</a>><a href="#">product name</a>
+    </section>
     <!-- ============= PRODUCT DETAIL SECTION AND IMAGES =========-->
     {% for notice in app.flashes('message') %}
         <p class="bg-success text-white">{{ notice }}</p>
     {% endfor %}
-    <main class="container py-5">
-        <section class="image_detail_product">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 d-flex justify-content-center align-items-center">
-                        <div>
-                            <img src="/upload/{{detailproduct.image}}" class="text-center" alt="basket new 7">
-                        </div>
-                    </div>
-                    <div class="col-md-7 text-center">
-                        <div class="about_product">
-                            <h5>{{detailproduct.mark}}</h5>
-                            <p>{{detailproduct.shoesname}} - {{detailproduct.category.category}}</p>
-                            <p>{{ (detailproduct.price/100) | number_format(2, ',', '.') }} €</p>
-                        </div>
-                        <div class="row justify-content-center pt-2">
 
+    <main>
+        <section>
+            <div class="container">
+                <div class="row myshoes_productdetails">
+                    <div class="col-sm-4 col-md-5 col-lg-5 col-xl-5 product_image">
+                        <img src="/upload/{{detailproduct.image}}" class="img-fluid pdt_img" alt="{{detailproduct.shoesname}}">
+                    </div>
+                    <div class="col-sm-4 col-md-5 col-lg-5 col-xl-5 product_info">
+                        <p>
+                            {{detailproduct.mark}} <br>
+                            <strong>{{detailproduct.shoesname}}</strong> - {{detailproduct.category.category}}
+                        </p>
+                        <p>
+                            {% if detailproduct.promotion > 0 %}
+                                <i style="color: red;">{{ (detailproduct.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                    <small>Original Price: <s>{{ (detailproduct.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                </span>
+                            {% else %}
+                                <span class="">{{ (detailproduct.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                            {% endif %}
+
+                        </p>
+                        <div class="product_more_info">
                             <form method="post" action="{{ path('add_to_cart', { 'id': detailproduct.id }) }}">
-                                {# <label for="size">Select size:</label> #}
-                                <select id="size" name="size" required>
+                                <select class="size" id="size" name="size" required aria-label="Default select">
                                     <option disabled selected>Select Size</option>
                                     {% for size in detailproduct.adultsize %}
-                                    <option value="{{ size.id }}">{{ size.adultsize }}</option>
+                                        <option value="{{ size.id }}">{{ size.adultsize }}</option>
                                     {% endfor %}
                                 </select>
-                                <div class="col-6 product-detail-wrap">
-                                    <div class="row">
-                                        <div class="col-8 detail_panier_button mt-3">
-                                            <button type="submit">Add to cart</button>
-                                        </div>
-                                        <div class="col-4 detail_wishlist_button">
-                                            <button><i class="fa-regular fa-heart"></i></button>
-                                        </div>
+                                <div class="basket_wishlist">
+                                    <div class="basket">
+                                        <button class="btn_basket_wishlist btn_basket" type="submit">Add to basket</button>
+                                    </div>
+                                    <div class="wishlist">
+                                        <button class="btn_basket_wishlist"><i class="fa-regular fa-heart btn_wishlist"></i></button>
                                     </div>
                                 </div>
                             </form>
-                            
+                            <div class="product_description">
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                <strong>Product description</strong>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                                            data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
+                                                <p class="">
+                                                    {{detailproduct.description}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                <strong>Delivery</strong>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                                            data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                                                class. This is the second item's accordion body. Let's imagine this being
+                                                filled with some actual content.</div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="product_description px-3">
-                    <h3>Description de Produit</h3>
-                    <p class="text_edit">
-                        {{detailproduct.description}}
-                    </p>
                 </div>
             </div>
         </section>
 
-            <!--================= TRENDING PRODUCTS SECTION ==================-->
-        <section class="trending_product container">
-            <div class="heading">
-                <h1>Products Frequently Bought</h1>
-            </div>
-            <div class="products mb-4">
-                {% for product in relatedproducts %}
-                <div class="card-new">
-                    <a href="{{path ('related_products', {'id': product.id})}}p">
-                        <div class="img-wishlist">
-                            <img src="/upload/{{product.image}}" alt="{{product.shoesname}}" style="width:60%">
-                        </div>
-                        <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
-                        <div class="product_info">
-                            <p>
-                                <span><strong>{{product.mark}}</strong></span> <br>
-                                <span><strong>{{product.shoesname}}</strong></span> <br>
-                                <span>{{product.category.category}}</span> <br>
-                                <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
-
+        <!--================= TRENDING PRODUCTS SECTION ==================-->
+        <section>
+            <div class="container">
+                <h2 class="mb-4">Related products</h2>
+                <div class="myshoes_product">
+                    {% for product in relatedproducts %}
+                    <div class="product_class">
+                        <a href="{{path ('related_products', {'id': product.id})}}" class="product">
+                            <div class="product_card">
+                                <div class="card_image">
+                                    <img src="/upload/{{product.image}}" class="product_img" alt="photo {{product.shoesname}}">
+                                    <a id="select_wishes" class="wishlist wishlist_update" href="{{path ('add_wishlist', {'id': product.id})}}" data-productid="">
+                                        {% if app.user and product.isWishedByUser(app.user) %}
+                                        <i class="fa-solid fa-heart heart_icon"></i>
+                                        {% else %}
+                                        <i class="fa-regular fa-heart"></i>
+                                        {% endif %}
+                                    </a>
+                                    <p class="promo">Promo<span>-30%</span></p> 
+                                </div>
+                                <div class="text">
+                                        {% for size in product.adultsize %}
+                                                {{ size.adultsize }}
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="product_info">
+                                {{product.mark}} <br>
+                                {{product.shoesname}} - {{product.category.category}} <br>
+        
+                                {% if product.promotion > 0 %}
+                                <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small> - 
+                                <span class="">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</span>
+                                {% else %}
+                                    <span class="">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                {% endif %}
                             </p>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </section>
 
         <!--================= RATING SECTION ==================-->
-        <section class="customer_remark">
+        <section class="customer_remark container">
             <div class="row">
-                <div class="col-md-5">
-                    <h4>Review ({{newremarks|length}} nb des avis)</h4>
+                <div class="col-md-5 pb-3">
+                    <h4>Review ({{newremarks|length}} No of review<span class="if_plural">(s)</span>)</h4>
                     {% if newremarks|length != 0 %}
                     <p>{{((reviewTotal|join)/(newremarks|length))|round(1, 'floor')}}/5</p>
                     {% else %}
                     <p>0/5</p>
                     {% endif %}
-                    <p class="text-justify">
+                    <p class="review_info">
                         Only Myshoes customers who have purchased this item can give a rating and share their 
                         opinion without any compensation. The overall rating (out of 5 stars) is an average 
                         of all the ratings. Customers can also give their review in writing. 
@@ -115,59 +162,64 @@
                     {% endif %}
                 </div>
                 <div class="col-md-1">
+                    <div class="hr_line"></div>
                 </div>
                 <div class="col-md-6">
-                    <h4>Trier par date</h4>
-                    {% for review in newremarks %}
-                    <div class="customer_comment">
-                        <div class="rating_info">
-                            {% if review.user %}
-                                <h6>{{review.user.pseudo}}</h6>
-                                {% else %}
-                                <h6>Anonymous </h6>
-                            {% endif %}
-                            
-                            <p>Evaluated : {{review.createAt|date("d/m/Y")}}</p>
-                            <div class="rating">
-                                {% if review.rating == 1 %}
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                {% elseif review.rating == 2 %}
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                {% elseif review.rating == 3 %}
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                {% elseif review.rating == 4 %}
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                {% elseif review.rating == 5 %}
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                    <h4 class="mb-5">Sorted by date</h4>
+                    {% if newremarks %}
+                        {% for review in newremarks %}
+                        <div class="customer_comment">
+                            <div class="rating_info">
+                                {% if review.user %}
+                                    <h6>{{review.user.pseudo}}</h6>
+                                    {% else %}
+                                    <h6>Anonymous </h6>
                                 {% endif %}
+                                
+                                <p>Evaluated : {{review.createAt|date("d/m/Y")}}</p>
+                                <div class="rating">
+                                    {% if review.rating == 1 %}
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    {% elseif review.rating == 2 %}
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    {% elseif review.rating == 3 %}
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    {% elseif review.rating == 4 %}
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                    {% elseif review.rating == 5 %}
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    {% endif %}
+                                </div>
                             </div>
+                            <p class="">
+                                {{review.comment}}
+                            </p>
                         </div>
-                        <p class="">
-                            {{review.comment}}
-                        </p>
-                    </div>
-                    <hr>
-                    {% endfor %}
+                        <hr>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-center">No review</p>
+                    {% endif %}
                 </div>
             </div>
         </section>

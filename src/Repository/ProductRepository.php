@@ -98,11 +98,11 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->addselect('sg')
-            ->leftjoin('p.gendershoes', 'sg')
+            ->join('p.gendershoes', 'sg')
             ->Where(':id MEMBER OF sg.products')
             ->andWhere('p.status = 1')
             ->setParameter('id', $id)
-            ->setMaxResults(3)
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult();
     }

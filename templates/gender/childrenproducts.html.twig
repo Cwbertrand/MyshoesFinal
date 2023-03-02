@@ -136,7 +136,9 @@
                                                         <i class="fa-regular fa-heart"></i>
                                                         {% endif %}
                                                     </a>
-                                                    <p class="promo">Promo<span>-30%</span></p> 
+                                                    {% if product.promotion > 0 %}
+                                                        <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="text">
                                                         {% for size in product.adultsize %}
@@ -147,11 +149,12 @@
                                             </div>
                                             <p class="product_info">
                                                 {{product.mark}} <br>
-                                                {{product.shoesname}} - {{product.category.category}} <br>
+                                                <strong>{{product.shoesname}}</strong> - {{product.category.category}} <br>
                         
                                                 {% if product.promotion > 0 %}
-                                                <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small> - 
-                                                <span class="">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</span>
+                                                    <i style="color: red;">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                                        <small>Original Price: <s>{{ (product.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                                    </span>
                                                 {% else %}
                                                     <span class="">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
                                                 {% endif %}

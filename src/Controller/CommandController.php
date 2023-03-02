@@ -68,6 +68,10 @@ class CommandController extends AbstractController
             $address = $form->get('address')->getData();
             $firstname = $form->get('firstname')->getData();
             $lastname = $form->get('lastname')->getData();
+            $street = $form->get('street')->getData();
+            $city = $form->get('city')->getData();
+            $postalcode = $form->get('postalcode')->getData();
+            $country = $form->get('country')->getData();
 
             //Setting Command into the database
             $command = new Command();
@@ -77,8 +81,17 @@ class CommandController extends AbstractController
 
             $command->setCreateAt($date);
             $command->setReference($reference);
-            $command->setFirstname($firstname);
-            $command->setLastname($lastname);
+            if($firstname){
+                $command->setFirstname($firstname);
+            }else{
+                $command->setFirstname($address->getFirstname());
+            }
+
+            if($lastname){
+                $command->setLastname($lastname);
+            }else{
+                $command->setLastname($address->getLastname());
+            }
             $command->setTransportagency($transport->getTransportagency());
             $command->setTransportprice($transport->getPrice());
             $command->setDescription($transport->getDescription());
@@ -115,7 +128,7 @@ class CommandController extends AbstractController
                 $commanddetail->setCommandtotal($allproduct['quantity'] * $allproduct['productdetail']->discountPrice());
                 
                 $this->em->persist($commanddetail);
-                $this->em->flush();
+                //$this->em->flush();
             }
         }
 
@@ -124,6 +137,12 @@ class CommandController extends AbstractController
             'deliveryaddress' => $address,
             'fullproducts' => $this->cartservice->getCart(),
             'reference' => $command->getReference(),
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'street' => $street,
+            'city' => $city,
+            'postalcode' => $postalcode,
+            'country' => $country,
 
         ]);
     }
