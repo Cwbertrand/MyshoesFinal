@@ -24,22 +24,6 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        //return parent::index();
-
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
         return $this->render('Admin/base.html.twig');
     }
 
@@ -51,7 +35,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('To Myshoes', 'fa fa-home', 'home')->setCssClass('pb-4 h5');
+
         yield MenuItem::linkToCrud('HomePage', 'fa-solid fa-earth-americas', Header::class);
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
         yield MenuItem::linkToCrud('Command', 'fas fa-shopping-cart', Command::class);
@@ -62,6 +47,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Address', 'fa-solid fa-map-location-dot', Address::class);
         yield MenuItem::linkToCrud('Transport Agencies', 'fa-solid fa-truck-fast', Transporter::class);
         yield MenuItem::linkToCrud('Gender Category', 'fa-solid fa-mars-and-venus-burst', ShoesGender::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

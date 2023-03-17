@@ -1,0 +1,247 @@
+@media screen and (max-width: 480px) {
+    .general_container {
+        width: 100%;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    /** NAVBAR **/
+
+    .myshoes_first_nav {
+        z-index: 9999 !important;
+    }
+
+    .myshoes_nav_items ul{
+        display: flex;
+    }
+
+    .myshoes_search_bar{
+        display: none;
+    }
+
+    ol, ul {
+        padding-left: 0rem;
+    }
+
+    .second_nav_myshoes{
+        position: relative;
+    }
+
+    .second_nav_items{
+        position: fixed;
+        z-index: 800;
+        right: 0px;
+        height: 100vh;
+        top: 0;
+        background-color: #d0cfcf;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+
+    .second_nav_myshoes ul {
+        justify-content: start;
+        align-items: start;
+        position: relative;
+    }
+
+    .second_nav_items li:nth-of-type(1){
+        margin-top: 7em;
+    }
+
+    .second_nav_items li {
+        height: 8%;
+    }
+
+    .burger_menu,
+    .burger_cancel{
+        position: absolute;
+        display: block;
+        top: 12px;
+        right: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .burger_cancel .fa-solid.fa-xmark{
+        font-size: 25px;
+    }
+
+    /** HOME PAGE **/
+
+    .hero_myshoes {
+        position: relative;
+        width: 100%;
+        height: 20vh;
+        background-position: cover !important;
+        background-size: cover !important;
+        object-fit: cover !important;
+    }
+
+    .hero_btn {
+        position: absolute;
+        bottom: 90px;
+        right: 159px;
+        padding: 4px 2px;
+        font-size: 13px;
+        transform: translate(.9 ease);
+    }
+
+    /** ADVERTISEMENT SECTION **/
+
+    .advert_myshoes {
+        padding-top: 1.5em;
+    }
+
+    .advert_info {
+        padding: 0px 0px;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .advert_writing h2{
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .advert_description p {
+        padding-top: 8px;
+        margin-bottom: 0px !important;
+    }
+
+    .advert_image {
+        display: none;
+    }
+
+    /** PRODUCT SECTION **/
+
+    .product_section {
+        display: flex;
+        width: 100%;
+        padding-right: 0rem;
+        padding-left: 0rem;
+    }
+
+    .product_card {
+        width: 12.5rem;
+    }
+
+    .product_img {
+        margin-top: 50px;
+        height: 150px;
+        width: 120px;
+    }
+
+    /** NEWSLETTER **/
+
+    .brand_myshoes.general_container, 
+    .newsletter_myshoes.general_container {
+        margin: 20px 0px;
+    }
+
+    .newsletter_btn,
+    .newsletter_input {
+        padding: .4rem 1rem;
+    }
+
+    /** FOOTER **/
+
+    .footer_myshoes .footer_container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .footer_container .find_product,
+    .footer_container .follow_us{
+        padding-top: 1.5em;
+    }
+
+    .follow_us a i {
+        margin-top: 10px;
+        padding: 7px;
+        font-size: 15px;
+    }
+
+    .myshoes_copyright .copyright p {
+        font-size: 7px;
+    }
+
+    .myshoes_copyright .payment_accept .payment_accept_img {
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .myshoes_copyright .payment_accept .payment_accept_img img{
+        width: 25px;
+        height: 20px;
+    }
+
+    .image_sign {
+        display: none;
+    }
+
+    /** PRODUCT PAGE **/
+    
+    .col-lg-4 .all_product {
+        display: flex;
+        justify-content: center;
+    }
+
+    .product_more_info {
+        width: 100%;
+    }
+
+    /** BASKET PAGE **/
+    .basket_product .basket_img_div {
+        background: #FFF;
+        height: 80%;
+    }
+
+    /** COMMAND PAGE **/
+    .col-6.basket_info aside,
+    .col-6.basket_info p{
+        font-size: 12px;
+    }
+
+    .edit_margin{
+        margin-top: 50px;
+    }
+
+    .sous_title {
+        position: relative;
+        height: 80px;
+        margin-top: 40px;
+        right: 30px;
+    }
+    .billing_delivery_address {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .billing_delivery_address .billing_address {
+        text-align: end;
+        width: 40%;
+    }
+    .billing_delivery_address .billing_address strong{
+        text-align: end;
+        width: 40%;
+    }
+
+    .billing_delivery_address .billing_address strong small {
+        text-align: end !important;
+        font-size: 10px;
+    }
+
+}

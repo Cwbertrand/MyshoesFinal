@@ -27,6 +27,7 @@ class Remarks
     private ?Product $product = null;
 
     #[ORM\ManyToOne(inversedBy: 'remarks')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?User $user = null;
 
     public function getId(): ?int

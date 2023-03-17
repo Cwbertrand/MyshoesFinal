@@ -25,6 +25,7 @@ class CartController extends AbstractController
     public function index(): Response
     {
         $cartItems = $this->cartservice->getCart();
+
         return $this->render('cart/index.html.twig', [
             'carts' => $cartItems,
         ]);

@@ -6,34 +6,86 @@
 {% endblock %}
 
 {% block body %}
-<main class="container py-5">
-    <div class="row">
-        {% for productdetails in commanddetails.commandDetails %}
-            
-        {{ dump(productdetails) }}
-        {% endfor %}
-        <h2 class="pb-4 text-center">Vos commandes</h2>
-        <!-- ============= SIDE BAR USER ACCOUNT =========-->
-        <div class="col-md-3 bg-light rounded-4 py-4 me-2" style="height: 300px;">
-            <h4 class="text-center">Mon compte</h4>
-            <div class="sous_total d-flex flex-column">
-                <a href="#">Résumé</a>
-                <a href="{{path ('client_command')}}">Mes Commandes</a>
-                <a href="#">Données personnelles</a>
-                <a href="{{path ('address')}}">addresss</a>
-            </div>
+    <main class="container">
+        <div class="row account">
+
+            {% include('_partials/leftnavuseraccount.html.twig') %}
+
+            <section class="col-9 right_side_account">
+                <div class="container pt-4">
+                    <h4 class="basket_page">Command Details</h4>
+                </div>
+                <div class="container">
+                    <div class="command_card">
+                        <div class="command_header">
+                            <div class="row">
+                                <p class="command_details_reference">Command Reference: <strong>{{commanddetails.reference}}</strong> <br>
+                                    Date commanded: <strong>{{ commanddetails.createAt|date('D, d.m.Y') }}</strong>
+                                </p>
+                                <hr>
+                                <div class="col-sm-8 command_reference">
+                                    <address>
+                                        <strong>Delivery address</strong>
+                                        <p class="command_detail_address">
+                                            {{commanddetails.addressname}} <br>
+                                            {{commanddetails.addressmobile}} <br>
+                                            {% if commanddetails.addresscompany %}
+                                            {{commanddetails.addresscompany}} <br>
+                                            {% endif %}
+                                            {{commanddetails.addresscp}} {{commanddetails.addresscity}} - {{commanddetails.addresscountry}}
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p class="text-center"><strong>Mode of payment</strong><br><span class="command_detail_address">Bank card</span></p>
+                                    <p class="text-center"><strong>Delivery status</strong><br><span class="command_detail_address">{{commanddetails.deliverystatus}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="command_body">
+                            {% set total = null %}
+                            {% for productdetails in commanddetails.commandDetails %}
+                                <div class="row py-4">
+                                    <a href="#" class="col-5 command_img_div">
+                                        <img src="/upload/{{productdetails.productimage}}" alt="{{productdetails.productname}}" class="img-fluid command_img">
+                                    </a>
+                                    <div class="col-4 command_info">
+                                        <aside>{{productdetails.productmark}} - <strong>{{productdetails.productname}}</strong></aside>
+                                        <aside>Quantity : {{productdetails.quantity}}</aside>
+                                        <aside>Size : {{productdetails.size}}</aside>
+                                        <p>{{(productdetails.productprice/100)|number_format(2, ',', '.')}} &#8364</p>
+                                    </div>
+                                </div>
+                                {% set total = total + (productdetails.productprice * productdetails.quantity) %}
+                            {% endfor %}
+                        </div>
+                        <hr>
+                        <div class="container">
+                            <div class="row command_detail_footer">
+                                <div class="col-8">
+                                    <p><strong>TOTAL</strong></p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="command_detail_price">
+                                        <p>Sub total: </p>
+                                        <p>{{ (total/100) | number_format(2, ',', '.') }} &#8364</p>
+                                    </div>
+                                    <div class="command_detail_price">
+                                        <p>Delivery:</p>
+                                        <p>{{(commanddetails.transportprice/100)|number_format(2, ',', '.')}} &#8364</p>
+                                    </div>
+                                    <div class="command_detail_price">
+                                        <p><strong>Total:</strong> </p>
+                                        <p><strong>{{ (total/100 + commanddetails.transportprice/100)|number_format(2, ',', '.') }} &#8364</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-
-        <!-- ============= COMMAND BY USERS =========-->
-        {# {{ dump(command) }} #}
-
-        <div class="d-flex justify-content-center">
-            {# {% do command.setPageRange(2) %}
-            {{ knp_pagination_render(command, 'base/pagination.html.twig')}} #}
-        </div>
-    </div>
-</main>
-
+    </main>
 {% endblock %}
 
 {% block footer %}

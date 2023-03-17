@@ -5,9 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Product;
 use App\Entity\Wishlist;
-use App\Repository\WishlistRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,8 +23,10 @@ class WishlistController extends AbstractController
     #[Route('/wishlist', name: 'wishlist')]
     public function index(): Response
     {
-        return $this->render('wishlist/index.html.twig', [
-            'controller_name' => 'WishlistController',
+        $wishlists = $this->em->getRepository(Wishlist::class)->productdetails();
+
+        return $this->render('account/wishlist.html.twig', [
+            'wishlists' => $wishlists,
         ]);
     }
 

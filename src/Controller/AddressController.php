@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Form\AddressType;
+use App\Form\EditEmailType;
+use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AddressController extends AbstractController
 {
@@ -31,7 +34,7 @@ class AddressController extends AbstractController
     //add and edit address
     #[Route('/add/address', name: 'add_address')]
     #[Route('/edit/address/{id}', name: 'edit_address')]
-    public function addaddress(Address $address = null, Request $request)
+    public function addaddress(CartService $cartservice, Address $address = null, Request $request)
     {
         // If an address object is not provided, create a new one
         if(!$address){
@@ -49,13 +52,17 @@ class AddressController extends AbstractController
             $this->em->persist($address);
             $this->em->flush();
 
-             // Redirect to the address list after saving
-            return $this->redirectToRoute('address');
+            if($cartservice->getCart()){
+                return $this->redirectToRoute('command');
+            }else{
+                // Redirect to the address list after saving
+                return $this->redirectToRoute('address');
+            }
         }
 
         // Render the template for the add/edit address form
         return $this->render('address/addaddress.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -70,4 +77,54 @@ class AddressController extends AbstractController
 
         return $this->redirectToRoute('address');
     }
+
+    //Client profile page
+    #[Route('/myprofile', name: 'myprofile')]
+    public function myProfile(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(EditEmailType::class, $user);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($user);
+            $this->em->flush();
+            return $this->redirectToRoute('myprofile');
+        }
+        
+        return $this->render('account/myprofile.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    //delete user's account
+    #[Route('/delete/user', name: 'delete_user')]
+    public function deleteUser()
+    {
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('home');
+        }
+
+        if($user){
+            //Reoving the wishlist
+            $wishlists = $user->getWishlists();
+            foreach ($wishlists as $wishlist) {
+                $this->em->remove($wishlist);
+            }
+
+            //Removing the association of address
+            $userAddresses = $user->getAddresses();
+            foreach($userAddresses as $userAddress){
+                $this->em->remove($userAddress);
+            }
+            
+            $this->em->remove($user);
+            $this->em->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
 }

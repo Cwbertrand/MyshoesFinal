@@ -6,26 +6,14 @@
 {% endblock %}
 
 {% block body %}
-<main class="container py-5">
-    <div class="row">
-        
-        <h2 class="text-center ">addresss</h2>
-        <p class="text-center pb-2">Ajoutez ou modifiez vos addresss ici</p>
-        <!-- ============= SIDE BAR USER ACCOUNT =========-->
-        <div class="col-md-3 bg-light rounded-4 py-4 me-2" style="height: 300px;">
-            <h4 class="text-center">Mon compte</h4>
-            <div class="sous_total d-flex flex-column">
-                <a href="#">Résumé</a>
-                <a href="{{path ('client_command')}}">Mes Commandes</a>
-                <a href="#">Données personnelles</a>
-                <a href="{{path ('address')}}">addresss</a>
+<main class="container">
+    <div class="row account">
+        {% include('_partials/leftnavuseraccount.html.twig') %}
+        <section class="col-9 right_side_account">
+            <div class="container pt-4">
+                <h4 class="basket_page">My address</h4>
             </div>
-        </div>
-
-        <!-- ============= COMMAND BY USERS =========-->
-        
-        <div class="col-md-8">
-            <div class="d-flex">
+            <div class="d-flex flex-wrap pb-3">
                 <a href="{{path ('add_address')}}" class="mx-3">
                     <div class="card bg-light d-flex justify-content-center align-items-center" style="width: 14rem; height: 24rem">
                         <i class="display-4 fa-solid fa-circle-plus mb-2"></i>
@@ -34,8 +22,8 @@
                 </a>
                 {% for address in form %}
                     
-                <div class="me-3 card bg-light p-3" style="width: 17rem; height: 24rem">
-                    <h6>House Address</h6>
+                <div class="me-3 card mt-3 bg-light p-3" style="width: 17rem; height: 24rem">
+                    <h6>Domicile Address</h6>
                     <h5 class="my-4"><span>{{address.firstname}}</span> {{address.lastname}}</h5>
                     <p>
                         {{address.company}}<br>
@@ -47,14 +35,15 @@
                     </p>
                     <div class="d-flex justify-content-center m-auto">
                         <a href="{{path ('delete_address', {'id': address.id})}}" class="addrese_delete"><i class="fa-solid fa-trash-can"></i></a>
-                        <a href="{{path ('edit_address', {'id': address.id})}}" class="addrese_modify"> Modifier </a>
+                        <a href="{{path ('edit_address', {'id': address.id})}}" class="addrese_modify"> Edit </a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        </div>
+        </section>
     </div>
 </main>
+
 {% endblock %}
 
 {% block footer %}

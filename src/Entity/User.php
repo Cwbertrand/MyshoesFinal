@@ -40,9 +40,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $addresses;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Command::class)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $commands;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Remarks::class)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $remarks;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: ContactUs::class)]

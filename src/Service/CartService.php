@@ -2,10 +2,12 @@
 
 namespace App\Service;
 
-use App\Entity\AdultSize;
 use App\Entity\Product;
+use App\Entity\AdultSize;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartService
@@ -16,11 +18,13 @@ final class CartService
      * @var SessionInterface
      */
     private $session;
+    private $requestStack;
 
     public function __construct(EntityManagerInterface $em, RequestStack $requestStack)
     {
         $this->em = $em;
         $this->session = $requestStack->getSession();
+        $this->requestStack = $requestStack;
     }
 
     // A private helper function that generates a unique cart key based on the product and size IDs
@@ -79,27 +83,6 @@ final class CartService
                     unset($cart[$cartKey]);
                 }
             }
-
-            // foreach ($cart as $cartItemKey => $cartItem) {
-            //     if ($cartItem['productdetail']->getId() === intval($cartKey)) {
-            //         //adds the quantity if the action is strictly 'add' if not, the quantity is minus
-            //         if ($action === 'add') {
-            //             $cart[$cartItemKey]['quantity'] += 1;
-            //         } elseif ($action === 'minus') {
-            //             if ($cart[$cartItemKey]['quantity'] > 1) {
-            //                 $cart[$cartItemKey]['quantity'] -= 1;
-            //             } else {
-            //                 unset($cart[$cartItemKey]);
-            //             }
-            //         }
-            //         // Set the flag to indicate that the update has been made
-            //         $updated = true;
-            //     }
-            //     // Check the flag to see if the update has been made, and exit the loop if it has
-            //     if ($updated) {
-            //         break;
-            //     }
-            // }
             $this->session->set('cart', $cart);
         }
     }
@@ -125,8 +108,33 @@ final class CartService
 
 
     //Getting the entire cart array (product, quantity and size)
-    public function getCart() {
+    public function getCart()
+    {
         return $this->session->get('cart', []);
+        // check if the cart data is present in a cookie
+        // $cartData = $this->requestStack->getCurrentRequest()->cookies->get('cart');
+
+        // if($cartData){
+        //     // if the cart data is present in the cookie, decode it and return it
+        //     return json_decode($cartData, true);
+        // }else{
+        //     // if the cart data is not present in the cookie, retrieve it from the session
+        //     $cartData = $this->session->get('cart', []);
+
+        //     // store the cart data in the cookie
+        //     $response = new Response();
+        //     $response->headers->setCookie(Cookie::create('cart')
+        //                         ->withValue(json_encode($cartData))
+        //                         ->withExpires(0)
+        //                         ->withPath('/')
+        //                         ->withDomain(null)
+        //                         ->withSecure(true)
+        //                         ->withHttpOnly(true)
+        //                         ->withSameSite('strict'));
+        // }
+
+        // //return cart data
+        // return $response;
     }
 
 

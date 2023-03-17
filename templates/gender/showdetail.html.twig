@@ -36,7 +36,7 @@
 
                         </p>
                         <div class="product_more_info">
-                            <form method="post" action="{{ path('add_to_cart', { 'id': detailproduct.id }) }}">
+                            <form method="post" data-id="{{detailproduct.id}}" action="{{ path('add_to_cart', { 'id': detailproduct.id }) }}">
                                 <select class="size" id="size" name="size" required aria-label="Default select">
                                     <option disabled selected>Select Size</option>
                                     {% for size in detailproduct.adultsize %}
@@ -322,8 +322,27 @@
                     });
                 }
             });
+
+            /*$('.btn_basket').click(function(e){
+                e.preventDefault();
+                var cart = JSON.parse(localStorage.getItem("cart"));
+                var id = $(this).parents('form').attr('data-id');
+                console.log(cart);
+                if(cart.length == 0){
+                    basket = [id];
+                    console.log(basket);
+                }else{
+                    if(cart.indexOf(id)){
+                        basket = cart.push(id);
+                    }else{
+
+                    }
+                }
+                localStorage.setItem('cart', JSON.stringify(basket));
+            });*/
         });
 
+        
     </script>
 {% endblock %}
 

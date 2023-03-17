@@ -1,8 +1,4 @@
 {% extends 'base.html.twig' %}
-{% block owlcarouselcss %}
-    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
-{% endblock %}
 
 {% block title %}Myshoes boutique{% endblock %}
 
@@ -81,7 +77,7 @@
                     </div>
                     <p class="product_info">
                         {{product.mark}} <br>
-                        {{product.shoesname}} - {{product.category.category}} <br>
+                        {{product.shoesname|length > 9 ? product.shoesname|slice(0, 8) ~ '…' : product.shoesname}} - {{product.category.category}} <br>
 
                         {% if product.promotion > 0 %}
                         <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small> - 
@@ -128,23 +124,6 @@
 {% block script %}
 
     <script>
-        $(document).ready(function(){
-
-            //Owl carousel
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                animateOut: 'fadeOut',
-                items : 1,
-                autoplay: true,
-                autoplayTimeout: 4000,
-                dots: true,
-                nav: true,
-            });
-
-        });
-
-        
-
         $(document).ready(function () {
             $('.wishlist_update').on('click', function (event) {
                 event.preventDefault();

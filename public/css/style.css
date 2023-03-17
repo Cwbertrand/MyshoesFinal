@@ -19,6 +19,23 @@ transition: all .5s;
     --footer_color: #201C1C;
 }
 
+.second_nav_items.active {
+    transform: translateX(0);
+}
+
+.burger_cancel.active {
+    display: block;
+}
+
+.burger_cancel {
+    display: none;
+}
+
+.fa-solid.fa-bars,
+.fa-solid.fa-xmark{
+    display: none;
+}
+
 /* GENERAL CLASSES */
 *{
     box-sizing: border-box;
@@ -56,10 +73,6 @@ h2{
     padding: 20px 0px;
 }
 
-.brand_myshoes.general_container,
-.newsletter_myshoes.general_container{
-    height: 35vh;
-}
 
 a,
 ul,
@@ -101,6 +114,11 @@ a:hover{
     padding-left: 4rem;
     margin-right: auto;
     margin-left: auto;
+}
+
+.row .command_btn .download_invoice:hover,
+.left_side_url aside p a:hover{
+    color: #0000ff
 }
 
 
@@ -432,7 +450,6 @@ input[type="color"]:focus,
     flex-grow: 1;
     flex-basis: 0;
     flex-direction: column;
-    max-height: 150vh;
     width: 100%;
     padding-right: 4rem;
     padding-left: 4rem;
@@ -684,11 +701,11 @@ input[type=checkbox] {
   * 	PRODUCT SECTION
 * ======================================================= */
 
-.col-lg-4 .all_product{
+.col-lg-12.my-4.product_resize {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
-
 /* ==================== MEN'S PAGE ENDS   =========================*/
 
 /* =======================================================
@@ -785,7 +802,7 @@ input[type=checkbox] {
     border: none;
 }
 
-.basket_wishlist .basket button:hover{
+.basket button:hover{
     color: #000000;
     border: 1px solid black;
     box-shadow: 
@@ -936,8 +953,6 @@ input[type=checkbox] {
     padding: 6px 5px;
 }
 
-
-
 /* =======================================================
   * 	ADRESSE PAGE
 * ======================================================= */
@@ -1074,39 +1089,198 @@ div#command_transport input.form-check-input{
     inset 15em 0 0 0 green;
 }
 
-
 /* =======================================================
-  * 	COMMAND PAGE
+  * 	CLIENT COMMAND PAGE
 * ======================================================= */
 
-.a_command{
-    position: relative;
-    border-radius: 15px;
-    padding: 50px 0px 20px 40px;
+.account{
+    margin-top: 40px;
+    justify-content: space-between;
 }
 
-.a_command .command_number{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    height: 70px;
-    left: 0;
-    top: 0;
-    border-radius: 15px 15px 0px 0px;
+.account h4{
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.detail_facture a,
-.detail_facture button{
-    font-size: 13px;
-    border: none;
-    padding: 10px;
+.command_card{
+    margin: 40px 0px;
+    box-shadow: 0px 10px 10px -10px #111;
+}
+
+.command_card .command_header{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 10px;
+    padding: 20px;
     width: 100%;
+    background: var(--main_color);
+}
+
+.command_header .row{
+    gap: 24px;
+    justify-content: space-between !important;
+}
+
+.command_header .row .command_btn{
     text-align: center;
-    border-radius: 8px;
-
 }
+
+.row .command_btn .command_detail_btn{
+    background: green;
+    font-size: 12px;
+    padding: 10px 10px;
+    color: #ffff;
+    transition: all .5s;
+    border-radius: 5px;
+}
+
+.row .command_btn .command_detail_btn:hover{
+    color: #000000;
+    border: .5px solid rgba(86, 86, 86, 0.457);
+    box-shadow: 
+    inset -10em 0 0 0 #ffff,
+    inset 10em 0 0 0 #ffff;
+}
+
+.row .command_btn .download_invoice{
+    font-size: 12px;
+    transition: all .5s;
+}
+
+.command_body .command_img_div{
+    position: relative;
+}
+
+.command_body .command_img{
+    width: 70%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.command_body .command_info,
+.command_body .command_status{
+    padding: 1em 0px;
+}
+
+/* =======================================================
+  * 	PROFILE & COMMAND DETAIL PAGE
+* ======================================================= */
+.icon_user,
+.modify{
+    align-self: center;
+}
+
+.fa-user-tie,
+.fa-envelope,
+.fa-shield-halved{
+    font-size: 40px !important;
+}
+
+.col .user_info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col .user_info .nom{
+    padding: 30px 10px;
+}
+
+.col .user_info .nom strong{
+    color: #000;
+}
+
+.modify .profile_modify{
+    display: inline-block;
+    border: 1.5px solid #000000;
+    padding: 10px 0px;
+    text-align: center;
+    width: 90%;
+    font-weight: 700;
+    margin: 0px 20px;
+    transition: .2s ease-out;
+}
+
+.modify .profile_modify:hover{
+    color: #ffffff;
+    background-color: #171616;
+}
+
+.delete_btn_div{
+    text-align: center;
+    margin: 25px 0px;
+}
+
+.delete_btn_div .delete_btn{
+    color: #ffff;
+    background: #ff0000;
+    display: inline-block;
+    padding: 17px 10px;
+    border-radius: 7px;
+    font-weight: 600;
+    transition: ease-in .2s;
+    border: none;
+}
+
+.delete_btn_div .delete_btn:hover{
+    background: #4f0101;
+}
+
+.command_details_reference{
+    margin-bottom: 0px !important;
+}
+
+.command_detail_address{
+    font-size: 13px;
+}
+
+.command_detail_footer .command_detail_price{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+/* =======================================================
+  * 	WISHLIST PAGE
+* ======================================================= */
+
+.myshoes_wishlist{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wishlist_card{
+    position: relative;
+}
+
+.wishlist_card .wishlist_cancel_icon{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.wishlist_card .wishlist_cancel_icon i{
+    font-size: 30px;
+    color: rgb(131, 131, 131);
+}
+
+.basket .btn_basket{
+    background: var(--button_colors);
+    color: #ffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**===== FOOTER SECTION ======**/

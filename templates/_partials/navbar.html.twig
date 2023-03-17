@@ -12,7 +12,7 @@
                     <ul>
                         {% if app.user %}
                         <li><a href="{{path ('app_logout')}}"><i><small>Log out</small></i></a></li>
-                        <li><a href="{{path ('address')}}">Account</a></li>
+                        <li><a href="{{path ('client_command')}}">Account</a></li>
                         <li class="admin"><a href="{{path ('admin')}}" target="_blank"><em><small>Admin</small></em></a></li>
                         {% else %}
                         <li class="admin"><a href="{{path ('admin')}}" target="_blank"><em><small>Admin</small></em></a></li>
@@ -39,7 +39,7 @@
 </nav>
 <nav class="second_nav_myshoes">
     <div class="">
-        <ul>
+        <ul class="second_nav_items">
             <li>
                 <a href="{{path ('men')}}">Men</a>
             </li>
@@ -49,6 +49,12 @@
             <li>
                 <a href="{{path ('children')}}">Children</a>
             </li>
+            <div class="burger_cancel">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
         </ul>
+    </div>
+    <div class="burger_menu">
+        <i class="fa-solid fa-bars"></i>
     </div>
 </nav>

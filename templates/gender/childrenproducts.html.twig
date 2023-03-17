@@ -119,61 +119,61 @@
 
                 <!-- ======= product section ===========  -->
 
-                <div class="col-lg-9 col-xl-9">
+                <div class="product_area col-lg-9 col-xl-9">
                     <div class="row row-pb-md">
-                        {% for product in products %}
-                            <div class="col-lg-4 my-4">
-                                <div class="all_product">
-                                    <div class="product_class">
-                                        <a href="{{path ('related_products', {'id': product.id})}}" class="product">
-                                            <div class="product_card">
-                                                <div class="card_image">
-                                                    <img src="/upload/{{product.image}}" class="product_img" alt="photo {{product.shoesname}}">
-                                                    <a id="select_wishes" class="wishlist wishlist_update" href="{{path ('add_wishlist', {'id': product.id})}}" data-productid="">
-                                                        {% if app.user and product.isWishedByUser(app.user) %}
-                                                        <i class="fa-solid fa-heart heart_icon"></i>
-                                                        {% else %}
-                                                        <i class="fa-regular fa-heart"></i>
-                                                        {% endif %}
-                                                    </a>
-                                                    {% if product.promotion > 0 %}
-                                                        <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
+                        <div class="col-lg-12 my-4 product_resize">
+                            {% for product in products %}
+                                <div class="all_product my-2">
+                                    <div class="product_card">
+                                        <div class="card_image">
+                                            <a href="{{path ('related_products', {'id': product.id})}}" class="product">
+                                                <img src="/upload/{{product.image}}" class="product_img" alt="photo {{product.shoesname}}">
+                                                <a id="select_wishes" class="wishlist wishlist_update" href="{{path ('add_wishlist', {'id': product.id})}}" data-productid="">
+                                                    {% if app.user and product.isWishedByUser(app.user) %}
+                                                    <i class="fa-solid fa-heart heart_icon"></i>
+                                                    {% else %}
+                                                    <i class="fa-regular fa-heart"></i>
                                                     {% endif %}
-                                                </div>
-                                                <div class="text">
-                                                        {% for size in product.adultsize %}
-                                                                {{ size.adultsize }}
-                                                        {% endfor %}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <p class="product_info">
-                                                {{product.mark}} <br>
-                                                <strong>{{product.shoesname}}</strong> - {{product.category.category}} <br>
-                        
+                                                </a>
                                                 {% if product.promotion > 0 %}
-                                                    <i style="color: red;">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
-                                                        <small>Original Price: <s>{{ (product.price/100) | number_format(2, ',', '.') }} €</s></small>
-                                                    </span>
-                                                {% else %}
-                                                    <span class="">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
-                                                {% endif %}
+                                                <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
+                                                {% endif %} 
+                                            </a>
+                                        </div>
+                                        <div class="text">
+                                            {% for size in product.adultsize %}
+                                                {{ size.adultsize }}
+                                            {% endfor %}
                                             </p>
-                                        </a>
+                                        </div>
                                     </div>
+                                    <p class="product_info">
+                                        {{product.mark}} <br>
+                                        <strong>{{product.shoesname|length > 9 ? product.shoesname|slice(0, 8) ~ '…' : product.shoesname}}</strong> - {{product.category.category}} <br>
+                
+                                        {% if product.promotion > 0 %}
+                                            <i style="color: red;">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                                <small>Original Price: <s>{{ (product.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                            </span>
+                                        {% else %}
+                                            <span class="">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                        {% endif %}
+                                    </p>
                                 </div>
-                            </div>
-                        {% endfor %}
-
+                            {% endfor %}
+                                
                             <div class="text-center">
                                 {% do products.setPageRange(2) %}
                                 {{ knp_pagination_render(products, 'base/pagination.html.twig')}}
                             </div>
                         </div>
-
-                        <!-- ======= pagination section ===========  -->
+                            
 
                     </div>
+
+                    <!-- ======= pagination section ===========  -->
+
+                </div>
                 </div>
             </div>
         </section>
