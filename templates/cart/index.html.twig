@@ -33,11 +33,12 @@
                                         <aside><strong>{{cart.productdetail.shoesname}}</strong></aside> {# - {{cart.productdetail.category.category}} #}
                                         <aside>Size: {{cart.size.adultsize}}</aside>
                                         <p>
-                                            {% if cart.productdetail.promotion  > 0 %}
-                                                {{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €
+                                            {% if cart.productdetail.promotion > 0 %}
+                                                <i style="color: red;">{{ (cart.productdetail.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                                    <small id="original_price">Original Price: <s>{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                                </span>
                                             {% else %}
-                                                <i style="color: red;">{{ ((cart.productdetail.discountPrice * cart.quantity)/100) | number_format(2, ',', '.') }} €</i> - 
-                                                <small class="badge">Original Price: <s>{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                                <span class="">{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</span> <br>
                                             {% endif %}
                                         </p>
                                         <form action="{{path('update_cart', {'cartKey': key})}}">

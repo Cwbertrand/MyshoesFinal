@@ -58,6 +58,10 @@ h2{
     font-size: 15px;
 }
 
+#original_price{
+    font-size: 12px;
+}
+
 .btn{
     width: 100%;
     display: inline-block;

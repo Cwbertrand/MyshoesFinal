@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Class\Search;
+use App\Service\Search;
 use App\Entity\ShoesCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

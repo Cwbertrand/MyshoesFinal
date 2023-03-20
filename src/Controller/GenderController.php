@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Class\Search;
+use App\Service\Search;
 use App\Entity\Product;
 use App\Entity\Remarks;
 use App\Form\SearchType;

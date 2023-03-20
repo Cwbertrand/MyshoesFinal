@@ -7,7 +7,6 @@ use App\Entity\AdultSize;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartService

@@ -36,9 +36,9 @@
 
                         </p>
                         <div class="product_more_info">
-                            <form method="post" data-id="{{detailproduct.id}}" action="{{ path('add_to_cart', { 'id': detailproduct.id }) }}">
+                            <form method="post" id="form_cart" data-id="{{detailproduct.id}}" action="{{ path('add_to_cart', { 'id': detailproduct.id }) }}">
                                 <select class="size" id="size" name="size" required aria-label="Default select">
-                                    <option disabled selected>Select Size</option>
+                                    <option disabled selected id="option_disabled">Select Size</option>
                                     {% for size in detailproduct.adultsize %}
                                         <option value="{{ size.id }}">{{ size.adultsize }}</option>
                                     {% endfor %}
@@ -48,7 +48,13 @@
                                         <button class="btn_basket_wishlist btn_basket" type="submit">Add to basket</button>
                                     </div>
                                     <div class="wishlist">
-                                        <button class="btn_basket_wishlist"><i class="fa-regular fa-heart btn_wishlist"></i></button>
+                                        <a id="select_wishes" class="wishlist btn_basket_wishlist wishlist_update" href="{{path ('add_wishlist', {'id': detailproduct.id})}}" data-productid="">
+                                            {% if app.user and detailproduct.isWishedByUser(app.user) %}
+                                            <i class="fa-solid fa-heart heart_icon btn_wishlist"></i>
+                                            {% else %}
+                                            <i class="fa-regular fa-heart btn_wishlist"></i>
+                                            {% endif %}
+                                        </a>
                                     </div>
                                 </div>
                             </form>
@@ -178,37 +184,13 @@
                                 
                                 <p>Evaluated : {{review.createAt|date("d/m/Y")}}</p>
                                 <div class="rating">
-                                    {% if review.rating == 1 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    {% elseif review.rating == 2 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    {% elseif review.rating == 3 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    {% elseif review.rating == 4 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                    {% elseif review.rating == 5 %}
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    {% endif %}
+                                    {% for i in 1..5 %}
+                                        {% if review.rating >= i %}
+                                            <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                            <i class="fas fa-star text-secondary"></i>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                             <p class="">
@@ -257,7 +239,18 @@
 
 {% block script %}
     <script>
+
+        /**** SELECTING SHOE SIZE  SECTION ***/
+        document.querySelector('#form_cart').addEventListener('submit', function(event){
+            var sizeInput = document.querySelector('select#size.size')
+            if(sizeInput.value === 'Select Size'){
+                sizeInput.style.border = '1px solid red';
+                event.preventDefault();
+            }
+        });
+
         $(document).ready(function(){
+
             ///=========== INSERTING DATA INTO THE DATABASE =======///
             var rating_data = 0;
             // When the user clicks the "Add Review" button, show the review modal
@@ -289,18 +282,15 @@
             //when mouse leaves, the color automatically resets
             $(document).on('mouseleave', '.submit_star', function() {
                 reset_background();
-
                 for (var count = 1; count <= rating_data; count++) {
                     $('#submit_star_' + count).removeClass('star-light');
                     $('#submit_star_' + count).addClass('text-warning');
                 }
-    
             });
 
             //this we collect the value the user has clicked upon and save
             $(document).on('click', '.submit_star', function (){
                 rating_data = $(this).data('rating');
-                //console.log(rating_data);
             });
             
             // When the user clicks the "Save Review" button, submit the rating and review via AJAX
@@ -323,6 +313,40 @@
                 }
             });
 
+            /**** WISHLIST  SECTION ***/
+            $('.wishlist_update').on('click', function (event) {
+                event.preventDefault();
+                var select_wishes = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: select_wishes.attr('href'),
+                    success: function (response) {
+                        if (response.code === 200) {
+                            // show success message
+                            //alert(response.message);
+                            // update the UI
+                            // if product has been added to the wishlist, change the icon to a solid heart
+                            if (select_wishes.find('i').hasClass('fa-regular')) {
+                                 // If the current state is not in the wishlist, add the product to the wishlist
+                                select_wishes.find('i').removeClass('fa-regular').addClass('fa-solid heart_icon');
+                            } else {
+                                // If the current state is in the wishlist, remove the product from the wishlist
+                                select_wishes.find('i').removeClass('fa-solid heart_icon').addClass('fa-regular');
+                            }
+                        } else {
+                            // show error message
+                            console.error(response.message);
+                        }
+                    },
+                    error: function(error) {
+                        // If there was an error making the AJAX call, show an error message
+                        console.error(error);
+                        alert('Can you please log in to enable this functionality?');
+                    }
+                });
+            });
+        
+
             /*$('.btn_basket').click(function(e){
                 e.preventDefault();
                 var cart = JSON.parse(localStorage.getItem("cart"));
@@ -341,7 +365,6 @@
                 localStorage.setItem('cart', JSON.stringify(basket));
             });*/
         });
-
         
     </script>
 {% endblock %}

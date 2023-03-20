@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Class;
+namespace App\Service;
 
 use Dompdf\Dompdf;
 use Symfony\Component\HttpFoundation\Response;

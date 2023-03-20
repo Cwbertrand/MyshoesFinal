@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Class\InvoicePdf;
+use App\Service\InvoicePdf;
 use App\Entity\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
