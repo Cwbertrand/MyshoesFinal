@@ -1,7 +1,6 @@
 
-/* At Media Query for size maximum 768 */
-@media screen and (max-width:768px) {
-
+/* At Media Query for size maximum 991 */
+@media screen and (max-width:991px) {
     .myshoes_search_nav {
         display: none;
     }
@@ -42,6 +41,7 @@
     /** PRODUCT PAGE **/
     .container{
         max-width: 100vw;
+        padding: 20px;
     }
 
     .product_resize{

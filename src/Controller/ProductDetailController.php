@@ -6,6 +6,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Product;
 use App\Entity\Remarks;
+use App\Entity\Wishlist;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +45,6 @@ class ProductDetailController extends AbstractController
             'relatedproducts' => $relatedProducts,
         ]);
     }
-
 
     #[Route('/product/detail/rating/{slug}', name: 'rating_product')]
     public function productRating(Product $product, Request $request)

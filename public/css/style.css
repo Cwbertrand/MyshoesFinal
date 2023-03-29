@@ -31,10 +31,9 @@ transition: all .5s;
     display: none;
 }
 
-.fa-solid.fa-bars,
-.fa-solid.fa-xmark{
+/* .display_none{
     display: none;
-}
+} */
 
 /* GENERAL CLASSES */
 *{
@@ -366,19 +365,29 @@ input[type="color"]:focus,
 /*===========================*/
 
 /**===== HERO SECTION ======**/
-.hero_myshoes{
-    position: relative;
-    height: 80vh;
-    background-position: cover !important;
-    background-size: cover !important;
-    object-fit: cover !important;
+.hero{
+    background-color: #c06b2f2a;
+    padding: 20px;
+    height: 100%;
+}
+
+.hero_info{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.hero_image{
+    text-align: center;
+}
+
+.hero_image .hero_img{
+    height: 80%;
 }
 
 .hero_btn{
-    position:absolute;
-    bottom: 30px;
-    right: 190px;
-
     padding: 20px 40px;
     transform: translate(.9 ease);
 }
@@ -462,9 +471,15 @@ input[type="color"]:focus,
 }
 
 .myshoes_product {
+    padding-right: 5rem;
+    padding-left: 5rem;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+.product_class{
+    margin-bottom: 15px;
 }
 
 .product_card {
@@ -499,14 +514,16 @@ input[type="color"]:focus,
 
 }
 
-.product_card:hover .card_image {
+/* Making shoe sizes to show when you hover on the card */
+
+/* .product_card:hover .card_image {
     transform: translateY(-2vmin);
     margin-bottom: 1em;
-}
+} */
 
-.product_card:hover .text{
+/* .product_card:hover .text{
     opacity: 1;
-}
+} */
 
 .card_image .fa-heart{
     position: absolute;
@@ -797,7 +814,6 @@ input[type=checkbox] {
     
 }
 
-.basket_wishlist .btn_basket_wishlist,
 .basket_wishlist .btn_basket_wishlist{
     width: 100%;
     display: inline-block;
@@ -807,11 +823,11 @@ input[type=checkbox] {
 }
 
 .basket button:hover{
-    color: #000000;
+    color: hsl(0, 0%, 0%) !important;
     border: 1px solid black;
     box-shadow: 
-    inset -6.5em 0 0 0 #fff,
-    inset 6em 0 0 0 #fff;
+    inset -7.5em 0 0 0 #fff,
+    inset 7.5em 0 0 0 #fff;
 }
 
 .product_more_info .product_description{
@@ -943,8 +959,8 @@ input[type=checkbox] {
 .btn_commande .check_out_btn:hover{
     color: #ffff;
     box-shadow: 
-    inset -10em 0 0 0 green,
-    inset 10em 0 0 0 green;
+    inset -14em 0 0 0 green,
+    inset 14em 0 0 0 green;
 }
 
 .quantity-left-minus {
@@ -1263,6 +1279,7 @@ div#command_transport input.form-check-input{
     position: absolute;
     right: 15px;
     top: 15px;
+    z-index: 999;
 }
 .wishlist_card .wishlist_cancel_icon i{
     font-size: 30px;

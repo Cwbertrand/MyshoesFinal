@@ -118,7 +118,9 @@
                                         <i class="fa-regular fa-heart"></i>
                                         {% endif %}
                                     </a>
-                                    <p class="promo">Promo<span>-30%</span></p> 
+                                    {% if product.promotion > 0 %}
+                                        <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
+                                    {% endif %} 
                                 </div>
                                 <div class="text">
                                         {% for size in product.adultsize %}

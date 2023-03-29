@@ -72,4 +72,14 @@ class WishlistController extends AbstractController
             //'totalwishlist' => count($product),
         ], 200);
     }
+
+    #[Route('/wishlist/{id}/delete', name: 'delete_wishlist')]
+    public function deleteWishlist($id): Response
+    {
+        $wishlist = $this->em->getRepository(Wishlist::class)->findOneById($id);
+        $this->em->remove($wishlist);
+        $this->em->flush();
+
+        return $this->redirectToRoute('wishlist');
+    }
 }

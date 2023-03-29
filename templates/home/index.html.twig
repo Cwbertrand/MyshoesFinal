@@ -8,13 +8,24 @@
 {% block body %}
     <!--=============  HERO SECTION  ======================-->
     {% for header in carousels %}
-    <section class="hero_myshoes" style="background: url('images/HeaderImage/{{header.headerimage}}');" alt="background Image">
+    <section class="hero">
+        <div class="hero_info">
+            <div class="hero_image">
+                <img src="images/HeaderImage/{{header.headerimage}}" class="hero_img" alt="background Image" srcset="">
+            </div>
+            <div class="hero_text">
+                <p>{{header.headertext}}</p>
+                <a href="{{header.headerurl}}" class="hero_btn myshoes_btn" role="button">{{header.headerbtn}}</a>
+            </div>
+        </div>
+    </section>
+    {# <section class="hero_myshoes" style="background: url('images/HeaderImage/{{header.headerimage}}');" alt="background Image">
         <div class="general_container">
                 <div class="hero_text">
                     <a href="{{header.headerurl}}" class="hero_btn myshoes_btn" role="button">{{header.headerbtn}}</a>
                 </div>
             </div>
-        </section>
+        </section> #}
     {% endfor %}
 
     <!-- Advertisement Section -->
@@ -70,12 +81,12 @@
                                 <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
                             {% endif %} 
                         </div>
-                        <div class="text">
+                        {# <div class="text">
                                 {% for size in product.adultsize %}
                                         {{ size.adultsize }}
                                 {% endfor %}
                             </p>
-                        </div>
+                        </div> #}
                     </div>
                     <p class="product_info">
                         {{product.mark}} <br>
@@ -111,10 +122,12 @@
     <section class="newsletter_myshoes general_container">
         <h2>Newsletter</h2>
         <p>Subscribe for our shoes updates</p>
-        <div class="newsletter">
-            <input type="text" class="newsletter_input">
-            <button class="newsletter_btn">Subscribe</button>
-        </div>
+        <form action="{{path('newsletter')}}" method="post">
+            <div class="newsletter">
+                <input type="email" name="email" class="newsletter_input">
+                <button class="newsletter_btn" type="submit">Subscribe</button>
+            </div>
+        </form>
     </section>
 
         <!-- Footer Section -->
@@ -160,6 +173,5 @@
                 });
             });
         });
-
     </script>
 {% endblock %}

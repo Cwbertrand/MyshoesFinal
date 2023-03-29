@@ -23,9 +23,9 @@
                 </div>
             </li>
             <li>
-                <a href="#" class="cart_number">
+                <a href="{{path ('wishlist')}}" class="cart_number">
                     <i class="fa-regular fa-heart cart_icon"></i>
-                    <span class="cart_data">2</span>
+                    <span class="cart_data">{{wishlist_total_quantity()}}</span>
                 </a>
             </li>
             <li>
@@ -50,11 +50,11 @@
                 <a href="{{path ('children')}}">Children</a>
             </li>
             <div class="burger_cancel">
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fa-solid fa-xmark display_none"></i>
             </div>
         </ul>
     </div>
     <div class="burger_menu">
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars display_none"></i>
     </div>
 </nav>

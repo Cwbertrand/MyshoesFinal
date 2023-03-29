@@ -34,6 +34,9 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/account, roles: ROLE_USER }
         - { path: ^/command, roles: ROLE_USER }
+        - { path: ^/my_cart, roles: ROLE_USER }
+        - { path: ^/wishlist, roles: ROLE_USER }
+        
 
 when@test:
     security:
