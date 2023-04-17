@@ -39,6 +39,6 @@ class WishlistExtension extends AbstractExtension
         {
             $wishlist = $this->em->getRepository(Wishlist::class)->findAll();
             $wishlistTotal = count($wishlist);
-            return $wishlistTotal;
+                return $wishlistTotal;
         }
 }

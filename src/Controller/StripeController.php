@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Stripe\Stripe;
-use App\Class\Email;
+use App\Service\Email;
 use App\Entity\Command;
 use App\Service\CartService;
 use Stripe\Checkout\Session;

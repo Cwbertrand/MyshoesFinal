@@ -25,7 +25,7 @@
             <li>
                 <a href="{{path ('wishlist')}}" class="cart_number">
                     <i class="fa-regular fa-heart cart_icon"></i>
-                    <span class="cart_data">{{wishlist_total_quantity()}}</span>
+                    <span class="cart_data">{{wishlist_total_quantity(app.user)}}</span>
                 </a>
             </li>
             <li>

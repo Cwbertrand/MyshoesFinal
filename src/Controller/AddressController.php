@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class AddressController extends AbstractController
 {
@@ -99,30 +100,36 @@ class AddressController extends AbstractController
 
     //delete user's account
     #[Route('/delete/user', name: 'delete_user')]
-    public function deleteUser()
+    public function deleteUser(Request $request, TokenStorageInterface $tokenStorage)
     {
         $user = $this->getUser();
         if(!$user){
-            return $this->redirectToRoute('home');
+            $request->getSession()->invalidate();
+            return $this->redirectToRoute('app_logout');
         }
 
         if($user){
             //Reoving the wishlist
-            $wishlists = $user->getWishlists();
-            foreach ($wishlists as $wishlist) {
-                $this->em->remove($wishlist);
-            }
+            // $wishlists = $user->getWishlists();
+            // foreach ($wishlists as $wishlist) {
+            //     $this->em->remove($wishlist);
+            // }
 
             //Removing the association of address
-            $userAddresses = $user->getAddresses();
-            foreach($userAddresses as $userAddress){
-                $this->em->remove($userAddress);
-            }
+            // $userAddresses = $user->getAddresses();
+            // foreach($userAddresses as $userAddress){
+            //     $this->em->remove($userAddress);
+            // }
             
+            // Invalidate the user's session
+            $request->getSession()->invalidate();
+
+            // Remove the user's authentication token from the security context
+            $tokenStorage->setToken(null);
             $this->em->remove($user);
             $this->em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_logout');
         }
 
     }
