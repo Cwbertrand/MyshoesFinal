@@ -1,0 +1,110 @@
+
+/* At Media Query for size maximum 991 */
+@media screen and (max-width:991px) {
+    .myshoes_search_nav {
+        display: none;
+    }
+
+    .myshoes_nav_search_button {
+        width: 20% !important;
+        right: 50px !important;
+        display: none;
+    }
+
+
+    /** HERO SECTION **/
+
+    .general_container {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .advert_info {
+        padding: 20px 0px;
+        align-items: center;
+    }
+
+    .advert_info h2{
+        font-size: 20px;
+    }
+
+    .advert_image .fluid {
+        margin-top: 20px;
+        width: 80%;
+        margin-left: 20px;
+        text-align: end;
+    }
+    .advert_image {
+        text-align: end;
+    }
+
+    /** PRODUCT PAGE **/
+    .container{
+        max-width: 100vw;
+        padding: 20px;
+    }
+
+    .product_resize{
+        justify-content: center !important;
+    }
+    .all_product {
+        margin: 0px 15px;
+    }
+
+    .w-100{
+        margin-left: 100px !important;
+    }
+
+    .myshoes_productdetails {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        width: 100%;
+    }
+
+    .myshoes_productdetails .product_image{
+        width: 100%;
+    }
+
+    .myshoes_productdetails .product_info{
+        margin: 0px 20px;
+    }
+
+    .myshoes_productdetails .product_info,
+    .product_more_info{
+        width: 90%;
+    }
+
+    .myshoes_product {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+    .edit_margin{
+        margin-top: 50px;
+    }
+
+    /** FOOTER **/
+
+    .footer_myshoes .footer_container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .footer_container .find_product,
+    .footer_container .follow_us{
+        padding-top: 1.5em;
+    }
+
+    .follow_us a i {
+        margin-top: 10px;
+        padding: 7px;
+        font-size: 15px;
+    }
+
+    .myshoes_copyright .copyright p {
+        font-size: 7px;
+    }
+}

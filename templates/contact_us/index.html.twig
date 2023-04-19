@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactUsController!{% endblock %}
+{% block title %}Contact Us!{% endblock %}
 
 {% block navbar %}{% endblock %}
 
@@ -8,7 +8,22 @@
 {% for notice in app.flashes('message') %}
     <p class="bg-success text-white">{{ notice }}</p>
 {% endfor %}
-{{form(form)}}
+
+<div class="container py-5">
+    {{form_start(form)}}
+        <div class="row container w-50">
+            <div class="col-md-12 mb-3">
+                {{form_label(form.subject, 'Subject')}}
+                {{ form_row(form.subject)}} 
+            </div>
+            <div class="col-md-12 mb-3">
+                {{form_label(form.contacttext, 'Text Content')}}
+                {{ form_row(form.contacttext)}} 
+            </div>
+            <div class="col-md-12 w-25"> {{ form_row(form.submit)}} </div>
+        </div>
+    {{form_end(form)}}
+</div>
 {% endblock %}
 
 {% block footer %}{% endblock %}

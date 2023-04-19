@@ -18,7 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -40,9 +40,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $addresses;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Command::class)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $commands;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Remarks::class)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $remarks;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: ContactUs::class)]

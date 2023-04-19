@@ -145,8 +145,8 @@ class Address
     {
         return  $this->getFirstname().' '.$this->getLastname().'[br]'.
                 $this->getMobile().'[br]'.$this->getCompany().'[br]'.
-                $this->getStreet().'[br]'.$this->getPostalcode().'[br]'.
-                $this->getCity().'[br]'.$this->getCountry().'[hr]';
+                $this->getStreet().'[br]'.$this->getPostalcode().', '.
+                $this->getCity().' - '.$this->getCountry();
     }
 
     public function getUser(): ?User

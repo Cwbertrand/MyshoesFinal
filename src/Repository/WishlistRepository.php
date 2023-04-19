@@ -39,6 +39,21 @@ class WishlistRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Wishlist[] Returns an array of Wishlist objects
+     */
+    public function productdetails(): array
+    {
+        $query = $this->createQueryBuilder('w')
+            ->addselect('p u')
+            ->innerJoin('w.product', 'p')
+            ->orderBy('w.id', 'ASC')
+            ->getQuery();
+
+        $results = $query->getResult();
+        return $results;
+    }
+
 //    /**
 //     * @return Wishlist[] Returns an array of Wishlist objects
 //     */

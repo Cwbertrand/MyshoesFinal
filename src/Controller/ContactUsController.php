@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Class\Email;
+use App\Service\Email;
 use DateTime;
 use App\Entity\User;
 use App\Entity\ContactUs;

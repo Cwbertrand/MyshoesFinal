@@ -330,7 +330,6 @@ class Product
             if($wishlist->getUser() === $user)
             return true;
         }
-
         return false;
     }
 

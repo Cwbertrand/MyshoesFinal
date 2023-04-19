@@ -5,96 +5,85 @@
 {% block navbar %}{% endblock %}
 
 {% block body %}
-{{ dump(carts) }}
-    <main class="container py-5">
-        <div class="row">
-            <!-- ============= cart PRODUCTS =========-->
-            <div class="col-md-8 gap-2 bg-light rounded-4 p-4 me-5">
-                <h2 class="pb-4">My Cart ({{carts|length}} articles)</h2>
-                
-                {% set total = null %}
-                
-                {% for cart in carts %}
-                    <div class="row">
-                        <a href="{{path('detail_product', {'slug': cart.productdetail.slug})}} " class="w-30 col-md-3">
-                            <div class="bg-warning d-flex justify-content-center align-items-center">
-                                <img src="/upload/{{cart.productdetail.image}}" alt="basket new" class=" text-center img-fluid">
-                            </div>
-                        </a>
-                            <div class="col-md-6">
-                                <div class="product_note product-detail-wrap">
-                                    <h6>{{cart.productdetail.mark}}</h6>
-                                    <h6>{{cart.productdetail.shoesname}}</h6>
-                                    <h6>{{cart.productdetail.category.category}}</h6>
-                                    {% if cart.size == null %}
-                                    <h6>Size: No size selected</h6>
-                                    {% else %}
-                                    <h6>Size: {{cart.size.adultsize}}</h6>
-                                    {% endif %}
-                                    <form action="{{path('update_cart', {'cartKey': cart.productdetail.id})}}">
-                                        {# {{ csrf_token('update_cart') }}
-                                        <input type="hidden" name="size" value="{{ cart.size.id }}"> #}
-                                        <div class="input-group mb-4 w-50">
-                                            <span class="input-group-btn">
-                                                <button type="submit" class="quantity-left-minus btn" name="action" value="minus">
-                                                    <i class="fa-solid fa-minus"></i>
-                                                </button>
-                                            </span>
-                                            <input type="text" id="quantity" name="quantity" class="text-center form-control input-number" value="{{cart.quantity}}" min="1" max="100" disabled>
-                                            <span class="input-group-btn ml-1">
-                                                
-                                                <button type="submit" class="quantity-right-plus btn" name="action" value="add">
-                                                    <i class="fa-solid fa-plus"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </form>
+
+    <section class="container pt-4">
+        <h4 class="basket_page">Basket</h4>
+    </section>
+
+<main>
+        <section>
+            <div class="container">
+                <div class="row basket">
+                    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 basket_full">
+                        <div class="basket_title">
+                            <h6>Basket Resume ({{carts|length}}{{ carts|length > 1 ? ' articles'  : ' article' }})</h2>
+                            </h6>
+                        </div>
+                        {{ dump(carts) }}
+                        {% set total = null %}
+                        {% set qtytotal = 0 %}
+                        {% for key, cart in carts %}
+                            <div class="basket_product">
+                                <div class="row a_basket_product">
+                                    <a href="{{path('detail_product', {'slug': cart.productdetail.id})}}" class="col-5 basket_img_div">
+                                            <img src="/upload/{{cart.productdetail.image}}" alt="nike" class="img-fluid basket_img">
+                                    </a>
+                                    <div class="col-6 basket_info">
+                                        <aside>{{cart.productdetail.mark}}</aside>
+                                        <aside><strong>{{cart.productdetail.shoesname}}</strong></aside> {# - {{cart.productdetail.category.category}} #}
+                                        <aside>Size: {{cart.size.adultsize}}</aside>
+                                        <p>
+                                            {% if cart.productdetail.promotion > 0 %}
+                                                <i style="color: red;">{{ (cart.productdetail.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                                    <small id="original_price">Original Price: <s>{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                                </span>
+                                            {% else %}
+                                                <span class="">{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                            {% endif %}
+                                        </p>
+                                        <form action="{{path('update_cart', {'cartKey': key})}}">
+                                            <div class="input-group mb-4 w-50">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="quantity-left-minus btn" name="action" value="minus">
+                                                        <i class="fa-solid fa-minus"></i>
+                                                    </button>
+                                                </span>
+                                                <input type="text" id="quantity" name="quantity" class="text-center form-control input-number" value="{{cart.quantity}}" min="1" max="100" disabled>
+                                                <span class="input-group-btn ml-1">
+                                                    
+                                                    <button type="submit" class="quantity-right-plus btn" name="action" value="add">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </form>             
+                                    </div>
                                 </div>
+                                <a href="{{path('delete_from_cart', {'id': cart.productdetail.id})}}" class="btn_cancel_basket"><i class="fa-solid fa-rectangle-xmark"></i></a>
                             </div>
-                        <div class="col-md-2">
-                            <h5>{{ ((cart.productdetail.discountPrice * cart.quantity)/100) | number_format(2, ',', '.') }} €</h5>
-                            <p>({{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} € /unit)</p>
+                            {% set total = total + (cart.productdetail.discountPrice * cart.quantity) %}
+                            {% set qtytotal = qtytotal + (cart.quantity) %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                        <div class="sub_total_section">
+                            <div class="sub_total">
+                                <p>Sub total</p>
+                                <p>{{ (total/100) | number_format(2, ',', '.') }} €</p>
+                            </div>
+                            <div class="sub_total">
+                                <p>Quantity</p>
+                                <p>{{qtytotal}}</p>
+                            </div>
+                            <a href="{{path ('command')}}" class="check_out_btn btn">Proceed to checkout</a>
                         </div>
                     </div>
-                    <div class="delete_wishlist d-flex justify-content-center pt-3">
-                        <div class="delete me-5">
-                            <button class="text-muted border-0 bg-transparent">
-                                <a href="{{path('delete_from_cart', {'id': cart.productdetail.id})}}">
-                                    <i class="fa-solid fa-trash-can"></i> <span>Supprimer</span>
-                                </a></button>
-                        </div>
-                        <div class="delete">
-                            <button class="text-muted border-0 bg-transparent">
-                                <i class="fa-regular fa-heart"></i>
-                                <span>Déplacer vers mes préférés</span>
-                            </button>
-                        </div>
-                    </div>
-                    <hr>
-                    {% set total = total + (cart.productdetail.discountPrice * cart.quantity) %}
-                {% endfor %}
-            </div>
-
-            <!-- ============= SUB TITLE =========-->
-            <div class="col-md-3 bg-light d-flex flex-column justify-content-center rounded-4 p-4" style="height: 150px;">
-                <div class="sous_total d-flex justify-content-between">
-                    <h5>Sous titre: </h5>
-                    <p>{{ (total/100) | number_format(2, ',', '.') }} €</p>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <a href="{{path ('command')}}" class="d-block rounded-3 bg-warning border-0 py-1 px-3">Passez la commande</a>
                 </div>
             </div>
-        </div>
-
-        <!-- ============= PAYMENT METHOD WE ACCEPT =========-->
-        <div class="row">
-            <div class="col-md-8 gap-2 bg-light rounded-4 p-4 mt-3">
-                <h4>Nous acceptons</h4>
-                <p><i class="fa-brands fa-cc-stripe display-5"></i></p>
-            </div>
-        </div>
+        </section>
     </main>
 {% endblock %}
 
 {% block footer %}{% endblock %}
+

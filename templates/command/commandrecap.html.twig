@@ -5,20 +5,33 @@
 {% block navbar %}{% endblock %}
 
 {% block body %}
-    <main class="container py-5">
+    <section class="container pt-4">
+        <h4 class="basket_page">Command Recap</h4>
+    </section>
+
+    <main class="newcontainer container py-5">
         <div class="row">
             <div class="col-md-6">
                 <!-- ============= lIVRAISON AND ADRESSE =========-->
                 <fieldset class="col-md-12 rounded-4 p-4 form-group">
-                    <legend><strong>Delivery address</strong></legend>
+                    <legend><strong>Delivery &#x26 Billing address</strong></legend>
                     <div id="order_addresses">
-                        <div>
-                            <p>
-                                {{deliveryaddress.firstname}} {{deliveryaddress.lastname}} <br>
+                        <div class="billing_delivery_address">
+                            <p class="delivery_address">
+                                <strong>{{deliveryaddress.firstname}} {{deliveryaddress.lastname}}</strong> <br>
                                 {{deliveryaddress.mobile}} <br>
                                 {{deliveryaddress.company}} <br>
                                 {{deliveryaddress.street}} <br>
                                 {{deliveryaddress.postalcode}} {{deliveryaddress.city}} - {{deliveryaddress.country}}<br>
+                            </p>
+                            <p class="billing_address">
+                                {% if firstname == null and lastname == null %}
+                                    <strong><small>Same billing address with delivery address</small></strong>
+                                    {% else %}
+                                    <strong>{{firstname}} {{lastname}}</strong><br>
+                                    {{street}} <br>
+                                    {{postalcode}} {{city}} - {{country}}<br>
+                                {% endif %}
                             </p>
                         </div>
                     </div>
@@ -41,7 +54,7 @@
 
             <div class="col-md-6">
                 <!-- ============= SELECTED PRODUCTS =========-->
-                <div class="col-md-12 bg-light rounded-4 p-4 sous_title" style="height: 35rem;">
+                <div class="col-md-12 bg-light rounded-4 p-4 position-relative" >
                     <div class="d-flex">
                         <div class="col-md-4">
                             <p></p>
@@ -59,9 +72,9 @@
                     {% set total = null %}
                     {% set qtytotal = 0 %}
                     {% for productdetail in fullproducts %}
-                    <div class="d-flex my-3">
+                    <div class="row my-3">
                         <div class="col-md-4">
-                            <img src="/upload/{{productdetail.productdetail.image}}" alt="" class=" w-50 bg-warning img-fluid">
+                            <img src="/upload/{{productdetail.productdetail.image}}" alt="" class=" command_recap_img img-fluid">
                         </div>
                         <div class="col-md-4">
                             <p>
@@ -97,7 +110,6 @@
                             <p><strong>{{ (total/100)|number_format(2, ',', '.') }} €</strong></p>
                             <p><strong>{{(transport.price/100)|number_format(2, ',', '.') }} €</strong></p>
                         </div>
-                        
                     </div>
                     <hr>
                     <div class="d-flex">
@@ -116,9 +128,9 @@
                         
                     </div>
                     
-                    <div class="btn_commande">
+                    <div class="recap_btn_command">
                         <form action="/command/create-session/{{reference}}" method="POST">
-                            <button type="submit" class="btn btn-primary btn-lg">Checkout</button>
+                            <button type="submit" class="btn check_out_btn command_recap_btn">Checkout</button>
                         </form>
                         {# <form action="">
                         <a  type="submit" class="btn bg-warning mt-5" id="button_pay">Pay</a>

@@ -1,4 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* hOVER BUTTON
+.hero_btn:hover{
+    color: white;
+    box-shadow: 
+    inset -5.5em 0 0 0 var(--button_colors),
+    inset 5.4em 0 0 0 var(--button_colors);
+} 
+transition: all .5s;
+*/
+
+
+
+/* Variables */
+:root{
+    --button_colors: #000026;
+    --main_color: #F3F3F3;
+    --product_card_color: #bfbebe29;
+    --promo_color: #fb0000;
+    --footer_color: #201C1C;
+}
+
+/* pagination modified styles */
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #ffffff !important;
+    background-color: var(--button_colors) !important;
+    border-color: var(--button_colors);
+}
+
+a.page-link{
+    color: var(--button_colors);
+}
+
+
+
+.second_nav_items.active {
+    transform: translateX(0);
+}
+
+.burger_cancel.active {
+    display: block;
+}
+
+.burger_cancel {
+    display: none;
+}
+
+.display_none{
+    display: none;
+}
+
+/* GENERAL CLASSES */
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+.heart_icon{
+    color: #ff0303;
+}
+
+h2{
+    font-weight: 600;
+    color:#000000d2;
+}
+
+.if_plural{
+    font-size: 15px;
+}
+
+#original_price{
+    font-size: 12px;
+}
+
+.btn{
+    width: 100%;
+    display: inline-block;
+    padding: 15px;
+    transition: all .5s;
+    border: none;
+}
+
+.product_section h2{
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.newsletter_myshoes h2,
+.brand_myshoes h2{
+    text-align: center;
+}
+
+.brand_myshoes{
+    padding: 40px 0px;
+}
+
+
+a,
+ul,
+li{
+    color: #000000;
+    text-decoration: none;
+    background-color: transparent;
+    list-style: none;
+}
+
+.fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.myshoes_btn{
+    border: .5px solid #0000007b;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    transition: 0.35s;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #000000;
+}
+
+.icons{
+    font-size: 20px;
+    text-align: center;
+}
+.general_container{
+    width: 100%;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row .command_btn .download_invoice:hover,
+.left_side_url aside p a:hover{
+    color: #0000ff
+}
+
+
 /*=============== SCROLL BAR ===============*/
 ::-webkit-scrollbar {
     
@@ -16,20 +166,9 @@
 }
 
 /*=============== GENERAL STYLING ===============*/
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
 
-li{
-    text-decoration: none;
-    font-style: none;
-    list-style: none;
-    color: #000;
-}
 
-In the end I changed the following css entry in bootstrap.css
+/* In the end I changed the following css entry in bootstrap.css */
 
 textarea:focus,
 .form-control.is-invalid :focus, 
@@ -54,134 +193,137 @@ input[type="color"]:focus,
     outline: 0 none;
 }
 
-a{
-    font-style: none;
-    color: #000;
-    text-decoration: none;
-
-}
-
-.text-justify{
-    text-align: justify;
-    text-indent: 50px;
-}
-.general_btn{
-    border: none;
-    background: transparent;
-    text-decoration: none;
-    font-style: none;
-    list-style: none;
-    text-align: center;
-    
-}
-
 
 /**===== NAV BAR ======**/
-.nav_bar{
-    background: #c6c6c7a2;
-    width: 100%;
-}
-.nav_bar .general_container{
+/* NAVBAR */
+
+.myshoes_first_nav {
+    position: relative;
+    height: 5rem;
+    background: var(--main_color);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 50px;
+    align-items:center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
 }
 
-.general_container .logo{
+.myshoes_nav_items{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.logo{
     font-weight: 800;
-    text-transform: uppercase;
+    font-size: 20px;
 }
 
-.general_container .nav_links,
-.general_container .nav_ul,
-.general_container .icons{
+.myshoes_search_bar{
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    width: 20%;
+    justify-content: center;
+    width: 90%;
+}
+.myshoes_search_nav{
+    width: 60%;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: .5px solid rgb(143, 143, 143);
+    padding: 10px 60px 10px 10px;
 }
 
-.nav_ul .nav_items{
-    margin: 0px 1rem;
-}
-
-.nav_right > ul{
-	display: flex;
-	align-items: center;
-}
-
-.nav_right ul li.nr_li{
-	margin-left: 20px;
-	cursor: pointer;
-	color: #fff;
-	font-size: 20px;
-	position: relative;
-}
-
-/* TODO:: HOVER .nr_li */
-
-.dd_menu {
+.myshoes_nav_search_button{
     position: absolute;
-    right: -25px;
-    top: 47px;
+    height: 2.5rem;
+    border-radius: 5px;
+    background: transparent;
+    border: none;
+    width: 8%;
+    right: 172px;
+}
+
+.myshoes_nav_items ul,
+.second_nav_myshoes ul{
     display: flex;
-    background: #fff;
-    width: 10rem;
-    border-radius: 15px;
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.25);
-    display: none;
-    z-index: 1000;
 }
 
-.dd_menu .dd_right{
-	padding: 15px 0px;
+.myshoes_nav_items ul li{
+    margin: 0px 20px;
+}
+
+.myshoes_nav_items ul li i{
+    font-size: 25px;
+    margin-top: 13px;
+    transition: ease-out .3s;
+}
+
+/* dropdown_user styles */
+.dropdown_user {
+    position: relative;
+    cursor: pointer;
+    transition: ease-out .9s;
+}
+
+.myshoes_nav_items ul li i:hover{
+    color: var(--button_colors);
+}
+
+.dropdown_user ul {
+    position: absolute;
+    flex-direction: column;
+    margin: 10px 0 0px 0;
+    padding: 20px 0;
+    width: 160px;
+    left: 50%;
+    margin-left: -80px;
+    z-index: 999;
+    /* opacity: 0; */
+    box-sizing: border-box;
+    background: rgba(161, 161, 161, 0.728);
+    border-radius: 6px;
+    list-style: none;
+    transform: scale(0) translate(-10%, -10%);
+    transition: ease-out .5s;
+}
+
+/* dropdown_user triangle */
+.dropdown_user ul::before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent rgba(161, 161, 161, 0.728) transparent;
+}
+
+.dropdown_user ul li{
+    margin: 0px !important;
+}
+
+.dropdown_user ul li a:link,
+.dropdown_user ul li a:visited {
+    display: inline-block;
+    transition: ease-out .7s;
+    padding: 10px 0.8rem;
     width: 100%;
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
-.dd_menu .dd_right ul{
-	padding-left: 10px !important;
-}
-
-.dd_menu .dd_right ul .btn_nav a{
-    background: rgb(0, 0, 0);
+.dropdown_user ul li a:hover {
+    background-color: var(--button_colors);
     color: #ffff;
-    display: inline;
-    padding: 10px 20px;
-    margin: 5px !important;
 }
 
-.dd_menu .dd_right .nav_hover:hover{
-    width: 100%;
-    background:rgba(207, 201, 201, 0.411);
+.dropdown_user:hover ul{
+    opacity: 1;
+    transform: scale(1) translate(0%, 0%);
 }
 
-.dd_menu li{
-	margin-bottom: 10px;
-	color: #868686;
-}
-
-.dd_menu::before{
-	content: "";
-	position: absolute;
-	top: -20px;
-	right: 30px;
-	border: 10px solid;
-	border-color: transparent transparent #fff transparent;
-}
-
-.dd_main.account_active .dd_menu{
-	display: flex;
-}
-
-/* Class active on navLinks */
-
-.menwochild{
-    background: red;
-    padding: 20px;
-}
-
-
-/**===== CART AND WISHLIST ICONS ======**/
 .cart_number{
     position: relative;
 }
@@ -189,23 +331,57 @@ a{
 .cart_icon{
     /* color: white; */
     position: relative;
-    border-radius: 50%;
-    padding: 10px;
-    font-size: 25px;
 }
 
 .cart_data{
     position: absolute;
-    top: -3px;
-    left: 27px;
+    top: -15px;
+    left: 16px;
     font-size: 15px;
-    background-color: #ffffff;
-    border: 0.5px solid rgb(180, 178, 178);
+    color: #fff;
+    background-color: var(--button_colors);
     border-radius: 50%;
     display: inline-block;
     padding: 0.1px 6px;
 }
 
+.second_nav_myshoes{
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+}
+
+.second_nav_myshoes ul{
+    padding-top: 10px;
+    justify-content: center;
+}
+
+.second_nav_myshoes ul li a{
+    position: relative;
+    margin: 0px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all .5s;
+}
+
+.second_nav_myshoes ul li a::before{
+    position: absolute;
+    content: '';
+    display: inline-block;
+    border: 1px solid var(--button_colors);
+    opacity: 0;
+    bottom: -2px;
+    width: 100%;
+    transition: ease-in-out .5s;
+}
+
+.second_nav_myshoes ul li a:hover{
+    color:rgba(0, 0, 0, 0.311);
+}
+
+.second_nav_myshoes ul li a:hover::before{
+    opacity: 1;
+}
 
 
 /* =========================*/
@@ -213,157 +389,261 @@ a{
 /*===========================*/
 
 /**===== HERO SECTION ======**/
-.hero_background{
-    height: 100vh;
-    background-position: cover !important;
-    background-size: cover !important;
-    object-fit: cover !important;
+.hero{
+    background-color: #c06b2f2a;
+    padding: 20px;
+    height: 100%;
 }
 
-.background_data{
+.hero_info{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.hero_image{
+    text-align: center;
+}
+
+.hero_image .hero_img{
+    height: 80%;
+}
+
+.hero_btn{
+    padding: 20px 40px;
+    transform: translate(.9 ease);
+}
+
+.hero_btn:hover{
+    color: white;
+    box-shadow: 
+    inset -5.5em 0 0 0 var(--button_colors),
+    inset 5.4em 0 0 0 var(--button_colors);
+}
+
+/* ADVERT */
+.advert_myshoes{
+    position: relative;
+}
+/* .advert_myshoes::before {
+	content: '';
+	position: absolute;
+    z-index: -1;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(#B7550E, #B7550E);
+	clip-path: circle(30% at right 70%);
+}
+
+.advert_myshoes::after {
+	content: '';
+	position: absolute;
+    z-index: -1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(#E55D87, #5FC3E4);
+	clip-path: circle(20% at 10% 10%);
+} */
+
+.advert_info{
+    padding: 50px 70px;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
-.background_data h4{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 50px;
+.advert_description{
+    display: flex;
+    padding-top: 20px;
+}
+
+.advert_description .advert_icon{
+    margin-right: 20px;
+}
+
+.advert_icon i{
+    display: inline-block;
+    background: var(--button_colors);
+    padding: 15px;
+    font-size: 30px;
+    border-radius: 5px;
     color: #fff;
 }
 
-.hero_note{
-    margin: 0px 120px;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
+.advert_description p{
+    padding-top: 10px;
 }
 
-.background_data a{
-    margin-top: 10px;
-    display: block;
-    font-size: 20px;
-    color: #fff;
-    border-radius: 8px;
-    padding: 10px 40px;
-    background-color: #18cf5eb3;
-}
-
-.owl-prev,
-.owl-next{
-    display: none !important;
-}
 
 /**===== TRENDING PRODUCT SECTION ======**/
-.products{
+/* PRODUCT */
+.product_section{
     display: flex;
-    flex-wrap: wrap;
-    padding-top: 50px;
+    flex-grow: 1;
+    flex-basis: 0;
+    flex-direction: column;
     width: 100%;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.trending_product{
-    padding-top: 4em;
+.myshoes_product {
+    padding-right: 5rem;
+    padding-left: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.product_class{
+    margin-bottom: 15px;
+}
+
+.product_card {
+    position: relative;
+    width: 15rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: .25rem;
+    transition: .3s ease-in-out;
+    overflow: hidden;
+}
+
+.card_image{
+    position: relative;
+    height: 20rem;
+    background: var(--product_card_color);
+    border-radius: .25rem;
+    transition: .4s ease-in-out;
+    z-index: 1;
+}
+
+.text {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    background: #fff;
+    transition: .4s ease-in-out;
+    font-size: 15px;
+    opacity: 0;
+
+}
+
+/* Making shoe sizes to show when you hover on the card */
+
+/* .product_card:hover .card_image {
+    transform: translateY(-2vmin);
+    margin-bottom: 1em;
+} */
+
+/* .product_card:hover .text{
+    opacity: 1;
+} */
+
+.card_image .fa-heart{
+    position: absolute;
+    display: inline-block;
+    padding: 5px;
+    margin-top: 9px;
+    right: -1px;
+    z-index: 9999;
+    background: #ffffff;
+    font-size:30px;
+}
+
+.product_img{
+    margin-top: 60px;
+    height: 180px;
+    width: 180px;
+}
+
+.card_image .promo{
+    position: absolute;
+    font-size: 13px;
+    padding-left: 5px;
+    bottom: 0;
+    color: var(--promo_color);
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid var(--promo_color);
     
 }
 
-.trending_product .heading{
-    font-size: 25px;
-    color:rgba(0, 0, 0, 1);
+.card_image .promo span{
+    background: var(--promo_color);
+    color: #fff;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 5px;
 }
 
-.card-new {
-    background:rgba(243, 241, 241, 0.998);
-    max-width: 280px;
-    border-radius: 10px;
-    margin: 10px;
-    position: relative;
+/**===== Marks SECTION ======**/
+
+.brand{
+    display: flex;
 }
 
-.card-new a {
-    text-decoration: none;
-    text-align: center;
-    color: #000;
-    position: relative;
-}
-
-.card-new .img-wishlist{
-    padding: 50px 0px;
+.brand a{
     display: flex;
     justify-content: center;
-    align-items: center
-}
-
-.card-new .wishlist{
-    position: absolute;
-    right: 0;
-    top: 5%;
-    background: #fff;
-    display: block;
-    padding: 10px;
-    font-size: 25px;
-}
-
-.card-new .product_info {
-    padding: 21px 20px;
-}
-
-.price {
-    color: grey;
-    font-size: 22px;
-}
-
-.card-new .product_info h1{
-    font-size: 20px;
-}
-
-.card-new .add_to_cart {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
     width: 100%;
-    font-size: 18px;
-    position: absolute;
-    bottom: 0;
-    border-radius: 0px 0px 10px 10px;
 }
 
-.card-new .add_to_cart:hover {
-    opacity: 0.7;
+.brand a img{
+    width: 50%;
 }
 
-/**===== ADVERT SECTION ======**/
+/**===== Newsletter SECTION ======**/
 
-.advert{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-    background-color: #8783838c;
-}
-
-.image{
+.newsletter_myshoes p{
     text-align: center;
 }
 
-/**===== LES MARQUES SECTION ======**/
-.myshoes-marques{
-    padding: 50px 0;
-}
-.myshoes-marques .marque-display{
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
+.newsletter{
+    text-align: center;
 }
 
-.myshoes-marques .marque-display .img_resize{
-    flex-wrap: wrap;
-    width: 80%;
+.newsletter_input {
+    padding: .8rem 1rem;
+    width: 40%;
+    border-radius: 5rem;
+    outline: none;
+    border: .1rem solid #d1d1d1;
+    font-size: .7rem;
+}
+
+::placeholder {
+    color: #d1d1d1;
+}
+
+.newsletter_btn {
+    padding: .8rem 2rem;
+    border-radius: 5rem;
+    background: transparent;
+    color: #000f;
+    font-size: .7rem;
+    border: 0.5px solid var(--button_colors);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.6s;
+}
+
+.newsletter_btn:hover{
+    border-radius: 5rem;
+    color: #ffff;
+    box-shadow: 
+        inset -5.3em 0 0 0 var(--button_colors),
+        inset 5.3em 0 0 0 var(--button_colors);
 }
 
 /* =========================*/
@@ -371,18 +651,22 @@ a{
 /*===========================*/
 
 .breadcrumbs-two .breadcrumbs-img{
-    background-image: url(../image/coverpage/cover-img-1.jpg);
+    /* background-image: url(../image/coverpage/cover-img-1.jpg); */
+    background-image: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%);
     height: 300px;
     padding: 4em;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
     position: relative;
 }
 
-.breadcrumbs-img h2 {
-    font-size: 40px;
-    text-transform: uppercase;
+.breadcrumbs-img h2,
+.breadcrumbs-img h2 a {
+    font-size: 20px;
+    width: 100%;
+    color: #ffff;
+    text-align: center;
 }
 
 
@@ -394,6 +678,10 @@ a{
     padding: 1em;
     width: 100%;
     float: left;
+}
+
+.myshoes_search_product fieldset {
+    border: none;
 }
 
 .accordion-item {
@@ -421,31 +709,14 @@ input[type=checkbox] {
 .side h3 {
     font-size: 14px;
     text-transform: uppercase;
-    font-family: "Montserrat", Arial, sans-serif;
+    font-weight: 300;
 }
 
-.side ul li {
-    font-size: 14px;
-}
 
 .side ul,
 .side ul li {
     padding: 0;
     margin: 0;
-    list-style: none;
-}
-
-.block-26 {
-    display: block;
-    float: left;
-    width: 100%;
-}
-
-.block-26 ul,
-.block-26 ul li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
 }
 
 .block-26 ul li {
@@ -471,69 +742,276 @@ input[type=checkbox] {
     background: #616161;
 }
 
-.block-26 h4 {
-    font-size: 12px;
-    text-transform: uppercase;
-    font-family: "Montserrat", Arial, sans-serif;
+.button_submit {
+    padding: 0px;
+    border: 1px solid black;
+    display: inline-block;
+    height: 40px;
+    text-align: center;
 }
+
+.button_submit:hover{
+    color: #ffff;
+    box-shadow: 
+    inset -5em 0 0 0 var(--button_colors),
+    inset 5em 0 0 0 var(--button_colors);
+}
+
+
 
 /* =======================================================
   * 	PRODUCT SECTION
 * ======================================================= */
-.col-lg-4 .all_product{
-    display: flex;
-    justify-content: space-between;
-}
 
+.col-lg-12.my-4.product_resize {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
 /* ==================== MEN'S PAGE ENDS   =========================*/
 
 /* =======================================================
   * 	PRODUCT DETAIL (PRODUCT PAGE DETAIL) SECTION
 * ======================================================= */
 
-.image_detail_product{
-    background-color: #61616168;
-    padding: 20px 0px;
-    border-radius: 10px;
-}
-
 .rating .fa-star{
     color: #FFC123;
 }
 
-.product-detail-wrap .quantity-left-minus {
-    border: 1px solid #e6e6e6;
-    padding: 15px;
-}
 
-.product-detail-wrap .quantity-right-plus {
-    border: 1px solid #e6e6e6;
-    padding: 15px;
-}
-
-
-.detail_panier_button a{
-    background-color: #000;
-    color: #fff;
+/* =======================================================
+  * 	PRODUCT DETAILS
+* ======================================================= */
+.breadcrum_area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
     width: 100%;
-    padding: 10px 30px;
+    background: #D9D9D9;
 }
 
-.detail_wishlist_button button{
-    background-color: #fff;
-    color: #000;
+.myshoes_productdetails{
+    justify-content: space-between;
+    margin: 3rem 0px;
+}
+
+.product_image{
+    position: relative;
+    height: 30rem;
+    background: var(--product_card_color);
+    border-radius: 5px;
+}
+
+.product_image .pdt_img{
+    position: absolute;
+    width: 80%;
+    text-align: center;
+}
+
+.product_image img{
+    margin-top: 5rem;
+    margin-left: 2rem;
+}
+
+.product_info{
+    display: inline;
+    padding: 2rem 0px 2rem 0;
+}
+
+.product_more_info{
+    width: 60%;
+}
+
+.product_more_info .size{
+    display: inline;
+    padding: 10px 0px;
     width: 100%;
-    padding: 10px 30px;
+}
+
+.product_more_info .basket_wishlist{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.product_more_info .basket_wishlist .basket{
+    width: 70%;
+}
+
+.product_more_info .basket_wishlist .wishlist{
+    width: 20%;
+    background: var(--product_card_color);
+}
+
+.basket_wishlist .basket .btn_basket{
+    background: var(--button_colors);
+    color: #ffff;
+}
+
+.basket_wishlist .btn_wishlist{
+    font-size: 22px;
+    
+}
+
+.basket_wishlist .btn_basket_wishlist{
+    width: 100%;
+    display: inline-block;
+    padding: 15px;
+    transition: all .5s;
     border: none;
 }
 
-.detail_wishlist_button button i{
-    font-size: 25px;
+.basket button:hover{
+    color: hsl(0, 0%, 0%) !important;
+    border: 1px solid black;
+    box-shadow: 
+    inset -7.5em 0 0 0 #fff,
+    inset 7.5em 0 0 0 #fff;
 }
 
-.text_edit{
+.product_more_info .product_description{
+    margin-top: 30px;
+}
+
+.product_description .accordion-body p{
     text-align: justify;
-    text-indent: 60px;
+}
+
+.customer_remark{
+    padding-top: 4em;
+}
+
+.customer_remark .review_info{
+    text-align: justify;
+}
+
+.customer_remark .col-md-1 .hr_line{
+    text-align: center;
+    width: 1%;
+    height: 100%;
+    border: 1px solid #5a595990;
+}
+
+
+
+/* =======================================================
+  * 	BASKET PAGE
+* ======================================================= */
+
+.pt-4 .basket_page{
+    text-transform: uppercase !important;
+    font-weight: 800;
+    position: relative;
+}
+
+.basket_page::after{
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    width: 100%;
+    margin: 5px 0;
+    height: 2px;
+    background: repeating-linear-gradient(to right,
+            transparent,
+            transparent 10px,
+            rgba(78, 78, 78, 0.669) 10px,
+            rgba(91, 91, 91, 0.632) 20px);
+}
+
+.row.basket{
+    gap: 30px;
+}
+
+.basket_full .basket_title{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 10px;
+    padding: 20px 0px;
+    width: 100%;
+    background: var(--main_color);
+}
+
+.basket_full .basket_title h6{
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.basket_product{
+    position: relative;
+    height: 180px;
+    margin: 2em 0px;
+    box-shadow: 
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px -11px 8px -10px #CCC; 
+}
+
+.row.a_basket_product{
+    height: 100%;
+    align-items: center;
+}
+
+.basket_product .basket_img_div{
+    position: relative;
+    height: 100%;
+    background: var(--product_card_color);
+    margin-left: 12px;
+    text-align: center;
+    align-content: center;
+}
+
+.basket_img_div .basket_img{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.basket_product .btn_cancel_basket i{
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    right: 10px;
+    color: red;
+    font-size: 20px;
+}
+
+.sub_total_section{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    margin-top: 7rem;
+}
+
+.sub_total{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub_total_section .check_out_btn,
+.btn_commande .check_out_btn,
+.recap_btn_command .check_out_btn{
+    color: #000000;
+    border: .5px solid rgba(86, 86, 86, 0.457);
+}
+
+.sub_total_section .check_out_btn:hover,
+.btn_commande .check_out_btn:hover{
+    color: #ffff;
+    box-shadow: 
+    inset -14em 0 0 0 var(--button_colors),
+    inset 14em 0 0 0 var(--button_colors);
+}
+
+.quantity-left-minus {
+    border: 1px solid #e6e6e6;
+    padding: 6px 5px;
+}
+
+.quantity-right-plus {
+    border: 1px solid #e6e6e6;
+    padding: 6px 5px;
 }
 
 /* =======================================================
@@ -581,123 +1059,386 @@ fieldset {
 
 legend {
     transform: translatey(-130%);
+    font-size: 17px;
     width: max-content;
     padding: 0 0.15em;
     background-color: #fff;
 }
 
-#commande_adresse{
-    display: flex;
-    flex-direction: column;
+div#command_address,
+div#command_transport{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 50% 50%;
+    
+}
+
+div#command_address .form-check,
+div#command_transport .form-check{
+    background: var(--main_color);
+    border-radius: 7px;
+}
+
+div#command_address .form-check label,
+div#command_address input.form-check-input,
+div#command_transport .form-check label,
+div#command_transport input.form-check-input{
+    font-size: 12px;
+    margin: 7px 5px;
 }
 
 .sous_title{
     position: relative;
-    margin-top: 20px;
+    height: 80px;
+    margin-top: 40px;
 }
+
 .btn_commande{
     position: absolute;
     bottom: 30px;
     left: 34%;
 }
 
+.billing_delivery_address{
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+.billing_delivery_address::before{
+    position:absolute;
+    content: '';
+    left: 230px;
+    border: .3px solid rgba(94, 93, 93, 0.345);
+    height: 100%;
+}
+
+.billing_delivery_address .billing_address,
+.billing_delivery_address .delivery_address{
+    font-size: 14px;
+}
+
+.billing_delivery_address .billing_address{
+    text-align: end;
+}
+.billing_delivery_address .billing_address strong small{
+    text-align: center !important;
+}
+
+.command_recap_img{
+    width: 50%;
+    background: #ffff;
+    border-radius: 5px;
+}
+
+.rounded-4.p-4.position-relative .recap_btn_command{
+    margin-top: 3em;
+}
+
+.recap_btn_command .command_recap_btn{
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.recap_btn_command .check_out_btn:hover{
+    color: #ffff;
+    box-shadow: 
+    inset -15em 0 0 0 var(--button_colors),
+    inset 15em 0 0 0 var(--button_colors);
+}
 
 /* =======================================================
-  * 	COMMAND PAGE
+  * 	CLIENT COMMAND PAGE
 * ======================================================= */
 
-.a_command{
-    position: relative;
-    border-radius: 15px;
-    padding: 50px 0px 20px 40px;
+.account{
+    margin-top: 40px;
+    justify-content: space-between;
 }
 
-.a_command .command_number{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    height: 70px;
-    left: 0;
-    top: 0;
-    border-radius: 15px 15px 0px 0px;
+.account h4{
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.detail_facture a,
-.detail_facture button{
-    font-size: 13px;
-    border: none;
-    padding: 10px;
+.command_card{
+    margin: 40px 0px;
+    box-shadow: 0px 10px 10px -10px #111;
+}
+
+.command_card .command_header{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 10px;
+    padding: 20px;
     width: 100%;
+    background: var(--main_color);
+}
+
+.command_header .row{
+    gap: 24px;
+    justify-content: space-between !important;
+}
+
+.command_header .row .command_btn{
     text-align: center;
-    border-radius: 8px;
-
 }
 
+.row .command_btn .command_detail_btn{
+    background: var(--button_colors);
+    font-size: 12px;
+    padding: 10px 10px;
+    color: #ffff;
+    transition: all .5s;
+    border-radius: 5px;
+}
+
+.row .command_btn .command_detail_btn:hover{
+    color: #000000;
+    border: .5px solid rgba(86, 86, 86, 0.457);
+    box-shadow: 
+    inset -10em 0 0 0 #ffff,
+    inset 10em 0 0 0 #ffff;
+}
+
+.row .command_btn .download_invoice{
+    font-size: 12px;
+    transition: all .5s;
+}
+
+.command_body .command_img_div{
+    position: relative;
+}
+
+.command_body .command_img{
+    width: 50%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.command_body .command_info,
+.command_body .command_status{
+    padding: 1em 0px;
+}
+
+/* =======================================================
+  * 	PROFILE & COMMAND DETAIL PAGE
+* ======================================================= */
+.icon_user,
+.modify{
+    align-self: center;
+}
+
+.fa-user-tie,
+.fa-envelope,
+.fa-shield-halved{
+    font-size: 40px !important;
+}
+
+.col .user_info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col .user_info .nom{
+    padding: 30px 10px;
+}
+
+.col .user_info .nom strong{
+    color: #000;
+}
+
+.modify .profile_modify{
+    display: inline-block;
+    border: 1.5px solid #000000;
+    padding: 10px 0px;
+    text-align: center;
+    width: 90%;
+    font-weight: 700;
+    margin: 0px 20px;
+    transition: .2s ease-out;
+}
+
+.modify .profile_modify:hover{
+    color: #ffffff;
+    background-color: #171616;
+}
+
+.delete_btn_div{
+    text-align: center;
+    margin: 25px 0px;
+}
+
+.delete_btn_div .delete_btn{
+    color: #ffff;
+    background: #ff0000;
+    display: inline-block;
+    padding: 17px 10px;
+    border-radius: 7px;
+    font-weight: 600;
+    transition: ease-in .2s;
+    border: none;
+}
+
+.delete_btn_div .delete_btn:hover{
+    background: #4f0101;
+}
+
+.command_details_reference{
+    margin-bottom: 0px !important;
+}
+
+.command_detail_address{
+    font-size: 13px;
+}
+
+.command_detail_footer .command_detail_price{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+/* =======================================================
+  * 	WISHLIST PAGE
+* ======================================================= */
+
+.myshoes_wishlist{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wishlist_card{
+    position: relative;
+}
+
+.wishlist_card .wishlist_cancel_icon{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 999;
+}
+.wishlist_card .wishlist_cancel_icon i{
+    font-size: 30px;
+    color: rgb(131, 131, 131);
+}
+
+.basket .btn_basket{
+    background: var(--button_colors);
+    color: #ffff;
+}
 
 /**===== FOOTER SECTION ======**/
 
-.first_footer{
-    background-color: #8783838c; 
+
+footer.footer_myshoes{
+    padding-top: 50px;
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 100%;
+    color: #ffff;
+    margin-top: 20px;
+    background-color: var(--footer_color);
+}
+
+.footer_myshoes .footer_container{
     display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-gap: 4%;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.first_footer h2{
-    font-weight: 800;
+
+.footer_container .footer_services h4{
+    font-size: 17px;
+    font-weight: 700;
 }
 
-.first_footer h2 span{
-    color: #3577F9;
+.footer_container .footer_services p{
+    margin-bottom: 0rem !important;
 }
 
-.first_footer h5{
-    color: #FFC123;
-}
-
-.social_media{
-    display: flex;
-    justify-content: space-around;
-}
-
-.social_media i{
-    font-size: 20px;
-}
-
-.footer_livraison .livraison_icons,
-.footer_livraison .payment_icons{
-    display: flex;
-    justify-content: space-around;
-}
-
-.footer_livraison .livraison_icons i{
-    font-size: 40px;
-    color: #FFC123;
-}
-.footer_livraison i{
-    font-size: 30px;
-}
-
-.aide_contact{
-    display: flex;
-    flex-direction: column;
-}
-
-.second_footer{
-    background-color: #000;
-    display: flex;
-    justify-content: center;
+.footer_container .footer_services p a{
+    color: #fff;
+    font-weight: 100;
+    font-size: 13px;
+    transition: all 0.5s;
     
 }
 
-.second_footer .policy_section{
-    color: #c6c6c7;
-    margin: 10px 20px;
+.footer_container .footer_services p a:hover{
+    color: rgb(174, 168, 168);
+    
 }
 
-.second_footer div{
+.follow_us p{
+    padding-top: 10px;
+    font-size: 10px;
+}
+
+.follow_us a{
+    margin-right: 10px;
+    
+}
+
+.follow_us a i{
     background-color: #fff;
-    width: 1px;
+    margin-top: 10px;
+    display: inline-block;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: ease-in-out .5s;
+}
+
+.follow_us a i:hover{
+    color: #ffff;
+    background: #0000;
+    border: 3px solid #ffff;
+}
+
+.myshoes_copyright.footer_container{
+    padding-top: 5px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    color: #ffff;
+}
+
+.myshoes_copyright .copyright,
+.myshoes_copyright .payment_accept{
+    width: 100%;
+}
+
+.myshoes_copyright .copyright p{
+    font-size: 10px;
+    font-weight: 100;
+}
+
+.myshoes_copyright .payment_accept{
+    display: flex;
+    justify-content: flex-end!important;
+}
+
+.myshoes_copyright .payment_accept p{
+    font-size: 10px;
+    margin-right: 10px;
+}
+
+.myshoes_copyright .payment_accept .payment_accept_img{
+    width: 50%;
+}
+
+.myshoes_copyright .payment_accept .payment_accept_img img{
+    width: 40px;
+    height: 30px;
+    margin-left: 10px;
 }

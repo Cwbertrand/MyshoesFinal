@@ -6,12 +6,10 @@
 
 {% block body %}
     <div class="breadcrumbs-two py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="breadcrumbs-img">
-                        <h2>Men's</h2>
-                    </div>
+        <div class="row">
+            <div class="col">
+                <div class="breadcrumbs-img" style="background: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%), url({{asset('image/coverpage/cover-img-1.jpg')}});" alt="background Image for men">
+                    <h2><a href="{{path('home')}}">Home</a>><a href="{{path('men')}}">Men</a></h2>
                 </div>
             </div>
         </div>
@@ -28,7 +26,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="side border mb-1">
-                                    <h3>Filtre</h3>
+                                    <h4>FILTER</h4>
                                 </div>
                             </div>
                             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -42,11 +40,10 @@
                                                     <h3>Brand</h3>
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse myshoes_search_product"
                                                 aria-labelledby="panelsStayOpen-headingOne">
                                                 <div class="accordion-body">
                                                     <ul>
-
                                                         <div class="brand d-flex justify-content-between">
                                                             {{form_start(form)}}
                                                             {{form_end(form)}}
@@ -54,7 +51,6 @@
                                                     </ul>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -66,31 +62,9 @@
                                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                         data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                                                         aria-controls="panelsStayOpen-collapseTwo">
-                                                        <h4>Size</h4>
+                                                        <h3>Size</h3>
                                                     </button>
                                                 </h2>
-                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-                                                    aria-labelledby="panelsStayOpen-headingTwo">
-                                                    <div class="accordion-body">
-                                                        <ul>
-                                                            <li><a href="#">7</a></li>
-                                                            <li><a href="#">7.5</a></li>
-                                                            <li><a href="#">8</a></li>
-                                                            <li><a href="#">8.5</a></li>
-                                                            <li><a href="#">9</a></li>
-                                                            <li><a href="#">9.5</a></li>
-                                                            <li><a href="#">10</a></li>
-                                                            <li><a href="#">10.5</a></li>
-                                                            <li><a href="#">11</a></li>
-                                                            <li><a href="#">11.5</a></li>
-                                                            <li><a href="#">12</a></li>
-                                                            <li><a href="#">12.5</a></li>
-                                                            <li><a href="#">13</a></li>
-                                                            <li><a href="#">13.5</a></li>
-                                                            <li><a href="#">14</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -105,15 +79,6 @@
                                                     <h3>Material</h3>
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
-                                                aria-labelledby="panelsStayOpen-headingThree">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        <li>Leather</li>
-                                                        <li>Suede</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -123,49 +88,67 @@
 
                     <!-- ======= product section ===========  -->
 
-                    <div class="col-lg-9 col-xl-9">
+                    <div class="product_area col-lg-9 col-xl-9">
                         <div class="row row-pb-md">
-                            {% for product in products %}
-                                <div class="col-lg-4 my-4">
-                                    <div class="all_product">
-                                        <div class="card-new">
-                                            <a href="{{path ('related_products', {'id': product.id})}}"> 
-                                                <div class="img-wishlist">
-                                                    <img src="/upload/{{product.image}}" alt="photo {{product.shoesname}}" style="width:60%">
-                                                </div>
-                                                <a class="wishlist" href="homme.html"><i class="fa-regular fa-heart"></i></a>
-                                                <div class="product_info">
-                                                    <p>
-                                                        <span><strong>{{product.mark}}</strong></span> <br>
-                                                        <span><strong>{{product.shoesname}}</strong></span> <br>
-                                                        <span>{{product.category.category}}</span> <br>
-                                                        {% if product.promotion > 0 %}
-                                                        <small><span >{{ (product.price/100) | number_format(2, ',', '.') }} €</span> Original price<br></small>
-                                                        <span class="price">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</span>
-                                                        <small class="bg-danger p-1 text-white">{{product.promotion}}% Promo</small>
-                                                        {% else %}
-                                                        <span class="price">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
-                                                        {% endif %}
-
-                                                    </p>
-                                                </div>
-                                                <p><a class="add_to_cart" href="{{path('add_to_cart', {'id': product.id} )}}">
-                                                    Add to Cart
-                                                </a></p>
-                                            </a>
-                                        </div>
-                                    </div>
+                            {{form_start(formText)}}
+                            <div class="row d-flex justify-content-end">
+                                <div class="col-5">
+                                    {{form_row(formText.categoryinfo)}}
                                 </div>
-                            {% endfor %}
-
-                            <div class="text-center">
-                                {% do products.setPageRange(2) %}
-                                {{ knp_pagination_render(products, 'base/pagination.html.twig')}}
+                                <div class="col-2">
+                                    {{form_row(formText.submit)}}
+                                </div>
+                            </div>
+                            {{form_end(formText)}}
+                            <div class="col-lg-12 my-4 product_resize">
+                                {% for product in products %}
+                                    <div class="all_product my-2">
+                                        <div class="product_card">
+                                            <div class="card_image">
+                                                <a href="{{path ('related_products', {'id': product.id})}}" class="product">
+                                                    <img src="/upload/{{product.image}}" class="product_img" alt="photo {{product.shoesname}}">
+                                                    <a id="select_wishes" class="wishlist wishlist_update" href="{{path ('add_wishlist', {'id': product.id})}}" data-productid="">
+                                                        {% if app.user and product.isWishedByUser(app.user) %}
+                                                        <i class="fa-solid fa-heart heart_icon"></i>
+                                                        {% else %}
+                                                        <i class="fa-regular fa-heart"></i>
+                                                        {% endif %}
+                                                    </a>
+                                                    {% if product.promotion > 0 %}
+                                                    <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
+                                                    {% endif %} 
+                                                </a>
+                                            </div>
+                                            <div class="text">
+                                                {% for size in product.adultsize %}
+                                                    {{ size.adultsize }}
+                                                {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p class="product_info">
+                                            {{product.mark}} <br>
+                                            <strong>{{product.shoesname|length > 9 ? product.shoesname|slice(0, 8) ~ '…' : product.shoesname}}</strong> - {{product.category.category}} <br>
+                    
+                                            {% if product.promotion > 0 %}
+                                                <i style="color: red;">{{ (product.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                                    <small id="original_price">Original Price: <s>{{ (product.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                                </span>
+                                            {% else %}
+                                                <span class="">{{ (product.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                                    
+                            </div>
+                            
+                            <!-- ======= pagination section ===========  -->
+                            <div class="w-100">
+                                {% do products.setPageRange(1) %}
+                                {{ knp_pagination_render(products, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig')}}
                             </div>
                         </div>
-
-                        <!-- ======= pagination section ===========  -->
-
                     </div>
                 </div>
             </div>
@@ -174,3 +157,42 @@
 {% endblock %}
 
 {% block footer %}{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('.wishlist_update').on('click', function (event) {
+                event.preventDefault();
+                var select_wishes = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: select_wishes.attr('href'),
+                    success: function (response) {
+                        if (response.code === 200) {
+                            // show success message
+                            //alert(response.message);
+                            // update the UI
+                            // if product has been added to the wishlist, change the icon to a solid heart
+                            if (select_wishes.find('i').hasClass('fa-regular')) {
+                                 // If the current state is not in the wishlist, add the product to the wishlist
+                                select_wishes.find('i').removeClass('fa-regular').addClass('fa-solid heart_icon');
+                            } else {
+                                // If the current state is in the wishlist, remove the product from the wishlist
+                                select_wishes.find('i').removeClass('fa-solid heart_icon').addClass('fa-regular');
+                            }
+                        } else {
+                            // show error message
+                            console.error(response.message);
+                        }
+                    },
+                    error: function(error) {
+                        // If there was an error making the AJAX call, show an error message
+                        console.error(error);
+                        alert('Can you please log in to enable this functionality?');
+                    }
+                });
+            });
+        });
+
+    </script>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Class\Search;
+use App\Service\Search;
 use App\Entity\ShoesCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,15 +17,8 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('categoryinfo', TextType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Votre recherche...'
-                ]
-            ] )
             ->add('categorycheckbox', EntityType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => false,
                 'class' => ShoesCategory::class,
                 'multiple' => true,
@@ -33,7 +26,7 @@ class SearchType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Filter',
-                'attr' => ['class' => 'btn-block btn-info']
+                'attr' => ['class' => 'button_submit']
             ]);
     }
 

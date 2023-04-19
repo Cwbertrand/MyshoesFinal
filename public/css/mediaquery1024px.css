@@ -1,0 +1,22 @@
+@media screen and (max-width: 1024px) {
+
+    .myshoes_product {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
+
+    .product_section {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+
+    .myshoes_nav_search_button {
+        right: 115px !important;
+        width: 15% !important;
+    }
+
+    .hero_myshoes {
+        height: 60vh !important;
+    }
+
+}

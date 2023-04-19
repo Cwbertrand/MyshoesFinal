@@ -1,0 +1,26 @@
+/* Style the <urlset> element */
+body{
+    background-color: black;
+    color: white;
+}
+urlset {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Style the <url> elements */
+url {
+    margin-bottom: 20px;
+}
+
+/* Style the <loc> and <lastmod> elements */
+loc, lastmod {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Style the <changefreq> and <priority> elements */
+changefreq, priority {
+    font-style: italic;
+    color: #999;
+}

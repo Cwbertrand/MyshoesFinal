@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}wishlist{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row account">
+            {% include('_partials/leftnavuseraccount.html.twig') %}
+            <section class="col-9 right_side_account">
+                <div class="container pt-4">
+                    <h4 class="basket_page">My favourite shoes</h4>
+                </div>
+                <div class="container">
+                    <div class="myshoes_wishlist">
+                        {% for wishlist in wishlists %}
+                            <div class="wishlist_card card me-2 mb-3" style="width: 15rem;">
+                                <img src="/upload/{{wishlist.product.image}}" class="card-img-top img-fluid p-3" alt="nike">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center"><small>{{wishlist.product.mark}}</small> - {{wishlist.product.shoesname}}</h5>
+                                    <h6 class="card-title text-secondary w-100 text-center">{{ (wishlist.product.price/100) | number_format(2, ',', '.') }} &#8364</h6>
+                                    {# <p class="card-text text-center">
+                                        size: 36
+                                    </p> #}
+                                    <div class="basket text-center">
+                                        <a href="{{path('related_products', {'id': wishlist.product.id})}}" class="btn btn_basket w-75">See product</a>
+                                    </div>
+                                </div>
+                                <a href="{{path('delete_wishlist', {'id': wishlist.id})}}" class="wishlist_cancel_icon"><i class="fa-solid fa-xmark"></i></a>
+                            </div>  
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

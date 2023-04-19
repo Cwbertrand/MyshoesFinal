@@ -53,10 +53,11 @@ class Command
     private ?string $addresscountry = null;
 
     #[ORM\ManyToOne(inversedBy: 'commands')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'command', targetEntity: CommandDetail::class)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private Collection $commandDetails;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -305,6 +306,20 @@ class Command
         $this->deliverystatus = $deliverystatus;
 
         return $this;
+    }
+
+    public function deliverystatusText():?string
+    {
+        if($this->getDeliverystatus() === 1) {
+            $response = 'Order Validated';
+        }else if($this->getDeliverystatus() === 2){
+            $response = 'Preparing Order';
+        }else if($this->getDeliverystatus() === 3){
+            $response = 'Delivery in Progress';
+        }else if($this->getDeliverystatus() === 4){
+            $response = 'Delivery Completed';
+        }
+        return $response;
     }
 
     public function getFirstname(): ?string

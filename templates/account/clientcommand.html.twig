@@ -6,59 +6,55 @@
 {% endblock %}
 
 {% block body %}
-<main class="container py-5">
-    <div class="row">
-        
-        <h2 class="pb-4 text-center">Vos commandes</h2>
-        <!-- ============= SIDE BAR USER ACCOUNT =========-->
-        <div class="col-md-3 bg-light rounded-4 py-4 me-2" style="height: 300px;">
-            <h4 class="text-center">Mon compte</h4>
-            <div class="sous_total d-flex flex-column">
-                <a href="#">Résumé</a>
-                <a href="{{path ('client_command')}}">Mes Commandes</a>
-                <a href="#">Données personnelles</a>
-                <a href="{{path ('address')}}">addresss</a>
-            </div>
-        </div>
-
-        <!-- ============= COMMAND BY USERS =========-->
-        {# {{ dump(command) }} #}
-        <div class="col-md-8">
-            {% for product in command %}
-                <div class="bg-light a_command mb-4">
-                    <div class="command_number bg-black px-3">
-                        <h6 class="text-white pe-3">Numéro de commande: {{product.reference}}</h6>
-                        <h6 class="text-white">COMMANDE EFFECTUÉE LE: {{ product.createAt|date('D, d.m.Y') }}</h6>
-                    </div>
-                    {% for productdetails in product.CommandDetails %}
-                    <div class="row pt-5">
-                        <div class="col-md-4 bg-warning d-flex justify-content-center align-items-center w-25">
-                            <img src="assets/image/basket/basket (7) new.png" alt="basket new" class=" text-center img-fluid">
-                        </div>
-                        <div class="col-md-5">
-                            <div class="product_note product-detail-wrap">
-                                <h6>{{productdetails.productmark}}</h6>
-                                <h6>{{productdetails.productname}}</h6>
-                                <h6>Taille: 43(size)</h6>
-                                <h6>Quantity: {{productdetails.quantity}}</h6>
-                                <h6>Price: {{(productdetails.productprice/100)|number_format(2, ',', '.')}} € </h6>
+    <main class="container">
+        <div class="row account">
+            {% include('_partials/leftnavuseraccount.html.twig') %}
+            <section class="col-9 right_side_account">
+                <div class="container pt-4">
+                    <h4 class="basket_page">My Commands</h4>
+                </div>
+                <div class="container">
+                    {{ dump(command) }}
+                    {% for product in command %}
+                        <div class="command_card">
+                            <div class="command_header">
+                                <div class="row">
+                                    <div class="col-sm-7 command_reference">
+                                        <p>Command Reference: <strong>{{product.reference}}</strong></p>
+                                        <p>Date commanded: <strong>{{ product.createAt|date('D, d.m.Y') }}</strong></p>
+                                    </div>
+                                    <div class="col-sm-4 command_btn">
+                                        <p><a href="{{path('details_command', {'reference': product.reference})}}" class="command_detail_btn">Command Details</a></p>
+                                        <p><a href="{{path('invoice_pdf', {'reference': product.reference})}}" class="download_invoice">Download Invoice</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="command_body">
+                                <div class="row">
+                                    {% for productdetails in product.CommandDetails %}
+                                        <a href="#" class="col-5 command_img_div">
+                                            <img src="/upload/{{productdetails.productimage}}" alt="{{productdetails.productname}}" class="img-fluid command_img">
+                                        </a>
+                                        <div class="col-4 command_info">
+                                            <aside>{{productdetails.productmark}}</aside>
+                                            <aside><strong>{{productdetails.productname}}</strong></aside>
+                                            <aside>Quantity : {{productdetails.quantity}}</aside>
+                                            <aside>Size : {{productdetails.size}}</aside>
+                                            <p>{{(productdetails.productprice/100)|number_format(2, ',', '.')}} €</p>
+                                        </div>
+                                    {% endfor %}
+                                        <div class="col-3 command_status text-center">
+                                            <p>Delivery status:</p>
+                                            <p><strong>{{product.deliverystatusText}}</strong></p>
+                                        </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     {% endfor %}
-                    <div class="detail_facture col-md-3 d-flex flex-column justify-content-center align-items-center">
-                        <a href="{{path('details_command', {'reference': product.reference})}}" class="bg-warning mb-2">Detail de la Commande</a>
-                        <a href="{{path('invoice_pdf', {'reference': product.reference})}}" class="bg-info mb-2">Téléchagez la facture</a>
-                    </div>
                 </div>
-            {% endfor %}
+            </section>
         </div>
-        <div class="d-flex justify-content-center">
-            {# {% do command.setPageRange(2) %}
-            {{ knp_pagination_render(command, 'base/pagination.html.twig')}} #}
-        </div>
-    </div>
-</main>
+    </main>
 
 {% endblock %}
 

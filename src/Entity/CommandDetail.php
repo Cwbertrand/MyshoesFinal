@@ -36,7 +36,7 @@ class CommandDetail
     private ?string $productdescription = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandDetails')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Command $command = null;
 
     #[ORM\Column]

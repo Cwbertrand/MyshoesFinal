@@ -22,9 +22,10 @@ class CartController extends AbstractController
     }
 
     #[Route('/my_cart', name: 'cart')]
-    public function index(CartService $cartservice): Response
+    public function index(): Response
     {
         $cartItems = $this->cartservice->getCart();
+
         return $this->render('cart/index.html.twig', [
             'carts' => $cartItems,
         ]);
@@ -45,9 +46,10 @@ class CartController extends AbstractController
     #[Route('/cart/update/{cartKey}', name: 'update_cart')]
     public function updateCart(Request $request, $cartKey)
     {
+        //dd($cartKey);
         $action = $request->query->get('action');
         $this->cartservice->updateCart($cartKey, $action);
-
+        
         return $this->redirectToRoute('cart');
     }
 
