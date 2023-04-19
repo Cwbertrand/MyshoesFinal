@@ -11,21 +11,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class SearchType extends AbstractType
+class SearchAllType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('categorycheckbox', EntityType::class, [
-                'required' => true,
+            ->add('categoryinfo', TextType::class, [
                 'label' => false,
-                'class' => ShoesCategory::class,
-                'multiple' => true,
-                'expanded' => true
-            ])
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Votre recherche...'
+                ]
+            ] )
             ->add('submit', SubmitType::class, [
-                'label' => 'Filter',
+                'label' => 'Search',
                 'attr' => ['class' => 'button_submit']
             ]);
     }

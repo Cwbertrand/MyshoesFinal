@@ -23,7 +23,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'home')]
-    public function index(Request $request): Response
+    public function index(): Response
     {
 
         $bestpromotion = $this->em->getRepository(Product::class)->findByisBest(1);
@@ -39,14 +39,12 @@ class HomeController extends AbstractController
     public function newsletter(Request $request): Response
     {
         if($request->request->get('email')){
-            $user = new User();
             $mailer = new Email();
-            $content = ' Thanks so much for reaching us. We will get back to you as soon as possible';
-            $mailer->sendEmail($user->getEmail(), $user->getEmail(), $contactUs->getSubject(), $content);
+            $content = ' Thanks so much for subscribing to our newsletter!';
+            $mailer->sendEmail($request->request->get('email'), $request->request->get('email'), 'Newsletter subscribe notification', $content);
             
-            return $this->redirectToRoute('contact_us');
+            return $this->redirectToRoute('home');
         }
-        dd($request);
         return $this->render('home/index.html.twig', [
         ]);
     }

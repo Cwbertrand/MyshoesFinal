@@ -49,19 +49,27 @@ class ProductRepository extends ServiceEntityRepository
             ->join('p.category', 'c')
             ->join('p.gendershoes', 'g');
 
-            //It searches the checkboxes.
-            if (!empty($search->categorycheckbox)) {
-                $query = 
-                    $query->andWhere('c.id IN (:category)')
-                    ->andWhere('g.id IN (:genershoes)')
-                    ->setParameter('genershoes', 1)
-                    ->setParameter('category', $search->categorycheckbox);
-            }else {
-                $query = $query
-                    ->andWhere('g.id IN (:genershoes)')
-                    ->setParameter('genershoes', 1);
+                //It searches the checkboxes.
+                if (!empty($search->categorycheckbox)) {
+                    $query = 
+                        $query->andWhere('c.id IN (:category)')
+                        ->andWhere('g.id IN (:genershoes)')
+                        ->setParameter('genershoes', 1)
+                        ->setParameter('category', $search->categorycheckbox);
+                }else {
+                    $query = $query
+                        ->andWhere('g.id IN (:genershoes)')
+                        ->setParameter('genershoes', 1);
                 }
-            return $query->getQuery()->getResult();
+
+                if (!empty($search->categoryinfo)) {
+                    $query = $query
+                        ->andWhere('p.mark LIKE :category OR c.category LIKE :category OR p.shoesname LIKE :category')
+                        ->setParameter('category', "%{$search->categoryinfo}%");
+                }
+            return $query
+                ->getQuery()
+                ->getResult();
     }
 
     /**
@@ -85,7 +93,41 @@ class ProductRepository extends ServiceEntityRepository
                 $query = $query
                     ->andWhere('g.id IN (:genershoes)')
                     ->setParameter('genershoes', 2);
-                }
+            }
+            if (!empty($search->categoryinfo)) {
+                $query = $query
+                    ->andWhere('p.mark LIKE :category OR c.category LIKE :category OR p.shoesname LIKE :category')
+                    ->setParameter('category', "%{$search->categoryinfo}%");
+            }
+
+            return $query->getQuery()->getResult();
+    }
+
+    public function searchwithChildren($search): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('c', 'p', 'g')
+            ->join('p.category', 'c')
+            ->join('p.gendershoes', 'g');
+
+            //It searches the checkboxes.
+            if (!empty($search->categorycheckbox)) {
+                $query = 
+                    $query->andWhere('c.id IN (:category)')
+                    ->andWhere('g.id IN (:genershoes)')
+                    ->setParameter('genershoes', 3)
+                    ->setParameter('category', $search->categorycheckbox);
+            }else {
+                $query = $query
+                    ->andWhere('g.id IN (:genershoes)')
+                    ->setParameter('genershoes', 3);
+            }
+            //It searches the text.
+            if (!empty($search->categoryinfo)) {
+                $query = $query
+                    ->andWhere('p.mark LIKE :category OR c.category LIKE :category OR p.shoesname LIKE :category')
+                    ->setParameter('category', "%{$search->categoryinfo}%");
+            }
 
             return $query->getQuery()->getResult();
     }

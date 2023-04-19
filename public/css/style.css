@@ -10,14 +10,31 @@
 transition: all .5s;
 */
 
+
+
 /* Variables */
 :root{
-    --button_colors: #FFA500;
+    --button_colors: #000026;
     --main_color: #F3F3F3;
     --product_card_color: #bfbebe29;
     --promo_color: #fb0000;
     --footer_color: #201C1C;
 }
+
+/* pagination modified styles */
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #ffffff !important;
+    background-color: var(--button_colors) !important;
+    border-color: var(--button_colors);
+}
+
+a.page-link{
+    color: var(--button_colors);
+}
+
+
 
 .second_nav_items.active {
     transform: translateX(0);
@@ -31,9 +48,9 @@ transition: all .5s;
     display: none;
 }
 
-/* .display_none{
+.display_none{
     display: none;
-} */
+}
 
 /* GENERAL CLASSES */
 *{
@@ -69,11 +86,18 @@ h2{
     border: none;
 }
 
-.product_section h2,
-.brand_myshoes h2,
-.newsletter_myshoes h2{
+.product_section h2{
     text-align: center;
     padding: 20px 0px;
+}
+
+.newsletter_myshoes h2,
+.brand_myshoes h2{
+    text-align: center;
+}
+
+.brand_myshoes{
+    padding: 40px 0px;
 }
 
 
@@ -212,8 +236,8 @@ input[type="color"]:focus,
     position: absolute;
     height: 2.5rem;
     border-radius: 5px;
-    background: var(--button_colors);
-    border: .5px solid rgb(143, 143, 143);
+    background: transparent;
+    border: none;
     width: 8%;
     right: 172px;
 }
@@ -255,7 +279,7 @@ input[type="color"]:focus,
     z-index: 999;
     /* opacity: 0; */
     box-sizing: border-box;
-    background: var(--product_card_color);
+    background: rgba(161, 161, 161, 0.728);
     border-radius: 6px;
     list-style: none;
     transform: scale(0) translate(-10%, -10%);
@@ -273,7 +297,7 @@ input[type="color"]:focus,
     margin-left: -10px;
     border-style: solid;
     border-width: 0 10px 10px 10px;
-    border-color: transparent transparent var(--product_card_color) transparent;
+    border-color: transparent transparent rgba(161, 161, 161, 0.728) transparent;
 }
 
 .dropdown_user ul li{
@@ -403,7 +427,7 @@ input[type="color"]:focus,
 .advert_myshoes{
     position: relative;
 }
-.advert_myshoes::before {
+/* .advert_myshoes::before {
 	content: '';
 	position: absolute;
     z-index: -1;
@@ -425,7 +449,7 @@ input[type="color"]:focus,
 	height: 100%;
 	background: linear-gradient(#E55D87, #5FC3E4);
 	clip-path: circle(20% at 10% 10%);
-}
+} */
 
 .advert_info{
     padding: 50px 70px;
@@ -449,6 +473,7 @@ input[type="color"]:focus,
     padding: 15px;
     font-size: 30px;
     border-radius: 5px;
+    color: #fff;
 }
 
 .advert_description p{
@@ -604,10 +629,10 @@ input[type="color"]:focus,
 .newsletter_btn {
     padding: .8rem 2rem;
     border-radius: 5rem;
-    background: linear-gradient(90deg, #ff9966, #ff5e62);
-    color: #fff;
+    background: transparent;
+    color: #000f;
     font-size: .7rem;
-    border: none;
+    border: 0.5px solid var(--button_colors);
     outline: none;
     cursor: pointer;
     transition: all 0.6s;
@@ -615,6 +640,7 @@ input[type="color"]:focus,
 
 .newsletter_btn:hover{
     border-radius: 5rem;
+    color: #ffff;
     box-shadow: 
         inset -5.3em 0 0 0 var(--button_colors),
         inset 5.3em 0 0 0 var(--button_colors);
@@ -714,6 +740,21 @@ input[type=checkbox] {
 
 .block-26 ul li a:hover {
     background: #616161;
+}
+
+.button_submit {
+    padding: 0px;
+    border: 1px solid black;
+    display: inline-block;
+    height: 40px;
+    text-align: center;
+}
+
+.button_submit:hover{
+    color: #ffff;
+    box-shadow: 
+    inset -5em 0 0 0 var(--button_colors),
+    inset 5em 0 0 0 var(--button_colors);
 }
 
 
@@ -959,8 +1000,8 @@ input[type=checkbox] {
 .btn_commande .check_out_btn:hover{
     color: #ffff;
     box-shadow: 
-    inset -14em 0 0 0 green,
-    inset 14em 0 0 0 green;
+    inset -14em 0 0 0 var(--button_colors),
+    inset 14em 0 0 0 var(--button_colors);
 }
 
 .quantity-left-minus {
@@ -1105,8 +1146,8 @@ div#command_transport input.form-check-input{
 .recap_btn_command .check_out_btn:hover{
     color: #ffff;
     box-shadow: 
-    inset -15em 0 0 0 green,
-    inset 15em 0 0 0 green;
+    inset -15em 0 0 0 var(--button_colors),
+    inset 15em 0 0 0 var(--button_colors);
 }
 
 /* =======================================================
@@ -1146,7 +1187,7 @@ div#command_transport input.form-check-input{
 }
 
 .row .command_btn .command_detail_btn{
-    background: green;
+    background: var(--button_colors);
     font-size: 12px;
     padding: 10px 10px;
     color: #ffff;
@@ -1172,7 +1213,7 @@ div#command_transport input.form-check-input{
 }
 
 .command_body .command_img{
-    width: 70%;
+    width: 50%;
     position: absolute;
     top: 40%;
     left: 50%;

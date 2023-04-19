@@ -308,6 +308,20 @@ class Command
         return $this;
     }
 
+    public function deliverystatusText():?string
+    {
+        if($this->getDeliverystatus() === 1) {
+            $response = 'Order Validated';
+        }else if($this->getDeliverystatus() === 2){
+            $response = 'Preparing Order';
+        }else if($this->getDeliverystatus() === 3){
+            $response = 'Delivery in Progress';
+        }else if($this->getDeliverystatus() === 4){
+            $response = 'Delivery Completed';
+        }
+        return $response;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;

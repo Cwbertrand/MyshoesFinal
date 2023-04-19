@@ -22,22 +22,22 @@
                 </a>
                 {% for address in form %}
                     
-                <div class="me-3 card mt-3 bg-light p-3" style="width: 17rem; height: 24rem">
-                    <h6>Domicile Address</h6>
-                    <h5 class="my-4"><span>{{address.firstname}}</span> {{address.lastname}}</h5>
-                    <p>
-                        {{address.company}}<br>
-                        {{address.mobile}}<br>
-                        {{address.street}} <br>
-                        {{address.postalcode}} <br>
-                        {{address.city}} <br>
-                        {{address.country}} <br>
-                    </p>
-                    <div class="d-flex justify-content-center m-auto">
-                        <a href="{{path ('delete_address', {'id': address.id})}}" class="addrese_delete"><i class="fa-solid fa-trash-can"></i></a>
-                        <a href="{{path ('edit_address', {'id': address.id})}}" class="addrese_modify"> Edit </a>
+                    <div class="me-3 card mt-3 bg-light p-3" style="width: 17rem; height: 24rem">
+                        <h6>Domicile Address</h6>
+                        <h5 class="my-4"><span>{{address.firstname}}</span> {{address.lastname}}</h5>
+                        <p>
+                            {{address.company}}<br>
+                            {{address.mobile}}<br>
+                            {{address.street}} <br>
+                            {{address.postalcode}} <br>
+                            {{address.city}} <br>
+                            {{address.country}} <br>
+                        </p>
+                        <div class="d-flex justify-content-center m-auto">
+                            <a href="{{path ('delete_address', {'id': address.id})}}" class="addrese_delete"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="{{path ('edit_address', {'id': address.id})}}" class="addrese_modify"> Edit </a>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </section>

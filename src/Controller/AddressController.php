@@ -25,7 +25,7 @@ class AddressController extends AbstractController
     #[Route('/address', name: 'address')]
     public function index(): Response
     {
-        $form = $this->em->getRepository(Address::class)->findBy([], ['firstname' => 'ASC']);
+        $form = $this->em->getRepository(Address::class)->findUserAddresses(['id' => $this->getUser()]);
 
         return $this->render('account/clientaddress.html.twig', [
             'form' => $form,

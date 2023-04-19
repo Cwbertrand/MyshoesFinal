@@ -1,21 +1,26 @@
 <nav class="myshoes_first_nav">
     <div class="general_container myshoes_nav_items">
-        <a href="{{path ('home')}}" class="logo">MyShoes</a>
-        <form action="" class="myshoes_search_bar">
+        <a href="{{path ('home')}}" class="logo">
+            <img src="{{asset('images/myshoes_logo.png')}}" alt="logo" style="height: 50px;">
+        </a>
+        {# <form action="" class="myshoes_search_bar">
             <input class="myshoes_search_nav" type="text" placeholder="Search" aria-label="Search">
-            <button class="myshoes_nav_search_button"><i class="fa-solid fa-magnifying-glass icons"></i></button>
-        </form>
+            <button class="myshoes_nav_search_button"><i class="fa-solid fa-magnifying-glass icons" style="font-size: 25px; color: #c0c0c0"></i></button>
+        </form> #}
         <ul>
             <li>
                 <div class="dropdown_user">
                     <i class="fa-regular fa-user user_icon"></i>
                     <ul>
                         {% if app.user %}
-                        <li><a href="{{path ('app_logout')}}"><i><small>Log out</small></i></a></li>
+                        <li><a href="{{path ('app_logout')}}"><small>Log out</small></a></li>
                         <li><a href="{{path ('client_command')}}">Account</a></li>
-                        <li class="admin"><a href="{{path ('admin')}}" target="_blank"><em><small>Admin</small></em></a></li>
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="admin"><a href="{{path ('admin')}}" target="_blank"><em><small>Admin</small></em></a></li>
+                        {% endif %}
+
                         {% else %}
-                        <li class="admin"><a href="{{path ('admin')}}" target="_blank"><em><small>Admin</small></em></a></li>
                         <li><a href="{{path ('app_login')}}">Sign in</a></li>
                         <li><a href="{{path ('app_register')}}">Register</a></li>
                         {% endif %}
@@ -24,14 +29,23 @@
             </li>
             <li>
                 <a href="{{path ('wishlist')}}" class="cart_number">
-                    <i class="fa-regular fa-heart cart_icon"></i>
-                    <span class="cart_data">{{wishlist_total_quantity(app.user)}}</span>
+                    {% if wishlist_total_quantity(app.user) == 0 %}
+                        <i class="fa-regular fa-heart cart_icon"></i>
+                    {% else %}
+                        <i class="fa-regular fa-heart cart_icon"></i>
+                        <span class="cart_data">{{wishlist_total_quantity(app.user)}}</span>
+                    {% endif %}
+                    
                 </a>
             </li>
             <li>
                 <a href="{{path ('cart')}}" class="cart_number">
+                    {% if cart_total_quantity() == 0 %}
                     <i class="fa-solid fa-cart-shopping cart_icon"></i>
-                    <span class="cart_data">{{cart_total_quantity()}}</span>
+                    {% else %}
+                        <i class="fa-solid fa-cart-shopping cart_icon"></i>
+                        <span class="cart_data">{{cart_total_quantity()}}</span>
+                    {% endif %}
                 </a>
             </li>
         </ul>
