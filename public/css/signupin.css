@@ -7,6 +7,8 @@
 body{
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99); 
+    margin: 0px;
+    padding: 0px;
 }
 
 .form-error-icon{
@@ -29,7 +31,7 @@ body{
 }
 
 .image_sign{
-    background: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%), url(../images/signup.jpg);
+    background: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%), url(../images/signupin/signup.jpg);
     background-size: cover !important;
     object-fit: cover !important;
     background-repeat: no-repeat;
@@ -61,6 +63,31 @@ body{
     background: transparent !important;
     color: #000 !important;
 }
+
+@media screen and (max-width: 480px) {
+    .w-100.size_section{
+        padding: 0px !important;
+        margin: 0px !important;
+        
+    }
+
+    .background_sign {
+        padding: 0px !important;
+        display: inline-block;
+        margin: 1rem !important;
+        
+    }
+
+    .background_sign_main{
+        border-radius: 8px;
+    }
+
+    .image_sign{
+        display: none;
+    }
+
+}
+
 
 
 

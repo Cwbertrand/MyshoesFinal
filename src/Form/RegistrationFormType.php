@@ -44,19 +44,21 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Please enter a password',
                     ]),
-                    // new Length([
-                    //     'min' => 6,
-                    //     'minMessage' => 'Your password should be at least {{ limit }} characters',
-                    //     // max length allowed by Symfony for security reasons
-                    //     'max' => 4096,
-                    // ]),
-                    // new Assert\Regex([
-                    //     'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{1,}$/',
-                    //     'message' => 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character'
-                    // ]),
+                    new Length([
+                        'min' => 12,
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,}$/',
+                        'message' => 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character'
+                    ]),
                 ],
                 ])
                 ->add('agreeTerms', CheckboxType::class, [
+                    'label' => 'I agree to the terms of use and to receive <strong class="text-primary fw-300">MyShoes</strong> emails and I acknowledge having read the <a href="#"><strong class="fw-500">privacy policy.</strong></a>',
+                    'label_html' => true,
                     'mapped' => false,
                     'constraints' => [
                         new IsTrue([

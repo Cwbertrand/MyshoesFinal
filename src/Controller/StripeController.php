@@ -87,6 +87,20 @@ class StripeController extends AbstractController
     {
         $command = $this->em->getRepository(Command::class)->findOneBy(['stripesessionid' => $stripesessionid]);
 
+        foreach ($command->getcommandDetails() as $value) {
+            //dump($value->getProductName());
+        }
+        $email = new Email();
+        $content = 'Hello '.$this->getUser()->getPseudo().', </br> Thanks for purchasing from us. Here is a recap of your purchase </br>';
+        $content .= 'Product Name  ' .' &nbsp; Price &nbsp; ' .' Quantity </br> </hr>';
+        $content .=  $value->getProductName(). ' '. $value->getProductprice()/100 .' Euros' .'  ' . $value->getQuantity().'</br>';
+        $content .= 'Total &nbsp;'. $value->getCommandtotal()/100  .'</br>';
+
+        $email->sendEmail($this->getUser()->getEmail(), $this->getUser()->getPseudo(), 'Thanks for purchasing from us.', $content);
+
+        // dump($content);
+        // dump($this->getUser()->getPseudo());
+        // dd($command);
         //for security purpose, if order do not exist and if the user
         //is different from the user of the command
         if(!$command || $command->getUser() != $this->getUser()){
@@ -100,11 +114,6 @@ class StripeController extends AbstractController
             //Modify the payment status
             $command->setIsPaid(1);
             $this->em->flush();
-
-            $email = new Email();
-            $content = 'Thanks for purchasing from us';
-
-            $email->sendEmail('email@gmail.com', 'john doe', 'Thanks for purchasing from us.', $content);
         }
 
         return $this->render('payment/success.html.twig', [

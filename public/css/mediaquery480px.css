@@ -68,7 +68,7 @@
     .burger_menu,
     .burger_cancel{
         position: absolute;
-        display: block;
+        display: inline-block;
         top: 12px;
         right: 12px;
         transition: all 0.3s ease;
@@ -76,6 +76,10 @@
 
     .burger_cancel .fa-solid.fa-xmark{
         font-size: 25px;
+    }
+
+    .hero_img{
+        width: 50%;
     }
     /** ADVERTISEMENT SECTION **/
 
@@ -236,6 +240,41 @@
     .billing_delivery_address .billing_address strong small {
         text-align: end !important;
         font-size: 10px;
+    }
+
+    /** COMMAND PAGE **/
+
+    .account {
+        margin-top: 0px;
+    }
+
+    .left_side_url h4{
+        display: none;
+    }
+
+    .left_side_url aside{
+        display: flex;
+        justify-content: space-around;
+        font-size: 13px;
+    }
+
+    .command_reference p{
+        font-size: 14px;
+    }
+
+    .command_info aside,
+    .command_info p,
+    .command_status p{
+        font-size: 12px;
+    }
+
+    .command_card .command_header {
+        padding: 0px 20px;
+    }
+
+    .address_480px{
+        align-items: center;
+        justify-content: center;
     }
 
 }

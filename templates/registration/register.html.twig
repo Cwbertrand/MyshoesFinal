@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block signupincss %}
-<link rel="stylesheet" href="{{asset('css/signupin.css')}}">
-{% endblock %}
+    <link rel="stylesheet" href="{{asset('css/signupin.css')}}">
+{% endblock signupincss %}
 
 {% block title %}Sign up{% endblock %}
 
@@ -10,7 +10,7 @@
     <div class="mt-1 mx-3 home">
         <h2><a href="{{path ('home')}}">MyShoes</a></h2>
     </div>
-    <section class="d-flex justify-content-center w-100">
+    <section class="d-flex justify-content-center w-100 size_section">
         <div class="background_sign container">
             <div class="container background_sign_main">
                 {% for flash_error in app.flashes('verify_email_error') %}

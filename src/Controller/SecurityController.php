@@ -25,6 +25,10 @@ class SecurityController extends AbstractController
         if ($lastUsername && $cartservice->getCart()) {
             return $this->redirectToRoute('command');
         }
+
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
             
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername, 
