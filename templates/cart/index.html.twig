@@ -19,14 +19,13 @@
                             <h6>Basket Resume ({{carts|length}}{{ carts|length > 1 ? ' articles'  : ' article' }})</h2>
                             </h6>
                         </div>
-                        {{ dump(carts) }}
                         {% set total = null %}
                         {% set qtytotal = 0 %}
                         {% for key, cart in carts %}
                             <div class="basket_product">
                                 <div class="row a_basket_product">
-                                    <a href="{{path('detail_product', {'slug': cart.productdetail.id})}}" class="col-5 basket_img_div">
-                                            <img src="/upload/{{cart.productdetail.image}}" alt="nike" class="img-fluid basket_img">
+                                    <a href="{{path('related_products', {'id': cart.productdetail.id})}}" class="col-5 basket_img_div">
+                                            <img src="/upload/{{cart.productdetail.image}}" alt="{{cart.productdetail.shoesname}}" class="img-fluid basket_img">
                                     </a>
                                     <div class="col-6 basket_info">
                                         <aside>{{cart.productdetail.mark}}</aside>

@@ -310,7 +310,9 @@ class Command
 
     public function deliverystatusText():?string
     {
-        if($this->getDeliverystatus() === 1) {
+        if($this->getDeliverystatus() === 0) {
+            $response = 'Order waiting validation';
+        }else if($this->getDeliverystatus() === 1){
             $response = 'Order Validated';
         }else if($this->getDeliverystatus() === 2){
             $response = 'Preparing Order';

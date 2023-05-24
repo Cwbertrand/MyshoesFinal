@@ -14,6 +14,9 @@
 
 
     /** HERO SECTION **/
+    .hero_img{
+        width: 70%;
+    }
 
     .general_container {
         padding-right: 2rem;
@@ -106,5 +109,10 @@
 
     .myshoes_copyright .copyright p {
         font-size: 7px;
+    }
+
+    .myshoes_copyright .payment_accept .payment_accept_img {
+        width: 100%;
+        text-align: end;
     }
 }

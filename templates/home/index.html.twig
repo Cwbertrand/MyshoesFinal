@@ -11,21 +11,14 @@
     <section class="hero">
         <div class="hero_info">
             <div class="hero_image">
-                <img src="images/HeaderImage/{{header.headerimage}}" class="hero_img" alt="background Image" srcset="">
+                <img src="images/HeaderImage/{{header.headerimage}}" class="hero_img" alt="background Image">
             </div>
             <div class="hero_text">
                 <p>{{header.headertext}}</p>
-                <a href="{{header.headerurl}}" class="hero_btn myshoes_btn" role="button">{{header.headerbtn}}</a>
+                <a href="#" class="hero_btn myshoes_btn">{{header.headerbtn}}</a>
             </div>
         </div>
     </section>
-    {# <section class="hero_myshoes" style="background: url('images/HeaderImage/{{header.headerimage}}');" alt="background Image">
-        <div class="general_container">
-                <div class="hero_text">
-                    <a href="{{header.headerurl}}" class="hero_btn myshoes_btn" role="button">{{header.headerbtn}}</a>
-                </div>
-            </div>
-        </section> #}
     {% endfor %}
 
     <!-- Advertisement Section -->
@@ -81,12 +74,6 @@
                                 <p class="promo">Promo<span>-{{product.promotion}}%</span></p>
                             {% endif %} 
                         </div>
-                        {# <div class="text">
-                                {% for size in product.adultsize %}
-                                        {{ size.adultsize }}
-                                {% endfor %}
-                            </p>
-                        </div> #}
                     </div>
                     <p class="product_info">
                         {{product.mark}} <br>

@@ -40,7 +40,6 @@ class StripeController extends AbstractController
                     'unit_amount' => $product->getProductprice(),
                     'product_data' => [
                         'name' => $product->getProductname(),
-                       // 'images' => [$YOUR_DOMAIN]."/upload/".$product->getProductimage(),
                     ],
                 ],
                 'quantity' => $product->getQuantity(),
@@ -72,8 +71,6 @@ class StripeController extends AbstractController
             'mode' => 'payment',
             'success_url' => $YOUR_DOMAIN . '/payment/successfull/{CHECKOUT_SESSION_ID}',
             'cancel_url' => $YOUR_DOMAIN . '/payment/error/{CHECKOUT_SESSION_ID}',
-            // 'success_url'  => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            // 'cancel_url'   => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
 
         $command->setStripesessionid($checkout_session->id);
@@ -86,6 +83,18 @@ class StripeController extends AbstractController
     public function successUrl(CartService $cartservice, $stripesessionid): Response
     {
         $command = $this->em->getRepository(Command::class)->findOneBy(['stripesessionid' => $stripesessionid]);
+
+        foreach ($command->getcommandDetails() as $value) {
+        }
+
+        $email = new Email();
+        $content = 'Hello '.$this->getUser()->getPseudo().', </br> Thanks for purchasing from us. Here is a recap of your purchase </br>';
+        $content .= 'Product Name  ' .' &nbsp; Price &nbsp; ' .' Quantity </br> </hr>';
+        $content .=  $value->getProductName(). ' '. $value->getProductprice()/100 .' Euros' .'  ' . $value->getQuantity().'</br>';
+        $content .= 'Total &nbsp;'. $value->getCommandtotal()/100  .'</br>';
+
+        $email->sendEmail($this->getUser()->getEmail(), $this->getUser()->getPseudo(), 'Thanks for purchasing from us.', $content);
+
 
         //for security purpose, if order do not exist and if the user
         //is different from the user of the command
@@ -100,11 +109,6 @@ class StripeController extends AbstractController
             //Modify the payment status
             $command->setIsPaid(1);
             $this->em->flush();
-
-            $email = new Email();
-            $content = 'Thanks for purchasing from us';
-
-            $email->sendEmail('email@gmail.com', 'john doe', 'Thanks for purchasing from us.', $content);
         }
 
         return $this->render('payment/success.html.twig', [
@@ -124,7 +128,6 @@ class StripeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        //dd($command);
         return $this->render('payment/cancel.html.twig', [
             'command' => $command,
         ]);

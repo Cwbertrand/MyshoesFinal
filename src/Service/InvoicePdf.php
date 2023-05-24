@@ -32,7 +32,7 @@ class InvoicePdf
         ]);
     }
 
-        //generating a pdf invoice to send by email
+    //generating a pdf invoice to send by email
     // public function generatePdfEmail($html){
     //     $this->dompdf->loadHtml($html);
     //     $this->dompdf->render();

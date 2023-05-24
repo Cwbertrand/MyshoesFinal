@@ -8,7 +8,7 @@
     <div class="breadcrumbs-two py-5">
         <div class="row">
             <div class="col">
-                <div class="breadcrumbs-img" style="background: linear-gradient(90deg, rgba(0, 0, 1, 0.6) 100%, rgba(0, 2, 3, 0.491) 100%, rgba(0, 0, 0, 0.45) 100%), url({{asset('image/coverpage/cover-img-1.jpg')}});" alt="background Image for men">
+                <div class="breadcrumbs-img">
                     <h2><a href="{{path('home')}}">Home</a>><a href="{{path('men')}}">Men</a></h2>
                 </div>
             </div>
@@ -92,10 +92,10 @@
                         <div class="row row-pb-md">
                             {{form_start(formText)}}
                             <div class="row d-flex justify-content-end">
-                                <div class="col-5">
+                                <div class="col-md-5 col-sm-7 col-7">
                                     {{form_row(formText.categoryinfo)}}
                                 </div>
-                                <div class="col-2">
+                                <div class="col-md-2 col-sm-3 col-3">
                                     {{form_row(formText.submit)}}
                                 </div>
                             </div>

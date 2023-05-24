@@ -25,6 +25,10 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
+        // if () {
+        //     $product = null;
+        //     throw new NotFoundHttpException('Product not found');
+        // }
 
         $bestpromotion = $this->em->getRepository(Product::class)->findByisBest(1);
         $header = $this->em->getRepository(Header::class)->findByisPublish(1);

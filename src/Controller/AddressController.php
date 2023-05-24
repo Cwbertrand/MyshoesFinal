@@ -116,10 +116,10 @@ class AddressController extends AbstractController
             // }
 
             //Removing the association of address
-            // $userAddresses = $user->getAddresses();
-            // foreach($userAddresses as $userAddress){
-            //     $this->em->remove($userAddress);
-            // }
+            $userAddresses = $user->getAddresses();
+            foreach($userAddresses as $userAddress){
+                $this->em->remove($userAddress);
+            }
             
             // Invalidate the user's session
             $request->getSession()->invalidate();
