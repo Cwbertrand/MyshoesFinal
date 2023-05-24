@@ -46,7 +46,6 @@ class CartController extends AbstractController
     #[Route('/cart/update/{cartKey}', name: 'update_cart')]
     public function updateCart(Request $request, $cartKey)
     {
-        //dd($cartKey);
         $action = $request->query->get('action');
         $this->cartservice->updateCart($cartKey, $action);
         

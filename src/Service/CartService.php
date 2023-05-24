@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Entity\Product;
 use App\Entity\AdultSize;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -43,17 +42,11 @@ final class CartService
         // Generate a unique key for the carte item based on the product and size IDs
         $cartKey = $this->generate_cart_key($id, $sizeId);
 
+        //This checks if a product with the same size exists, it just adds the quantity
         if(isset($cart[$cartKey])){
             $cart[$cartKey]['quantity'] += 1;
-        }else if(isset($cart[$id])) {
-            // If a cart item with the specified product ID exists, create a new cart item with the specified size and a quantity of 1
-            $cart[$this->generate_cart_key($id, $sizeId)] = [
-                'productdetail' => $product,
-                'size' => $size,
-                'quantity' => 1
-            ];
         }else{
-             // If a cart item with the same product and size does not exist, create a new cart item
+            // If a cart item with the same product and size does not exist, create a new cart item
             $cart[$cartKey] = [
                 'productdetail' => $product,
                 'size' => $size,
@@ -110,30 +103,6 @@ final class CartService
     public function getCart()
     {
         return $this->session->get('cart', []);
-        // check if the cart data is present in a cookie
-        // $cartData = $this->requestStack->getCurrentRequest()->cookies->get('cart');
-
-        // if($cartData){
-        //     // if the cart data is present in the cookie, decode it and return it
-        //     return json_decode($cartData, true);
-        // }else{
-        //     // if the cart data is not present in the cookie, retrieve it from the session
-        //     $cartData = $this->session->get('cart', []);
-
-        //     // store the cart data in the cookie
-        //     $response = new Response();
-        //     $response->headers->setCookie(Cookie::create('cart')
-        //                         ->withValue(json_encode($cartData))
-        //                         ->withExpires(0)
-        //                         ->withPath('/')
-        //                         ->withDomain(null)
-        //                         ->withSecure(true)
-        //                         ->withHttpOnly(true)
-        //                         ->withSameSite('strict'));
-        // }
-
-        // //return cart data
-        // return $response;
     }
 
 

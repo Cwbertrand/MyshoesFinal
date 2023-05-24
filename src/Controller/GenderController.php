@@ -199,27 +199,27 @@ class GenderController extends AbstractController
         ]);
     }
 
-    //Show product details
-    #[Route('/product/detail/{id}', name: 'related_products')]
-    #[Route('/product/detail/{slug}', name: 'detail_product')]
-    public function productDetail(Product $product, $id): Response
-    {
-        $relatedProducts = $this->em->getRepository(Product::class)->relatedProducts($id);
+    // //Show product details
+    // #[Route('/product/detail/{id}', name: 'related_products')]
+    // #[Route('/product/detail/{slug}', name: 'detail_product')]
+    // public function productDetail(Product $product, $id): Response
+    // {
+    //     $relatedProducts = $this->em->getRepository(Product::class)->relatedProducts($id);
 
-        // selecting it from the database
-        $newremarks = $this->em->getRepository(Remarks::class)->findProductId($product);
+    //     // selecting it from the database
+    //     $newremarks = $this->em->getRepository(Remarks::class)->findProductId($product);
 
-        //this is the total reviews of the client
-        $reviewTotal = $this->em->getRepository(Remarks::class)->sumProductReview($product);
+    //     //this is the total reviews of the client
+    //     $reviewTotal = $this->em->getRepository(Remarks::class)->sumProductReview($product);
 
-        return $this->render('gender/showdetail.html.twig', [
-            'detailproduct' => $product,
-            'slug' => $product->getSlug(),
-            'newremarks' => $newremarks,
-            'reviewTotal' => $reviewTotal,
-            'relatedproducts' => $relatedProducts,
-        ]);
-    }
+    //     return $this->render('gender/showdetail.html.twig', [
+    //         'detailproduct' => $product,
+    //         'slug' => $product->getSlug(),
+    //         'newremarks' => $newremarks,
+    //         'reviewTotal' => $reviewTotal,
+    //         'relatedproducts' => $relatedProducts,
+    //     ]);
+    // }
 
     #[Route('/product/detail/rating/{slug}', name: 'rating_product')]
     public function productRating(Product $product, Request $request)

@@ -304,7 +304,7 @@
                 }else{
                     // Submit the rating and review to the server via AJAX
                     $.ajax({
-                        url:"/product/detail/rating/{{slug}}",
+                        url:"/product/detail/rating/{{id}}",
                         method: "POST",
                         data:{rating_data:rating_data, userReview:userReview},
                         success: function(data){
@@ -348,24 +348,6 @@
                 });
             });
         
-
-            /*$('.btn_basket').click(function(e){
-                e.preventDefault();
-                var cart = JSON.parse(localStorage.getItem("cart"));
-                var id = $(this).parents('form').attr('data-id');
-                console.log(cart);
-                if(cart.length == 0){
-                    basket = [id];
-                    console.log(basket);
-                }else{
-                    if(cart.indexOf(id)){
-                        basket = cart.push(id);
-                    }else{
-
-                    }
-                }
-                localStorage.setItem('cart', JSON.stringify(basket));
-            });*/
         });
         
     </script>
