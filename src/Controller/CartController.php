@@ -52,12 +52,12 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart');
     }
 
-    // Delete product from the cart
-    #[Route('/cart/delete/{id}', name: 'delete_from_cart')]
-    public function deleteCart($id): Response
-    {
-        $this->cartservice->deleteCart($id);
-        return $this->redirectToRoute('cart');
-    }
+    // // Delete product from the cart
+    // #[Route('/cart/delete/{key}', name: 'delete_from_cart')]
+    // public function deleteCart($key): Response
+    // {
+    //     $this->cartservice->deleteCart($key);
+    //     return $this->redirectToRoute('cart');
+    // }
 
 }

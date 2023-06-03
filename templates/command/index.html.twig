@@ -17,6 +17,9 @@
                 <!-- ============= lIVRAISON AND ADRESSE =========-->
                 <fieldset class="col-md-12 rounded-4 p-4 form-group">
                     <legend><strong>Choose your address for delivery</strong></legend>
+                    <div class="mb-2">
+                        <a href="{{path ('add_address')}}" class="mx-3" style="color: rgba(12, 12, 155, 0.886);">Add a delivery address</a>
+                    </div>
                     <div id="order_addresses">
                         <address>
                             {{ form_widget(forms.address)|replace({'[br]' : '<br>'})|raw}}

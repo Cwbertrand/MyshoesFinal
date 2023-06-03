@@ -81,7 +81,7 @@ class AddressController extends AbstractController
 
     //Client profile page
     #[Route('/myprofile', name: 'myprofile')]
-    public function myProfile(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function myProfile(Request $request): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(EditEmailType::class, $user);

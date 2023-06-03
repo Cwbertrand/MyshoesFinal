@@ -30,7 +30,7 @@ class HeaderCrudController extends AbstractCrudController
                 //this renames and hashes the images and gets the various extensions (jpg,png)
                 ->setUploadedFileNamePattern('[randomhash], [extension]')
                 //require is false because...
-                ->setRequired(false),
+                ->setRequired(true),
             TextField::new('headerbtn'),
             TextareaField::new('headertext'),
         ];

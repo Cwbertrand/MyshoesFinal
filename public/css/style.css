@@ -969,14 +969,43 @@ input[type=checkbox] {
     transform: translate(-50%, -50%);
 }
 
-.basket_product .btn_cancel_basket i{
+.basket_product .delete_cart {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.basket_product .btn_cancel_basket{
     position: absolute;
     text-align: center;
     top: 10px;
     right: 10px;
     color: red;
     font-size: 20px;
+    border: none;
+    transition: all .4s ease;
+    background: transparent;
 }
+
+.basket_product .btn_cancel_basket:hover{
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    right: 10px;
+    color: red;
+    font-size: 20px;
+    border: none;
+    background: transparent;
+}
+
+/* .basket_product .btn_cancel_basket i{
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    right: 10px;
+    color: red;
+    font-size: 20px;
+} */
 
 .sub_total_section{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

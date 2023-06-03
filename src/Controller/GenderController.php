@@ -80,6 +80,7 @@ class GenderController extends AbstractController
         );
 
         return $this->render('gender/menproducts.html.twig', [
+            
             // c'est la methode qui fait la relation MAnytoMany
             'products' => $man,//->toArray(),
             'form' => $form,

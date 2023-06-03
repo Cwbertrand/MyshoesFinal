@@ -59,7 +59,8 @@ class Transporter
 
     public function __toString()
     {
-        return $this->getTransportagency().'[br]'.number_format($this->getPrice()/100, 2, ',', '.').' €[br]'.
+        return $this->getTransportagency().'[br]'
+                .number_format($this->getPrice()/100, 2, ',', '.').' €[br]'.
                 $this->getDescription().'[hr]';
     }
 

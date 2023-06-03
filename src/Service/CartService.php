@@ -60,43 +60,46 @@ final class CartService
 
     //this updates the quantity of the product
     public function updateCart($cartKey, $action){
-        if($action && ($action === 'add' || $action === 'minus')){
+        if($action && ($action === 'add' || $action === 'minus' || $action === 'delete')){
             $cart = $this->session->get('cart', []);
 
             //declaring a default flag to false (assuming that no updates have been made)
             //$updated = false;
-
             if ($action === 'add') {
-                    $cart[$cartKey]['quantity'] += 1;
+                $cart[$cartKey]['quantity'] += 1;
             } elseif ($action === 'minus') {
                 if ($cart[$cartKey]['quantity'] > 1) {
                     $cart[$cartKey]['quantity'] -= 1;
-                } else {
+                }else {
                     unset($cart[$cartKey]);
                 }
+            }elseif ($action === 'delete') {
+                unset($cart[$cartKey]);
             }
+            
             $this->session->set('cart', $cart);
         }
     }
 
     //Deleting product from cart
-    public function deleteCart($id){
-        $cart = $this->session->get('cart', []);
-        foreach ($cart as $cartItemKey => $cartItem){
-            if($cartItem['productdetail']->getId() === intval($id)){
-                unset($cart[$cartItemKey]);
+    // public function deleteCart($id){
+    //     $cart = $this->session->get('cart', []);
+    //     foreach ($cart as $cartItemKey => $cartItem){
+    //         dd($cart[$cartItemKey]);
+    //         if($cartItem['productdetail']->getId() === intval($id)){
+    //             unset($cart[$cartItemKey]);
 
-                 // Exit the loop early since we've already found and removed the matching cart item
-                break;
-            }
-        }
-        $this->session->set('cart', $cart);
-    }
+    //              // Exit the loop early since we've already found and removed the matching cart item
+    //             break;
+    //         }
+    //     }
+    //     $this->session->set('cart', $cart);
+    // }
 
     //Clearing everything in the cart
-    public function removeCart(){
-        return $this->session->remove('cart');
-    }
+    // public function removeCart(){
+    //     return $this->session->remove('cart');
+    // }
 
 
     //Getting the entire cart array (product, quantity and size)

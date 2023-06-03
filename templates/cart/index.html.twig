@@ -23,24 +23,24 @@
                         {% set qtytotal = 0 %}
                         {% for key, cart in carts %}
                             <div class="basket_product">
-                                <div class="row a_basket_product">
-                                    <a href="{{path('related_products', {'id': cart.productdetail.id})}}" class="col-5 basket_img_div">
-                                            <img src="/upload/{{cart.productdetail.image}}" alt="{{cart.productdetail.shoesname}}" class="img-fluid basket_img">
-                                    </a>
-                                    <div class="col-6 basket_info">
-                                        <aside>{{cart.productdetail.mark}}</aside>
-                                        <aside><strong>{{cart.productdetail.shoesname}}</strong></aside> {# - {{cart.productdetail.category.category}} #}
-                                        <aside>Size: {{cart.size.adultsize}}</aside>
-                                        <p>
-                                            {% if cart.productdetail.promotion > 0 %}
-                                                <i style="color: red;">{{ (cart.productdetail.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
-                                                    <small id="original_price">Original Price: <s>{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</s></small>
-                                                </span>
-                                            {% else %}
-                                                <span class="">{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</span> <br>
-                                            {% endif %}
-                                        </p>
-                                        <form action="{{path('update_cart', {'cartKey': key})}}">
+                                <form action="{{path('update_cart', {'cartKey': key})}}">
+                                    <div class="row a_basket_product">
+                                        <a href="{{path('related_products', {'id': cart.productdetail.id})}}" class="col-5 basket_img_div">
+                                                <img src="/upload/{{cart.productdetail.image}}" alt="{{cart.productdetail.shoesname}}" class="img-fluid basket_img">
+                                        </a>
+                                        <div class="col-6 basket_info">
+                                            <aside>{{cart.productdetail.mark}}</aside>
+                                            <aside><strong>{{cart.productdetail.shoesname}}</strong></aside> {# - {{cart.productdetail.category.category}} #}
+                                            <aside>Size: {{cart.size.adultsize}}</aside>
+                                            <p>
+                                                {% if cart.productdetail.promotion > 0 %}
+                                                    <i style="color: red;">{{ (cart.productdetail.discountPrice/100) | number_format(2, ',', '.') }} €</i> - <span>
+                                                        <small id="original_price">Original Price: <s>{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</s></small>
+                                                    </span>
+                                                {% else %}
+                                                    <span class="">{{ (cart.productdetail.price/100) | number_format(2, ',', '.') }} €</span> <br>
+                                                {% endif %}
+                                            </p>
                                             <div class="input-group mb-4 w-50">
                                                 <span class="input-group-btn">
                                                     <button type="submit" class="quantity-left-minus btn" name="action" value="minus">
@@ -49,16 +49,19 @@
                                                 </span>
                                                 <input type="text" id="quantity" name="quantity" class="text-center form-control input-number" value="{{cart.quantity}}" min="1" max="100" disabled>
                                                 <span class="input-group-btn ml-1">
-                                                    
                                                     <button type="submit" class="quantity-right-plus btn" name="action" value="add">
                                                         <i class="fa-solid fa-plus"></i>
                                                     </button>
                                                 </span>
-                                            </div>
-                                        </form>             
+                                            </div>          
+                                        </div>
                                     </div>
-                                </div>
-                                <a href="{{path('delete_from_cart', {'id': cart.productdetail.id})}}" class="btn_cancel_basket"><i class="fa-solid fa-rectangle-xmark"></i></a>
+                                    <div class="delete_cart">
+                                        <button type="submit" class="btn_cancel_basket" name="action" value="delete">
+                                            <i class="fa-solid fa-rectangle-xmark"></i>
+                                        </button>
+                                    </div>
+                                </form> 
                             </div>
                             {% set total = total + (cart.productdetail.discountPrice * cart.quantity) %}
                             {% set qtytotal = qtytotal + (cart.quantity) %}

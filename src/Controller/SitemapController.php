@@ -12,10 +12,11 @@ class SitemapController extends AbstractController
     #[Route('/sitemap.xml', name: 'sitemap', format: 'xml')]
     public function index(Request $request)
     {
-        $hostname = $request->getSchemeAndHttpHost();
+        $hostname = $request->getSchemeAndHttpHost(); // Get the scheme (HTTP or HTTPS) and the host name of the current request.
 
         $urls = [];
 
+        // Generate URLs and add them to the $urls array.
         $urls[] = ['loc' => $this->generateUrl('home')];
         $urls[] = ['loc' => $this->generateUrl('app_login')];
         $urls[] = ['loc' => $this->generateUrl('app_register')];
@@ -26,11 +27,16 @@ class SitemapController extends AbstractController
         $response = new Response(
             $this->renderView('sitemap/index.xml.twig', 
             ['hostname' => $hostname, 'urls' => $urls]),
-            Response::HTTP_OK,
+            Response::HTTP_OK, // Set the HTTP status code to 200 (OK).
             ['content-type' => 'application/xml']      
         );
-
-        //$response->headers->set('Content-type', 'text/xml');
         return $response;
+    }
+
+    #[Route('/general_terms_condition', name: 'gtc')]
+    public function gtc(): Response
+    {
+        return $this->render('legals/gtc.html.twig', [
+        ]);
     }
 }

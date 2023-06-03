@@ -32,7 +32,6 @@ class ClientOrdersController extends AbstractController
         //     $request->query->getInt('page', 1)/*page number*/,
         //     2/*limit per page*/
         //);
-        //dd($command);
         return $this->render('account/clientcommand.html.twig', [
             'command' => $command,
         ]);

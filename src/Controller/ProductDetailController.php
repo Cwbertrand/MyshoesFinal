@@ -43,6 +43,7 @@ class ProductDetailController extends AbstractController
 
             'detailproduct' => $product,
             'id' => $product->getId(),
+            'productName' => $product->getShoesname(),
             'newremarks' => $newremarks,
             'reviewTotal' => $reviewTotal,
             'relatedproducts' => $relatedProducts,

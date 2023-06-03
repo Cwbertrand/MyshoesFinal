@@ -6,7 +6,7 @@
 
 {% block body %}
     <section class="breadcrum_area">
-        <a href="#">home</a>><a href="#">women</a>><a href="#">product name</a>
+        <a href="#">home</a>><a>{{productName}}</a>
     </section>
     <!-- ============= PRODUCT DETAIL SECTION AND IMAGES =========-->
     {% for notice in app.flashes('message') %}
